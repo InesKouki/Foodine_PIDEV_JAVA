@@ -36,9 +36,11 @@ public class Evenement {
         this.date_fin = date_fin;
         this.description = description;
     }
-    
-    
 
+    public Evenement(String name) {
+        this.name = name;
+    }
+    
     public int getId() {
         return id;
     }

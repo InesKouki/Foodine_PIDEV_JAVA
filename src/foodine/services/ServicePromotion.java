@@ -1,5 +1,7 @@
 package foodine.services;
 
+import foodine.entities.Evenement;
+import foodine.entities.Produit;
 import foodine.entities.Promotion;
 import foodine.utils.DataSource;
 import java.sql.Connection;
@@ -68,12 +70,15 @@ public class ServicePromotion implements IService<Promotion> {
     public List<Promotion> getAll() {
         List<Promotion> list = new ArrayList<>();
         try {
-            String req = "Select * from promotion";
+            String req = "Select * from promotion p, evenement e where e.id = p.evenement_id";
             Statement st = cnx.createStatement();
             ResultSet rs = st.executeQuery(req);
             while (rs.next()) {
-                Promotion p = new Promotion(rs.getDouble(2), rs.getInt(4), rs.getInt(5));
-                list.add(p);
+                Evenement e = new Evenement(rs.getString("e.name"));
+                Produit p = new Produit();
+                
+                Promotion pr = new Promotion(rs.getDouble("p.pourcentage"), e, p);
+                list.add(pr);
             }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());

@@ -10,18 +10,12 @@ public class Promotion {
     public Promotion() {
     }
 
-    public Promotion(Evenement evenement_id, double pourcentage, Produit produit_id) {
+    public Promotion(double pourcentage, Evenement evenement_id, Produit produit_id) {
         this.evenement_id = evenement_id;
         this.pourcentage = pourcentage;
         this.produit_id = produit_id;
     }
 
-    public Promotion(double pourcentage, Evenement evenement_id, Produit produit_id) {
-        this.pourcentage = pourcentage;
-        this.evenement_id = evenement_id;
-        this.produit_id = produit_id;
-    }
-    
     public Promotion(double pourcentage) {
         this.pourcentage = pourcentage;
     }
