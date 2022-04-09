@@ -5,56 +5,62 @@
  */
 package tn.edu.esprit.entities;
 
+import java.sql.Date;
+
 /**
  *
  * @author ASUS
  */
-public class User {
+public abstract class User {
     private int id;
     private String nom;
     private String prenom;
     private String username;
     private String email;
-    private String roles;
     private String password;
     private String file;
-    private String activation_token ;
+    private Date created_at;
     private String reset_token ;
-    private String created_at;
     private int etat;
-    private int phone;
-    private String address;
 
-    
     public User() {
     }
-    
-    public User(String nom, String prenom, String username, String email, String roles, String password, String file, String created_at, int etat) {
+
+    public User(int id, String nom, String prenom, String username, String email, String password, String file, Date created_at, int etat) {
+        this.id = id;
         this.nom = nom;
         this.prenom = prenom;
         this.username = username;
         this.email = email;
-        this.roles = roles;
         this.password = password;
         this.file = file;
         this.created_at = created_at;
         this.etat = etat;
     }
 
-    public User(int id, String nom, String prenom, String username, String email, String roles, String file, String created_at, int phone, String address, int etat) {
-        this.id = id;
+    public User(String nom, String prenom, String username, String email, String password, String file, Date created_at, int etat) {
         this.nom = nom;
         this.prenom = prenom;
         this.username = username;
         this.email = email;
-        this.roles = roles;
+        this.password = password;
         this.file = file;
         this.created_at = created_at;
         this.etat = etat;
-        this.phone = phone;
-        this.address = address;
     }
 
+    
+    public User(String nom, String prenom, String username, String email, String password, String file, int etat) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.file = file;
+        this.etat = etat;
+    }
+
+ 
     
 
     
@@ -99,14 +105,6 @@ public class User {
         this.email = email;
     }
 
-    public String getRoles() {
-        return roles;
-    }
-
-    public void setRoles(String roles) {
-        this.roles = roles;
-    }
-
     public String getPassword() {
         return password;
     }
@@ -123,19 +121,19 @@ public class User {
         this.file = file;
     }
 
-    public String getActivation_token() {
-        return activation_token;
+    public String getReset_token() {
+        return reset_token;
     }
 
-    public void setActivation_token(String activation_token) {
-        this.activation_token = activation_token;
+    public void setReset_token(String reset_token) {
+        this.reset_token = reset_token;
     }
 
-    public String getCreated_at() {
+    public Date getCreated_at() {
         return created_at;
     }
 
-    public void setCreated_at(String created_at) {
+    public void setCreated_at(Date created_at) {
         this.created_at = created_at;
     }
 
@@ -147,35 +145,11 @@ public class User {
         this.etat = etat;
     }
 
-    public int getPhone() {
-        return phone;
-    }
-
-    public void setPhone(int phone) {
-        this.phone = phone;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getReset_token() {
-        return reset_token;
-    }
-
-    public void setReset_token(String reset_token) {
-        this.reset_token = reset_token;
-    }
-
-    
     @Override
     public String toString() {
-        return "User{" + ", nom=" + nom + ", prenom=" + prenom + ", username=" + username + ", email=" + email + ", roles=" + roles + ", password=" + password + ", file=" + file + ", created_at=" + created_at + ", etat=" + etat + ", phone=" + phone + ", address=" + address + '}';
+        return "User{" + "nom=" + nom + ", prenom=" + prenom + ", username=" + username + ", email=" + email + ", Role="  + ", file=" + file + ", created_at=" + created_at + ", etat=" + etat + '}';
     }
+
     
-    
+   
 }

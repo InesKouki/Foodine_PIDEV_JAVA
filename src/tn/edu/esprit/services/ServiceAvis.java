@@ -58,7 +58,7 @@ public class ServiceAvis implements IService<Review>{
             
             while(rs.next()){
             
-                Review r = new Review(rs.getInt(1), rs.getString("published_at"),rs.getInt("stars"),rs.getString("description"),rs.getString("user_name"));
+                Review r = new Review(rs.getDate("published_at"),rs.getInt("stars"),rs.getString("description"),rs.getString("user_name"));
                 list.add(r);
             }
         } catch (SQLException ex) {

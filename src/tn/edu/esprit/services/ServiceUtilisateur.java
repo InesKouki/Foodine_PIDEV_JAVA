@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import tn.edu.esprit.entities.Client;
 
 import tn.edu.esprit.entities.User;
 import tn.edu.esprit.utils.DataSource;
@@ -25,8 +26,13 @@ Connection cnx = DataSource.getInstance().getCnx();
   
         public void ajouter(User u) {
        try {
-            String req = "INSERT INTO `user` (`nom`, `prenom`,`username`,`email`,`roles`,`password`,`file`,`created_at`) VALUES ('" + u.getNom() + "', '" + u.getPrenom()+ 
-                    "', '" +u.getUsername()+ "', '" +u.getEmail()+ "', '" +u.getRoles()+ "', '" +u.getPassword()+u.getCreated_at()+ "')";
+           String Role = "";
+           if (u instanceof Client)
+               Role="[]";
+           else 
+               Role="[\"ROLE_ADMIN\"]";
+            String req = "INSERT INTO `user` (`nom`, `prenom`,`username`,`email`,`roles`,`password`,`file`,`created_at`,`etat`) VALUES ('" + u.getNom() + "', '" + u.getPrenom()+ 
+                    "', '" +u.getUsername()+ "', '" +u.getEmail()+ "', '" +Role+ "', '" +u.getPassword()+ "', '"+u.getFile()+"', '" +u.getCreated_at()+ "', '" +u.getEtat()+ "')";
             Statement st = cnx.createStatement();
             st.executeUpdate(req);
             System.out.println("Utilisateur ajouté !");
@@ -48,8 +54,8 @@ Connection cnx = DataSource.getInstance().getCnx();
         }
     }
 
-    @Override
-    public void modifier(User u) {
+    //@Override
+    public void modifier(Client u) {
          try {
             String req = "UPDATE `user` SET `nom` = '" + u.getNom() + "', `prenom` = '" + u.getPrenom() + "', `phone` = '" + u.getPhone() + "', `address` = '" + u.getAddress() + "' WHERE `personne`.`id` = " + u.getId();
             Statement st = cnx.createStatement();
@@ -94,7 +100,7 @@ Connection cnx = DataSource.getInstance().getCnx();
         }    
     }
     
-    public void attribuer_role(User u){
+  /*  public void attribuer_role(User u){
          try {
             String req = "UPDATE `user` SET `roles` = '"+ u.getRoles() + "' WHERE `personne`.`id` = " + u.getId();
             Statement st = cnx.createStatement();
@@ -103,7 +109,8 @@ Connection cnx = DataSource.getInstance().getCnx();
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }    
-    }
+    }*/
+    
     @Override
     public List getAll() {
         List<User> list = new ArrayList<>();
@@ -113,7 +120,7 @@ Connection cnx = DataSource.getInstance().getCnx();
             ResultSet rs = st.executeQuery(req);
             
             while(rs.next()){
-                User u = new User(rs.getInt(1), rs.getString("nom"), rs.getString("prenom"), rs.getString("username"), rs.getString("email"),rs.getString("roles"),rs.getString("file"),rs.getString("created_at"), rs.getInt("phone"), rs.getString("address"), rs.getInt("etat"));
+                User u = new Client(rs.getString("nom"), rs.getString("prenom"), rs.getString("username"), rs.getString("email"),rs.getString("roles"),rs.getString("file"),rs.getInt("phone"), rs.getString("address"), rs.getInt("etat"));
                 list.add(u);
             }
         } catch (SQLException ex) {
@@ -121,6 +128,11 @@ Connection cnx = DataSource.getInstance().getCnx();
         }
 
         return list;
+    }
+
+    @Override
+    public void modifier(User p) {
+       //
     }
     }
     

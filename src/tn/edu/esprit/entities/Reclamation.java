@@ -5,7 +5,7 @@
  */
 package tn.edu.esprit.entities;
 
-import java.util.Date;
+import java.sql.Date;
 
 /**
  *
@@ -13,18 +13,20 @@ import java.util.Date;
  */
 public class Reclamation {
     private int id;
-    private int user_id;
-    private String created_at;
+    private User user;
+    private Date created_at;
     private int etat;
     private String type;
     private String description;
+    private String nomu;
+    private String prenomu;
 
     public Reclamation (){
         
     }
 
-    public Reclamation(int id_user, String created_at, int etat, String type, String description) {
-        this.user_id = id_user;
+    public Reclamation(User user, Date created_at, int etat, String type, String description) {
+        this.user = user;
         this.created_at = created_at;
         this.etat = etat;
         this.type = type;
@@ -32,15 +34,23 @@ public class Reclamation {
     }
     
     
-    public Reclamation(int id, int id_user, String created_at, String type, String description) {
+    public Reclamation(int id,User user, Date created_at, String type, String description) {
         this.id = id;
-        this.user_id = id_user;
+        this.user = user;
         this.created_at = created_at;
         this.etat = 0;
         this.type = type;
         this.description = description;
     }
 
+     public Reclamation(String nomu,String prenomu,Date created_at,int etat, String type, String description) {
+      this.nomu=nomu;
+      this.prenomu=prenomu;
+        this.created_at = created_at;
+        this.etat = 0;
+        this.type = type;
+        this.description = description;
+    }
     
     
     public int getId() {
@@ -51,19 +61,19 @@ public class Reclamation {
         this.id = id;
     }
 
-    public int getId_user() {
-        return user_id;
+    public User getUser() {
+        return user;
     }
 
-    public void setId_user(int id_user) {
-        this.user_id = id_user;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public String getCreated_at() {
+    public Date getCreated_at() {
         return created_at;
     }
 
-    public void setCreated_at(String created_at) {
+    public void setCreated_at(Date created_at) {
         this.created_at = created_at;
     }
 
@@ -93,7 +103,7 @@ public class Reclamation {
 
     @Override
     public String toString() {
-        return "Reclamation{" + ", id_user=" + user_id + ", created_at=" + created_at + ", etat=" + etat + ", type=" + type + ", description=" + description + '}';
+        return "Reclamation{" + "Utilisateur=" + nomu +" "+ prenomu + ", created_at=" + created_at + ", etat=" + etat + ", type=" + type + ", description=" + description + '}';
     }
     
     

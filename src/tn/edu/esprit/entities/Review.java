@@ -6,6 +6,7 @@
 package tn.edu.esprit.entities;
 
 
+import java.sql.Date;
 import java.time.LocalDateTime;
 
 /**
@@ -15,24 +16,29 @@ import java.time.LocalDateTime;
 public class Review {
     private int id;
     private String user_name;
-    private String published_at;
+    private Date published_at;
     private int stars;
     private String description;
 
     public Review() {
     }
 
-    public Review(String published_at, int stars,String user_name,  String description) {
+    public Review(Date published_at, int stars,String user_name,  String description) {
         this.user_name = user_name;
         this.published_at = published_at;
         this.stars = stars;
         this.description = description;
     }
 
-    public Review(int id, String published_at, int stars, String user_name, String description) {
+    public Review(int id,Date published_at, int stars, String user_name, String description) {
         this.id = id;
         this.user_name = user_name;
         this.published_at = published_at;
+        this.stars = stars;
+        this.description = description;
+    }
+    public Review(int stars, String user_name, String description) {
+        this.user_name = user_name;
         this.stars = stars;
         this.description = description;
     }
@@ -53,11 +59,11 @@ public class Review {
         this.user_name = user_name;
     }
 
-    public String getPublished_at() {
+    public Date getPublished_at() {
         return published_at;
     }
 
-    public void setPublished_at(String published_at) {
+    public void setPublished_at(Date published_at) {
         this.published_at = published_at;
     }
 

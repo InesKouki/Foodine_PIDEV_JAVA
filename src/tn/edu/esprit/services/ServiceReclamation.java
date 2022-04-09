@@ -25,7 +25,7 @@ Connection cnx = DataSource.getInstance().getCnx();
     @Override
     public void ajouter(Reclamation r) {
      try {
-            String req = "INSERT INTO `reclamation` (`user_id`, `created_at`,`etat`,`type`,`description`) VALUES ('" + r.getId_user()+ "', '" + r.getCreated_at()+ 
+            String req = "INSERT INTO `reclamation` (`user_id`, `created_at`,`etat`,`type`,`description`) VALUES ('" + r.getUser().getId()+ "', '" + r.getCreated_at()+ 
                     "', '" +r.getEtat()+ "', '" +r.getType()+ "', '" +r.getDescription()+ "')";
             Statement st = cnx.createStatement();
             st.executeUpdate(req);
@@ -69,12 +69,13 @@ Connection cnx = DataSource.getInstance().getCnx();
     public List<Reclamation> getAll() {
        List<Reclamation> list = new ArrayList<>();
         try {
-            String req = "Select * from reclamation";
+            String req = "SELECT * FROM `reclamation` r  join `User` u  on r.user_id=u.id;";
             Statement st = cnx.createStatement();
             ResultSet rs = st.executeQuery(req);
             
             while(rs.next()){
-                Reclamation r = new Reclamation(rs.getInt(1), rs.getString("created_at"), rs.getInt("etat"), rs.getString("type"), rs.getString("description"));
+                
+                Reclamation r = new Reclamation(rs.getString("u.nom"),rs.getString("u.prenom"),rs.getDate("created_at"), rs.getInt("etat"), rs.getString("type"), rs.getString("description"));
                 list.add(r);
             }
         } catch (SQLException ex) {
