@@ -48,7 +48,18 @@ public abstract class User {
         this.created_at = created_at;
         this.etat = etat;
     }
-
+    
+    
+   public User(String nom, String prenom, String username, String email, String password, Date created_at, int etat) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.file = file;
+        this.created_at = created_at;
+        this.etat = etat;
+    }
     
     public User(String nom, String prenom, String username, String email, String password, String file, int etat) {
         this.nom = nom;
