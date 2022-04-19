@@ -11,6 +11,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import tn.edu.esprit.entities.Reclamation;
 import tn.edu.esprit.entities.Reponse;
 import tn.edu.esprit.entities.User;
@@ -66,8 +68,8 @@ Connection cnx = DataSource.getInstance().getCnx();
     }
 
     @Override
-    public List<Reclamation> getAll() {
-       List<Reclamation> list = new ArrayList<>();
+    public ObservableList<Reclamation> getAll() {
+      ObservableList<Reclamation> list = FXCollections.observableArrayList();
         try {
             String req = "SELECT * FROM `reclamation` r  join `User` u  on r.user_id=u.id;";
             Statement st = cnx.createStatement();

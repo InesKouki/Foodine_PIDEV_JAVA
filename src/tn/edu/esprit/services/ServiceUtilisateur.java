@@ -123,15 +123,7 @@ ResultSet rs = null;
                 u = new Admin();
                else
                    u = new Client();
-                u.setId(rs.getInt("id"));
-               // j.setType(Joueur.type.valueOf(rs.getString("type")));
-                u.setNom(rs.getString("nom"));
-                u.setUsername(rs.getString("username"));
-                u.setPrenom(rs.getString("prenom"));
-                u.setCreated_at((Date) rs.getDate("created_at") );
-                u.setPassword(rs.getString("password"));
-                u.setEmail(rs.getString("email"));
-                u.setFile(rs.getString("file"));
+             
                 
             }
 
@@ -212,15 +204,15 @@ ResultSet rs = null;
     }*/
     
     @Override
-    public List<User> getAll() {
-      List<User> list = new ArrayList<>();
+    public ObservableList<User> getAll() {
+      ObservableList<User> list = FXCollections.observableArrayList();
         try {
             String req = "Select * from user";
             Statement st = cnx.createStatement();
             ResultSet rs = st.executeQuery(req);
             
             while(rs.next()){
-                User u = new Client(rs.getString("nom"), rs.getString("prenom"), rs.getString("username"), rs.getString("email"),rs.getString("roles"),rs.getString("file"),rs.getInt("phone"), rs.getString("address"), rs.getInt("etat"));
+                User u = new Client(rs.getString("nom"), rs.getString("prenom"), rs.getString("username"), rs.getString("email"),rs.getString("file"), rs.getInt("etat"),rs.getDate("created_at"));
                 list.add(u);
             }
         } catch (SQLException ex) {
@@ -229,16 +221,21 @@ ResultSet rs = null;
 
         return list;
     }
-   
     
-    
-    
-    
-    
-    
-    
-    
-    
+    public void logout(User u){
+        
+                u.setId(0);
+               // j.setType(Joueur.type.valueOf(rs.getString("type")));
+                u.setNom(null);
+                u.setUsername(null);
+                u.setPrenom(null);
+                u.setCreated_at(null);
+                u.setPassword(null);
+                u.setEmail(null);
+                u.setFile(null);
+        
+    }
+
 
     @Override
     public void modifier(User p) {

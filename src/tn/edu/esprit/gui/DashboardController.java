@@ -8,8 +8,11 @@ package tn.edu.esprit.gui;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -43,36 +46,37 @@ public class DashboardController implements Initializable {
     private TableColumn<User, String> email;
     private TableColumn<User, String> role;
     private TableColumn<User, Integer> etat;
-    @FXML
-    private TableColumn<?, ?> nomuser;
-    @FXML
-    private TableColumn<?, ?> type;
-    @FXML
-    private TableColumn<?, ?> description;
-    @FXML
-    private TableColumn<?, ?> dateenvoi;
-
+ObservableList<User> list ;
+ ServiceUtilisateur su = new ServiceUtilisateur();
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       ServiceUtilisateur su = new ServiceUtilisateur();
+      
         //traiter.setVisible(false);
         //supprimer.setVisible(false);
-      
-            ArrayList<User> arrayList = (ArrayList<User>) su.getAll();
-            //System.out.println(arrayList);
-             ObservableList obs = FXCollections.observableArrayList(arrayList);
-             System.out.println(obs);
-            tableList.setItems(obs);
-            nom.setCellValueFactory(new PropertyValueFactory<>("nom"));
-            prenom.setCellValueFactory(new PropertyValueFactory<>("prenom"));
-            username.setCellValueFactory(new PropertyValueFactory<>("username"));
-            email.setCellValueFactory(new PropertyValueFactory<>("email"));
-            role.setCellValueFactory(new PropertyValueFactory<>("roles"));
+       
+           showList();
+             
+            
             //dateinscri.setCellValueFactory(new PropertyValueFactory<>("created_at"));
-            etat.setCellValueFactory(new PropertyValueFactory<>("etat"));
+           
+          
+       
+       
+           
+    }
+    
+    public void showList(){
+            nom.setCellValueFactory(new PropertyValueFactory<User, String>("nom"));
+            prenom.setCellValueFactory(new PropertyValueFactory<User, String>("prenom"));
+            username.setCellValueFactory(new PropertyValueFactory<User, String>("username"));
+            email.setCellValueFactory(new PropertyValueFactory<User, String>("email"));
+            role.setCellValueFactory(new PropertyValueFactory<User, String>("roles"));
+            etat.setCellValueFactory(new PropertyValueFactory<User, Integer>("etat"));
+             list=su.getAll();
+            tableList.setItems(list);
     }
 
     @FXML
@@ -99,7 +103,6 @@ public class DashboardController implements Initializable {
             AuthentificationController ac = loader.getController();
     }
 
-    @FXML
     private void Logout(ActionEvent event) throws IOException {
           FXMLLoader  loader = new FXMLLoader(getClass().getResource("Authentification.fxml"));
             Parent root = loader.load();

@@ -5,9 +5,22 @@
  */
 package tn.edu.esprit.gui;
 
+import java.io.IOException;
 import java.net.URL;
+import java.sql.Date;
 import java.util.ResourceBundle;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import tn.edu.esprit.entities.Reclamation;
+import tn.edu.esprit.entities.User;
+import tn.edu.esprit.services.ServiceReclamation;
 
 /**
  * FXML Controller class
@@ -16,6 +29,21 @@ import javafx.fxml.Initializable;
  */
 public class AfficherReclamationController implements Initializable {
 
+    @FXML
+    private TableView<Reclamation> listRec;
+    @FXML
+    private TableColumn<Reclamation, String> colNom;
+    @FXML
+    private TableColumn<Reclamation, String> colType;
+    @FXML
+    private TableColumn<Reclamation, Date> colDate;
+    @FXML
+    private TableColumn<Reclamation, String> colDescr;
+    @FXML
+    private TableColumn<Reclamation, Integer> colEtat;
+
+    ServiceReclamation sv = new ServiceReclamation();
+    ObservableList<Reclamation> list ;
     /**
      * Initializes the controller class.
      */
@@ -23,5 +51,57 @@ public class AfficherReclamationController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+
+    @FXML
+    private void AfficherAccueil(ActionEvent event) throws IOException {
+         FXMLLoader  loader = new FXMLLoader(getClass().getResource("Dashboard.fxml"));
+            Parent root = loader.load();
+            listRec.getScene().setRoot(root);
+           DashboardController ac = loader.getController();
+    }
+
+    @FXML
+    private void AfficherReclamation(ActionEvent event) throws IOException {
+         FXMLLoader  loader = new FXMLLoader(getClass().getResource("AfficherReclamation.fxml"));
+            Parent root = loader.load();
+            listRec.getScene().setRoot(root);
+            AfficherReclamationController ac = loader.getController();
+        
+    }
+
+    @FXML
+    private void AfficherUtilisateur(ActionEvent event) throws IOException {
+         FXMLLoader  loader = new FXMLLoader(getClass().getResource("AfficherUtilisateur.fxml"));
+            Parent root = loader.load();
+            listRec.getScene().setRoot(root);
+            AfficherUtilisateurController ac = loader.getController();
+    }
+
+    @FXML
+    private void logout(ActionEvent event) throws IOException {
+         FXMLLoader  loader = new FXMLLoader(getClass().getResource("Authentification.fxml"));
+            Parent root = loader.load();
+            listRec.getScene().setRoot(root);
+            AuthentificationController ac = loader.getController();
+    }
+
+    
+      public void showList(){
+            colNom.setCellValueFactory(new PropertyValueFactory<Reclamation, String>("u.nom"));
+            colType.setCellValueFactory(new PropertyValueFactory<Reclamation, String>("type"));
+            colDescr.setCellValueFactory(new PropertyValueFactory<Reclamation, String>("username"));
+            colEtat.setCellValueFactory(new PropertyValueFactory<Reclamation, Integer>("etat"));
+            colDate.setCellValueFactory(new PropertyValueFactory<Reclamation, Date>("created_at"));
+             list=sv.getAll();
+             listRec.setItems(list);
+            
+    }
+    @FXML
+    private void supprimer(ActionEvent event) {
+    }
+
+    @FXML
+    private void modifier(ActionEvent event) {
+    }
     
 }

@@ -49,6 +49,7 @@ public class MainClass {
        User u = new Admin("zz","zz","zz","zz","zz","zz", date,1);
        su.ajouter(u);
       
+       su.getAll();
        
         //sa.supprimer(8);
        //System.out.println(su.getAll()) ;
