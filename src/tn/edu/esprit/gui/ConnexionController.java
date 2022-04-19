@@ -78,8 +78,7 @@ public class ConnexionController implements Initializable {
             FXMLLoader  loader = new FXMLLoader(getClass().getResource("Authentification.fxml"));
             Parent root = loader.load();
             tfNom.getScene().setRoot(root);
-            AuthentificationController ac = loader.getController();
-            
+            ConnexionController ac = loader.getController();
     }
     }
 
@@ -88,7 +87,7 @@ public class ConnexionController implements Initializable {
         FXMLLoader  loader = new FXMLLoader(getClass().getResource("Authentification.fxml"));
             Parent root = loader.load();
             tfNom.getScene().setRoot(root);
-            AuthentificationController ac = loader.getController();
+            ConnexionController ac = loader.getController();
     }
     
 }

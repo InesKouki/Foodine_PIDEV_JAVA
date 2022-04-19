@@ -7,6 +7,10 @@ package tn.edu.esprit.gui;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -20,6 +24,7 @@ import javafx.scene.control.TextField;
 import tn.edu.esprit.entities.Client;
 import tn.edu.esprit.entities.User;
 import tn.edu.esprit.services.ServiceUtilisateur;
+import tn.edu.esprit.utils.DataSource;
 
 /**
  * FXML Controller class
@@ -27,7 +32,10 @@ import tn.edu.esprit.services.ServiceUtilisateur;
  * @author Asus
  */
 public class AuthentificationController implements Initializable {
-
+public static int idplayer;
+public static String role;
+Connection cnx = DataSource.getInstance().getCnx();
+    public static User connectedUser;
     @FXML
     private TextField tfUsername;
     @FXML
@@ -42,7 +50,7 @@ public class AuthentificationController implements Initializable {
     }    
 
     @FXML
-    private void Authentification(ActionEvent event) {
+    private void Authentification(ActionEvent event) throws SQLException, IOException {
         
     if(tfUsername.getText().isEmpty() || tfPassword.getText().isEmpty()){
              Alert a = new Alert(Alert.AlertType.ERROR,"Champs vides !",ButtonType.OK);
@@ -50,12 +58,48 @@ public class AuthentificationController implements Initializable {
    
         }
             else{
-           
-            Alert a = new Alert(Alert.AlertType.INFORMATION,"Succes !",ButtonType.OK);
-            a.showAndWait();
-            
-           
-            
+            ServiceUtilisateur su = new ServiceUtilisateur();
+
+        if (su.authentifier(tfUsername.getText(), tfPassword.getText()) == 1) {
+            PreparedStatement statement;
+            try {
+                statement = cnx.prepareStatement("SELECT * FROM user WHERE username=?");
+                statement.setString(1, tfUsername.getText());
+                 
+                ResultSet rs = statement.executeQuery();
+
+                while (rs.next()) {
+                    idplayer = rs.getInt(1);
+                    role = rs.getString(6);
+                    connectedUser = su.find(rs.getInt(1));
+                }
+                System.out.println(connectedUser);
+                System.out.println(role);
+
+            } catch (SQLException ex) {
+                ex.getMessage();
+            }
+ Alert aa = new Alert(Alert.AlertType.INFORMATION,"Succes !",ButtonType.OK);
+                    aa.showAndWait();
+                    
+               if(role.contains("[\"ROLE_ADMIN\"]")){
+                FXMLLoader  loader = new FXMLLoader(getClass().getResource("Dashboard.fxml"));
+                Parent root = loader.load();
+                tfUsername.getScene().setRoot(root);
+                AuthentificationController ac = loader.getController();
+               }
+               else
+               {
+                    FXMLLoader  loader = new FXMLLoader(getClass().getResource("ProfileClient.fxml"));
+                Parent root = loader.load();
+                tfUsername.getScene().setRoot(root);
+                AuthentificationController ac = loader.getController();
+               }           
+    }
+        else{
+            Alert a = new Alert(Alert.AlertType.ERROR,"Vérifier vos coodonnées !",ButtonType.OK);
+               a.showAndWait();
+        }
     }
     }
 
@@ -68,7 +112,7 @@ public class AuthentificationController implements Initializable {
          FXMLLoader  loader = new FXMLLoader(getClass().getResource("Inscription.fxml"));
             Parent root = loader.load();
             tfUsername.getScene().setRoot(root);
-            AuthentificationController ac = loader.getController();
+            ConnexionController ac = loader.getController();
     }
     
 }

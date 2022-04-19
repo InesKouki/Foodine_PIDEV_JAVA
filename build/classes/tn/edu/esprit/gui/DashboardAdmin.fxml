@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1200.0" styleClass="sidebar_opt" stylesheets="@dashboardadmin.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <left>
+      <AnchorPane prefHeight="200.0" prefWidth="45.0" styleClass="sidebar" BorderPane.alignment="CENTER">
+         <children>
+            <FontAwesomeIconView glyphName="BARS" layoutX="17.0" layoutY="35.0" size="1.5em" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.5" AnchorPane.topAnchor="15.0" />
+            <VBox layoutX="15.0" layoutY="176.0">
+               <children>
+                  <FontAwesomeIconView fill="ORANGE" glyphName="HOME" layoutX="-4.0" layoutY="-57.0" size="14">
+                     <VBox.margin>
+                        <Insets bottom="15.0" top="15.0" />
+                     </VBox.margin>
+                  </FontAwesomeIconView>
+                  <FontAwesomeIconView glyphName="LIST_UL" layoutX="-4.0" layoutY="-14.0" styleClass="sidebar_opt">
+                     <VBox.margin>
+                        <Insets bottom="15.0" top="15.0" />
+                     </VBox.margin>
+                  </FontAwesomeIconView>
+                  <FontAwesomeIconView glyphName="IMAGE" layoutX="-4.0" layoutY="29.0" styleClass="sidebar_opt">
+                     <VBox.margin>
+                        <Insets bottom="15.0" top="15.0" />
+                     </VBox.margin>
+                  </FontAwesomeIconView>
+                  <FontAwesomeIconView glyphName="GEAR" layoutX="-4.0" layoutY="74.0" size="14" styleClass="sidebar_opt" wrappingWidth="13.0">
+                     <VBox.margin>
+                        <Insets bottom="15.0" top="15.0" />
+                     </VBox.margin>
+                  </FontAwesomeIconView>
+                  <Separator layoutX="-4.0" layoutY="92.0" />
+                  <FontAwesomeIconView glyphName="PLUS" layoutX="-4.0" layoutY="122.0" size="14" wrappingWidth="13.0">
+                     <VBox.margin>
+                        <Insets bottom="15.0" top="15.0" />
+                     </VBox.margin>
+                  </FontAwesomeIconView>
+               </children>
+            </VBox>
+            <Circle fill="WHITE" layoutX="22.0" layoutY="568.0" radius="18.0" stroke="#c1c1c1" strokeType="INSIDE" />
+         </children>
+      </AnchorPane>
+   </left>
+   <center>
+      <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: #f3f3f3;" BorderPane.alignment="CENTER">
+         <children>
+            <VBox alignment="TOP_CENTER" layoutX="44.0" prefHeight="250.0" prefWidth="850.0" styleClass="pane" AnchorPane.leftAnchor="44.0" AnchorPane.rightAnchor="26.0">
+               <children>
+                  <HBox prefHeight="56.0" prefWidth="1083.0">
+                     <children>
+                        <Label text="Dashboad" textFill="ORANGE">
+                           <padding>
+                              <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                           </padding>
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </Label>
+                        <Separator orientation="VERTICAL" />
+                        <Label text="Welcome">
+                           <padding>
+                              <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                           </padding>
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="117.0" layoutY="10.0" maxWidth="1.7976931348623157E308" text="18-04-2022" textFill="#726e6e" HBox.hgrow="ALWAYS">
+                           <padding>
+                              <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                           </padding>
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <VBox.margin>
+                        <Insets left="10.0" right="10.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                     <VBox.margin>
+                        <Insets bottom="30.0" />
+                     </VBox.margin>
+                     <children>
+                        <VBox>
+                           <children>
+                              <Label text="My cards">
+                                 <padding>
+                                    <Insets left="15.0" top="15.0" />
+                                 </padding>
+                                 <font>
+                                    <Font name="System Bold" size="16.0" />
+                                 </font>
+                              </Label>
+                              <Button mnemonicParsing="false" prefHeight="75.0" prefWidth="75.0" styleClass="plus_btn">
+                                 <graphic>
+                                    <FontAwesomeIconView fill="#c1c1c1" glyphName="PLUS" size="2em" />
+                                 </graphic>
+                              </Button>
+                           </children>
+                           <padding>
+                              <Insets left="15.0" top="15.0" />
+                           </padding>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>
