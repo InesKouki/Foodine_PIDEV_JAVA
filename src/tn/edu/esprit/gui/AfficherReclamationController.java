@@ -49,7 +49,7 @@ public class AfficherReclamationController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+      showList();
     }    
 
     @FXML
@@ -89,10 +89,11 @@ public class AfficherReclamationController implements Initializable {
       public void showList(){
             colNom.setCellValueFactory(new PropertyValueFactory<Reclamation, String>("u.nom"));
             colType.setCellValueFactory(new PropertyValueFactory<Reclamation, String>("type"));
-            colDescr.setCellValueFactory(new PropertyValueFactory<Reclamation, String>("username"));
+            colDescr.setCellValueFactory(new PropertyValueFactory<Reclamation, String>("description"));
             colEtat.setCellValueFactory(new PropertyValueFactory<Reclamation, Integer>("etat"));
             colDate.setCellValueFactory(new PropertyValueFactory<Reclamation, Date>("created_at"));
              list=sv.getAll();
+             System.out.println(list);
              listRec.setItems(list);
             
     }

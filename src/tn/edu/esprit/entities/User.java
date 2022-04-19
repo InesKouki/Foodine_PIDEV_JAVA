@@ -26,6 +26,19 @@ public abstract class User {
     public User() {
     }
 
+    public User(int id, String nom, String prenom, String email) {
+        this.id = id;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.email = email;
+    }
+
+    public User(int id, String password) {
+        this.id = id;
+        this.password = password;
+    }
+    
+
     public User(int id, String nom, String prenom, String username, String email, String password, String file, Date created_at, int etat) {
         this.id = id;
         this.nom = nom;

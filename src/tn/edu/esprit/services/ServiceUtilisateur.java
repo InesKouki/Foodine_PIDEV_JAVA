@@ -161,7 +161,7 @@ ResultSet rs = null;
     public void modifier_Password(User u){
         
          try {
-            String req = "UPDATE `user` SET `password` = '" + u.getPassword() + "' WHERE `personne`.`id` = " + u.getId();
+            String req = "UPDATE `user` SET `password` = '" + u.getPassword() + "' WHERE `user`.`id` = " + u.getId();
             Statement st = cnx.createStatement();
             st.executeUpdate(req);
             System.out.println("Mot de passe modifié !");
@@ -172,7 +172,7 @@ ResultSet rs = null;
     
     public void bloquer(User u){
          try {
-            String req = "UPDATE `user` SET `etat` = '"+ 0 + "' WHERE `personne`.`id` = " + u.getId();
+            String req = "UPDATE `user` SET `etat` = '"+ 0 + "' WHERE `user`.`id` = " + u.getId();
             Statement st = cnx.createStatement();
             st.executeUpdate(req);
             System.out.println("Utilisateur bloqué !");
@@ -183,7 +183,7 @@ ResultSet rs = null;
 
     public void debloquer(User u){
          try {
-            String req = "UPDATE `user` SET `etat` = '"+ 1 + "' WHERE `personne`.`id` = " + u.getId();
+            String req = "UPDATE `user` SET `etat` = '"+ 1 + "' WHERE `user`.`id` = " + u.getId();
             Statement st = cnx.createStatement();
             st.executeUpdate(req);
             System.out.println("Utilisateur débloqué !");
@@ -222,24 +222,35 @@ ResultSet rs = null;
         return list;
     }
     
-    public void logout(User u){
-        
-                u.setId(0);
-               // j.setType(Joueur.type.valueOf(rs.getString("type")));
-                u.setNom(null);
-                u.setUsername(null);
-                u.setPrenom(null);
-                u.setCreated_at(null);
-                u.setPassword(null);
-                u.setEmail(null);
-                u.setFile(null);
-        
+
+
+
+    
+    public void modifierInfo(Client u) {
+
+   try {
+            String req = "UPDATE `user` SET `phone` = '"+ u.getPhone()+ "',prenom='"+u.getPrenom()+ "',nom='"+u.getNom()
+                    + "',address='"+u.getAddress()
+                    + "',email='"+u.getEmail()
+                   
+                    
+                    + "' WHERE `user`.`id` = " + u.getId();
+            Statement st = cnx.createStatement();
+            st.executeUpdate(req);
+            System.out.println("Information modifiée !");
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }    
     }
 
+       
+  
+    
+    
 
     @Override
     public void modifier(User p) {
-       //
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     }

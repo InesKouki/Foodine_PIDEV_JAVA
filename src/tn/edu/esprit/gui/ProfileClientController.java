@@ -16,6 +16,9 @@ import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
+import tn.edu.esprit.entities.Client;
+import tn.edu.esprit.entities.User;
+import tn.edu.esprit.services.ServiceUtilisateur;
 
 /**
  * FXML Controller class
@@ -40,7 +43,10 @@ public class ProfileClientController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+         FXMLLoader  loader = new FXMLLoader(getClass().getResource("Authentification.fxml"));
+         AuthentificationController ac = loader.getController();
+         
+//        System.out.println(ac.connectedUser);
     }    
 
     @FXML
@@ -52,7 +58,7 @@ public class ProfileClientController implements Initializable {
         FXMLLoader  loader = new FXMLLoader(getClass().getResource("ProfileClient.fxml"));
             Parent root = loader.load();
             txtNom.getScene().setRoot(root);
-            AuthentificationController ac = loader.getController();
+           ProfileClientController ac = loader.getController();
     }
 
     @FXML
@@ -60,7 +66,7 @@ public class ProfileClientController implements Initializable {
          FXMLLoader  loader = new FXMLLoader(getClass().getResource("AjouterReclamation.fxml"));
             Parent root = loader.load();
             txtNom.getScene().setRoot(root);
-            AuthentificationController ac = loader.getController();
+            AjouterReclamationController ac = loader.getController();
     }
 
     @FXML
@@ -81,12 +87,21 @@ public class ProfileClientController implements Initializable {
             Alert a = new Alert(Alert.AlertType.ERROR,"Numero téléphone invalide !",ButtonType.OK);
                a.showAndWait();
         }else  {
+            ServiceUtilisateur su = new ServiceUtilisateur();
+            User u = new Client(57,txtNom.getText(),txtPrenom.getText(),txtEmail.getText(),Integer. parseInt(txtPhone.getText()),txtAdresse.getText());
+            su.modifierInfo((Client) u);
+             Alert a = new Alert(Alert.AlertType.INFORMATION,"Succes !",ButtonType.OK);
+               a.showAndWait();
             
         }
     }
 
     @FXML
-    private void ModifierPassword(ActionEvent event) {
+    private void ModifierPassword(ActionEvent event) throws IOException {
+        FXMLLoader  loader = new FXMLLoader(getClass().getResource("ModifierPassword.fxml"));
+            Parent root = loader.load();
+            txtNom.getScene().setRoot(root);
+           ModifierPasswordController ac = loader.getController();
     }
     
 }

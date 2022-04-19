@@ -7,14 +7,24 @@ package tn.edu.esprit.gui;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Date;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.control.ComboBox;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
+import tn.edu.esprit.entities.Client;
+import tn.edu.esprit.entities.Reclamation;
+import tn.edu.esprit.entities.User;
+import tn.edu.esprit.services.ServiceReclamation;
 
 /**
  * FXML Controller class
@@ -24,16 +34,28 @@ import javafx.scene.control.TextField;
 public class AjouterReclamationController implements Initializable {
 
     @FXML
-    private ComboBox<?> tfType;
+    private Button logout;
+    @FXML
+    private Button Home;
+    @FXML
+    private Button afficherProfile;
+    @FXML
+    private Button AjouterReclamation;
     @FXML
     private TextField tfDescription;
+    @FXML
+    private ChoiceBox<String> type;
+  FXMLLoader  loader = new FXMLLoader(getClass().getResource("Authentification.fxml"));
+    AuthentificationController ac = loader.getController();
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+         ObservableList<String> list = FXCollections.observableArrayList("Livraison en retard","Commande Erroné","Autre");
+        type.setItems(list);
+
     }    
 
     @FXML
@@ -50,18 +72,36 @@ public class AjouterReclamationController implements Initializable {
 
     @FXML
     private void AfficherProfile(ActionEvent event) throws IOException {
-        FXMLLoader  loader = new FXMLLoader(getClass().getResource("ProfileClient.fxml"));
+          FXMLLoader  loader = new FXMLLoader(getClass().getResource("ProfileClient.fxml"));
             Parent root = loader.load();
             tfDescription.getScene().setRoot(root);
-            AuthentificationController ac = loader.getController();
+            ProfileClientController ac = loader.getController();
+
     }
 
     @FXML
-    private void AjouterReclamation(ActionEvent event) throws IOException {
-        FXMLLoader  loader = new FXMLLoader(getClass().getResource("AjouterReclamation.fxml"));
-            Parent root = loader.load();
-            tfDescription.getScene().setRoot(root);
-            AuthentificationController ac = loader.getController();
+    private void AjouterReclamation(ActionEvent event) {
+    }
+
+    @FXML
+    private void Ajout(ActionEvent event) {
+             if(type.getValue().isEmpty() || tfDescription.getText().isEmpty()){
+             Alert a = new Alert(Alert.AlertType.ERROR,"Champs vides !",ButtonType.OK);
+               a.showAndWait();
+   
+        }
+            else{
+            ServiceReclamation su = new ServiceReclamation();
+            long millis=System.currentTimeMillis();
+            java.sql.Date date= new java.sql.Date(millis);
+            User u = new Client(57,"","", "","","", "", date,0);
+            System.out.println(type.getSelectionModel().toString());
+            Reclamation r = new Reclamation(u,date,0,type.getValue(),tfDescription.getText());
+            su.ajouter(r);
+             Alert a = new Alert(Alert.AlertType.INFORMATION,"Succes !",ButtonType.OK);
+               a.showAndWait();
+    }
+
     }
     
 }

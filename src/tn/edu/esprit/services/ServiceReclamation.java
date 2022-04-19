@@ -71,7 +71,7 @@ Connection cnx = DataSource.getInstance().getCnx();
     public ObservableList<Reclamation> getAll() {
       ObservableList<Reclamation> list = FXCollections.observableArrayList();
         try {
-            String req = "SELECT * FROM `reclamation` r  join `User` u  on r.user_id=u.id;";
+            String req = "SELECT * FROM `reclamation` r  join `User` u  on r.user_id=u.id";
             Statement st = cnx.createStatement();
             ResultSet rs = st.executeQuery(req);
             

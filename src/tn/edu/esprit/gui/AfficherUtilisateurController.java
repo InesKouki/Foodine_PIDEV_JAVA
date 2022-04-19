@@ -68,7 +68,7 @@ public class AfficherUtilisateurController implements Initializable {
          FXMLLoader  loader = new FXMLLoader(getClass().getResource("AfficherReclamation.fxml"));
             Parent root = loader.load();
             tableList.getScene().setRoot(root);
-            AuthentificationController ac = loader.getController();
+           AfficherReclamationController ac = loader.getController();
     }
 
     @FXML

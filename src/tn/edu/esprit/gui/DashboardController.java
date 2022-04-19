@@ -39,45 +39,17 @@ public class DashboardController implements Initializable {
 
     @FXML
     private Label lbadmin;
-    private TableView<User> tableList;
-    private TableColumn<User, String> nom;
-    private TableColumn<User, String> prenom;
-    private TableColumn<User, String> username;
-    private TableColumn<User, String> email;
-    private TableColumn<User, String> role;
-    private TableColumn<User, Integer> etat;
-ObservableList<User> list ;
- ServiceUtilisateur su = new ServiceUtilisateur();
+    
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-      
-        //traiter.setVisible(false);
-        //supprimer.setVisible(false);
        
-           showList();
-             
-            
-            //dateinscri.setCellValueFactory(new PropertyValueFactory<>("created_at"));
-           
-          
-       
-       
-           
     }
     
-    public void showList(){
-            nom.setCellValueFactory(new PropertyValueFactory<User, String>("nom"));
-            prenom.setCellValueFactory(new PropertyValueFactory<User, String>("prenom"));
-            username.setCellValueFactory(new PropertyValueFactory<User, String>("username"));
-            email.setCellValueFactory(new PropertyValueFactory<User, String>("email"));
-            role.setCellValueFactory(new PropertyValueFactory<User, String>("roles"));
-            etat.setCellValueFactory(new PropertyValueFactory<User, Integer>("etat"));
-             list=su.getAll();
-            tableList.setItems(list);
-    }
+  
 
     @FXML
     private void AfficherAccueil(ActionEvent event) throws IOException {

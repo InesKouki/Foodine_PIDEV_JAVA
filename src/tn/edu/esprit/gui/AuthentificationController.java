@@ -35,7 +35,7 @@ public class AuthentificationController implements Initializable {
 public static int idplayer;
 public static String role;
 Connection cnx = DataSource.getInstance().getCnx();
-    public static User connectedUser;
+    public   User connectedUser;
     @FXML
     private TextField tfUsername;
     @FXML
@@ -68,8 +68,8 @@ Connection cnx = DataSource.getInstance().getCnx();
                  
                 ResultSet rs = statement.executeQuery();
 
-                while (rs.next()) {
-                    idplayer = rs.getInt(1);
+                if (rs.next()) {
+                    //idplayer = rs.getInt(1);
                     role = rs.getString(6);
                     connectedUser = su.find(rs.getInt(1));
                 }
@@ -93,7 +93,7 @@ Connection cnx = DataSource.getInstance().getCnx();
                     FXMLLoader  loader = new FXMLLoader(getClass().getResource("ProfileClient.fxml"));
                 Parent root = loader.load();
                 tfUsername.getScene().setRoot(root);
-                AuthentificationController ac = loader.getController();
+                ProfileClientController ac = loader.getController();
                }           
     }
         else{
