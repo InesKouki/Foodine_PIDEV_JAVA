@@ -8,6 +8,7 @@ package tn.edu.esprit.gui;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -97,8 +98,39 @@ public class AfficherReclamationController implements Initializable {
              listRec.setItems(list);
             
     }
+      
+    
+      private void refresh() {
+           list.clear();
+            
+           list=sv.getAll();
+             System.out.println(list);
+             listRec.setItems(list);
+        
+    }
+         public void clear() {
+
+        colNom.setText(null);
+        colType.setText(null);
+        colDescr.setText(null);
+        colEtat.setText(null);
+        colDate.setText(null);
+
+    }
+      
+      public void delete()
+    {
+        ServiceReclamation SV = new ServiceReclamation();
+       SV.supprimer(listRec.getSelectionModel().getSelectedItem().getId());
+        System.out.println(listRec.getSelectionModel().getSelectedItem().getId());
+    }
+   
     @FXML
     private void supprimer(ActionEvent event) {
+         delete();
+        listRec.getItems().removeAll(listRec.getSelectionModel().getSelectedItem());
+        System.out.println(listRec);
+        listRec.refresh();
     }
 
     @FXML

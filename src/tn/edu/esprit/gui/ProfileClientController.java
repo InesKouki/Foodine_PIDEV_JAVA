@@ -86,7 +86,12 @@ public class ProfileClientController implements Initializable {
         }else if(!txtPhone.getText().matches("[0-9]+") ||txtPhone.getText().length() > 8 ){
             Alert a = new Alert(Alert.AlertType.ERROR,"Numero téléphone invalide !",ButtonType.OK);
                a.showAndWait();
-        }else  {
+        }else if (txtNom.getText().matches("[0-9]+") ||txtPrenom.getText().matches("[0-9]+")){
+             Alert a = new Alert(Alert.AlertType.ERROR,"Votre nom ou prenom doit contenir des lettre alphabetique !",ButtonType.OK);
+               a.showAndWait();
+        }
+        
+        else  {
             ServiceUtilisateur su = new ServiceUtilisateur();
             User u = new Client(57,txtNom.getText(),txtPrenom.getText(),txtEmail.getText(),Integer. parseInt(txtPhone.getText()),txtAdresse.getText());
             su.modifierInfo((Client) u);

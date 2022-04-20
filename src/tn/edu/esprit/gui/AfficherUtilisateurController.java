@@ -19,6 +19,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import tn.edu.esprit.entities.User;
+import tn.edu.esprit.services.ServiceReclamation;
 import tn.edu.esprit.services.ServiceUtilisateur;
 
 /**
@@ -103,5 +104,45 @@ public class AfficherUtilisateurController implements Initializable {
 
     @FXML
     private void supprimerUtilisateur(ActionEvent event) {
+         delete();
+        tableList.getItems().removeAll(tableList.getSelectionModel().getSelectedItem());
+        System.out.println(tableList);
+        tableList.refresh();
+    }
+    
+    
+      private void refresh() {
+           list.clear();
+            
+           list=su.getAll();
+             System.out.println(list);
+             tableList.setItems(list);
+        
+    }
+         public void clear() {
+
+        colNom.setText(null);
+        colPrenom.setText(null);
+        colUsername.setText(null);
+         colEmail.setText(null);
+        colEtat.setText(null);
+        colDate.setText(null);
+          colRole.setText(null);
+
+    }
+      
+      public void delete()
+    {
+        ServiceReclamation SV = new ServiceReclamation();
+       SV.supprimer(tableList.getSelectionModel().getSelectedItem().getId());
+        System.out.println(tableList.getSelectionModel().getSelectedItem().getId());
+    }
+   
+    @FXML
+    private void supprimer(ActionEvent event) {
+         delete();
+        tableList.getItems().removeAll(tableList.getSelectionModel().getSelectedItem());
+        System.out.println(tableList);
+        tableList.refresh();
     }
 }
