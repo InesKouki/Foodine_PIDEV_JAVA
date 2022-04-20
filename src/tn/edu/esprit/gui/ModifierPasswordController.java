@@ -6,6 +6,7 @@
 package tn.edu.esprit.gui;
 
 import java.io.IOException;
+import static java.lang.Integer.parseInt;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -98,7 +99,7 @@ StringBuilder finalresult;
            }
             
              ServiceUtilisateur su = new ServiceUtilisateur();
-             User u = new Client(57,finalresult.toString());
+             User u = new Client(parseInt(System.getProperty("id")),finalresult.toString());
             su.modifier_Password((Client) u);
              Alert a = new Alert(Alert.AlertType.INFORMATION,"Succes !",ButtonType.OK);
                a.showAndWait();

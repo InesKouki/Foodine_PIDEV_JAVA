@@ -122,7 +122,7 @@ ResultSet rs = null;
                if (role.contains("[\"ROLE_ADMIN\"]"))
                 u = new Admin();
                else
-                   u = new Client();
+                   u = new Client(rs.getInt("id"),rs.getString("nom"),rs.getString("prenom"),rs.getString("username"),rs.getString("email"),rs.getString("password"),rs.getString("file"),rs.getInt("phone"),rs.getString("address"),rs.getInt("etat"));
              
                 
             }

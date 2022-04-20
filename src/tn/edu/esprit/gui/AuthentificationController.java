@@ -70,13 +70,14 @@ Connection cnx = DataSource.getInstance().getCnx();
                 ResultSet rs = statement.executeQuery();
 
                 if (rs.next()) {
-                    //idplayer = rs.getInt(1);
+                    System.setProperty("id",Integer.toString(rs.getInt(1)));
                     role = rs.getString(6);
                     etat =rs.getInt(14);
                     connectedUser = su.find(rs.getInt(1));
                 }
-                System.out.println(connectedUser);
+                System.out.println(System.setProperty("id",Integer.toString(rs.getInt(1))));
                 System.out.println(role);
+                
 
             } catch (SQLException ex) {
                 ex.getMessage();

@@ -59,6 +59,12 @@ public class Client extends User{
         this.address=address;
         this.phone=phone;
     }
+   
+    public Client(int id,String nom, String prenom, String username, String email, String password, String file,int phone,String address,int etat) {
+        super(nom, prenom, username, email, password, file,etat);
+        this.address=address;
+        this.phone=phone;
+    }
 
     public int getPhone() {
         return phone;

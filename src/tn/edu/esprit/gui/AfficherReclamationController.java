@@ -59,6 +59,8 @@ public class AfficherReclamationController implements Initializable {
       showList();
       supprimer.setVisible(false);
         traiter.setVisible(false);
+          System.out.println(System.getProperty("id"));
+        
     }    
 
     @FXML

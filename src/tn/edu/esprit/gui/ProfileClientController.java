@@ -6,6 +6,7 @@
 package tn.edu.esprit.gui;
 
 import java.io.IOException;
+import static java.lang.Integer.parseInt;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -37,6 +38,10 @@ public class ProfileClientController implements Initializable {
     private TextField txtPrenom;
     @FXML
     private TextField txtNom;
+    
+    
+    ServiceUtilisateur u = new ServiceUtilisateur();
+     Client us = (Client) u.find(Integer.parseInt(System.getProperty("id")));
 
     /**
      * Initializes the controller class.
@@ -45,8 +50,18 @@ public class ProfileClientController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
          FXMLLoader  loader = new FXMLLoader(getClass().getResource("Authentification.fxml"));
          AuthentificationController ac = loader.getController();
-         
-//        System.out.println(ac.connectedUser);
+         txtNom.setText(us.getNom());
+     
+           txtAdresse.setText(us.getAddress());
+      
+    
+           txtPhone.setText(Integer.toString(us.getPhone()));
+       
+       
+         txtPrenom.setText(us.getPrenom());
+         txtEmail.setText(us.getEmail());
+     
+
     }    
 
     @FXML
@@ -93,7 +108,7 @@ public class ProfileClientController implements Initializable {
         
         else  {
             ServiceUtilisateur su = new ServiceUtilisateur();
-            User u = new Client(57,txtNom.getText(),txtPrenom.getText(),txtEmail.getText(),Integer. parseInt(txtPhone.getText()),txtAdresse.getText());
+            User u = new Client(parseInt(System.getProperty("id")),txtNom.getText(),txtPrenom.getText(),txtEmail.getText(),Integer. parseInt(txtPhone.getText()),txtAdresse.getText());
             su.modifierInfo((Client) u);
              Alert a = new Alert(Alert.AlertType.INFORMATION,"Succes !",ButtonType.OK);
                a.showAndWait();

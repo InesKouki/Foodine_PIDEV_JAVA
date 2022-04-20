@@ -6,6 +6,7 @@
 package tn.edu.esprit.gui;
 
 import java.io.IOException;
+import static java.lang.Integer.parseInt;
 import java.net.URL;
 import java.sql.Date;
 import java.util.ResourceBundle;
@@ -94,7 +95,9 @@ public class AjouterReclamationController implements Initializable {
             ServiceReclamation su = new ServiceReclamation();
             long millis=System.currentTimeMillis();
             java.sql.Date date= new java.sql.Date(millis);
-            User u = new Client(57,"","", "","","", "", date,0);
+          
+            
+            User u = new Client(parseInt(System.getProperty("id")),"","", "","","", "", date,0);
             System.out.println(type.getSelectionModel().toString());
             Reclamation r = new Reclamation(u,date,0,type.getValue(),tfDescription.getText());
             su.ajouter(r);
