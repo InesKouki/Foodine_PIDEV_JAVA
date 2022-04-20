@@ -88,13 +88,12 @@
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </padding>
       </Label>
-      <TableView fx:id="tableList" layoutX="311.0" layoutY="115.0" onMouseClicked="#clickItem" prefHeight="418.0" prefWidth="655.0">
+      <TableView fx:id="tableList" layoutX="383.0" layoutY="115.0" onMouseClicked="#clickItem" prefHeight="418.0" prefWidth="558.0">
         <columns>
           <TableColumn fx:id="colNom" prefWidth="75.0" text="Nom" />
           <TableColumn fx:id="colPrenom" prefWidth="75.0" text="Prenom" />
             <TableColumn fx:id="colUsername" prefWidth="75.0" text="Username" />
             <TableColumn fx:id="colEmail" prefWidth="75.0" text="Email" />
-            <TableColumn fx:id="colRole" prefWidth="75.0" text="Role" />
             <TableColumn fx:id="colDate" prefWidth="156.0" text="Date d'inscription" />
             <TableColumn fx:id="colEtat" prefWidth="99.0" text="Etat" />
         </columns>

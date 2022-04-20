@@ -34,7 +34,6 @@ public class AfficherReclamationController implements Initializable {
 
     @FXML
     private TableView<Reclamation> listRec;
-    @FXML
     private TableColumn<Reclamation, String> colNom;
     @FXML
     private TableColumn<Reclamation, String> colType;
@@ -98,7 +97,7 @@ public class AfficherReclamationController implements Initializable {
 
     
       public void showList(){
-            colNom.setCellValueFactory(new PropertyValueFactory<Reclamation, String>("u.nom"));
+           // colNom.setCellValueFactory(new PropertyValueFactory<Reclamation, String>("u.nom"));
             colType.setCellValueFactory(new PropertyValueFactory<Reclamation, String>("type"));
             colDescr.setCellValueFactory(new PropertyValueFactory<Reclamation, String>("description"));
             colEtat.setCellValueFactory(new PropertyValueFactory<Reclamation, Integer>("etat"));

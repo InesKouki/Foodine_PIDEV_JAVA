@@ -54,8 +54,7 @@ public class ProfileClientController implements Initializable {
     private ImageView image;
     @FXML
     private Button btnphoto;
-    private ImageView image1;
-    
+   
 
     /**
      * Initializes the controller class.
@@ -75,7 +74,7 @@ public class ProfileClientController implements Initializable {
          txtPrenom.setText(us.getPrenom());
          txtEmail.setText(us.getEmail());
          image.setImage(new Image("file:" + uploads +us.getFile()));
-         image1.setImage(new Image("file:" + uploads +us.getFile()));
+         
      
 
     }    

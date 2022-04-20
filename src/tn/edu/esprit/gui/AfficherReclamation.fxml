@@ -95,7 +95,6 @@
             <TableColumn fx:id="colEtat" minWidth="0.0" prefWidth="114.0" text="Etat" />
             <TableColumn fx:id="colDescr" minWidth="0.0" prefWidth="168.0" text="Description" />
             <TableColumn fx:id="colDate" minWidth="0.0" prefWidth="124.0" text="Date d'envoi" />
-          <TableColumn fx:id="colNom" prefWidth="116.0" text="Nom Utilisateur" />
         </columns>
       </TableView>
       <Button fx:id="supprimer" layoutX="529.0" layoutY="490.0" mnemonicParsing="false" onAction="#supprimer" prefHeight="48.0" prefWidth="173.0" styleClass="buttonItem" stylesheets="@authentification.css" text="Supprimer">

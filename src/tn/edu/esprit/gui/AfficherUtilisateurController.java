@@ -40,7 +40,6 @@ public class AfficherUtilisateurController implements Initializable {
     private TableColumn<User, String> colUsername;
     @FXML
     private TableColumn<User, String> colEmail;
-    @FXML
     private TableColumn<User, String> colRole;
     @FXML
     private TableColumn<User, Integer> colEtat;
@@ -97,7 +96,7 @@ public class AfficherUtilisateurController implements Initializable {
             colPrenom.setCellValueFactory(new PropertyValueFactory<User, String>("prenom"));
             colUsername.setCellValueFactory(new PropertyValueFactory<User, String>("username"));
             colEmail.setCellValueFactory(new PropertyValueFactory<User, String>("email"));
-            colRole.setCellValueFactory(new PropertyValueFactory<User, String>("roles"));
+           // colRole.setCellValueFactory(new PropertyValueFactory<User, String>("roles"));
             colEtat.setCellValueFactory(new PropertyValueFactory<User, Integer>("etat"));
             colDate.setCellValueFactory(new PropertyValueFactory<User, Date>("created_at"));
              list=su.getAll();
