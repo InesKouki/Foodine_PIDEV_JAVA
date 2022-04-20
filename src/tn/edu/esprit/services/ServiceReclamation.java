@@ -77,7 +77,7 @@ Connection cnx = DataSource.getInstance().getCnx();
             
             while(rs.next()){
                 
-                Reclamation r = new Reclamation(rs.getString("u.nom"),rs.getString("u.prenom"),rs.getDate("created_at"), rs.getInt("etat"), rs.getString("type"), rs.getString("description"));
+                Reclamation r = new Reclamation(rs.getInt("id"),rs.getString("u.nom"),rs.getString("u.prenom"),rs.getDate("created_at"), rs.getInt("etat"), rs.getString("type"), rs.getString("description"));
                 list.add(r);
             }
         } catch (SQLException ex) {

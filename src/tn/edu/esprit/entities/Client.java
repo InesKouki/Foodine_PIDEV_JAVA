@@ -45,6 +45,10 @@ public class Client extends User{
     public Client(String nom, String prenom, String username, String email,String file, int etat, Date created_at) {
         super(nom, prenom, username, email,file,etat,created_at);
     }
+    
+    public Client(int id,String nom, String prenom, String username, String email,String file, int etat, Date created_at) {
+        super(id,nom, prenom, username, email,file,etat,created_at);
+    }
    
    public Client(String nom, String prenom, String username, String email, String password, String file,int etat) {
         super(nom, prenom, username, email, password, file,etat);

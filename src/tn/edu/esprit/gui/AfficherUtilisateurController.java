@@ -5,6 +5,7 @@
  */
 package tn.edu.esprit.gui;
 
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
@@ -15,6 +16,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
+import javafx.scene.control.SortEvent;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -48,13 +51,21 @@ public class AfficherUtilisateurController implements Initializable {
     private TableView<User> tableList;
     @FXML
     private TableColumn<User, Date> colDate;
+    @FXML
+    private Button bloquer;
+    @FXML
+    private Button debloquer;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+         debloquer.setVisible(false);
+        bloquer.setVisible(false);
         showList();
-    }    
+    } 
+    
+   
 
     @FXML
     private void AfficherAccueil(ActionEvent event) throws IOException {
@@ -77,7 +88,7 @@ public class AfficherUtilisateurController implements Initializable {
         FXMLLoader  loader = new FXMLLoader(getClass().getResource("AfficherUtilisateur.fxml"));
             Parent root = loader.load();
             tableList.getScene().setRoot(root);
-            AuthentificationController ac = loader.getController();
+            AfficherUtilisateurController ac = loader.getController();
         
         
     }
@@ -114,9 +125,9 @@ public class AfficherUtilisateurController implements Initializable {
       private void refresh() {
            list.clear();
             
-           list=su.getAll();
-             System.out.println(list);
-             tableList.setItems(list);
+           showList();
+              debloquer.setVisible(false);
+            bloquer.setVisible(false);
         
     }
          public void clear() {
@@ -133,16 +144,55 @@ public class AfficherUtilisateurController implements Initializable {
       
       public void delete()
     {
-        ServiceReclamation SV = new ServiceReclamation();
+        ServiceUtilisateur SV = new ServiceUtilisateur();
        SV.supprimer(tableList.getSelectionModel().getSelectedItem().getId());
-        System.out.println(tableList.getSelectionModel().getSelectedItem().getId());
-    }
+            }
    
-    @FXML
     private void supprimer(ActionEvent event) {
          delete();
         tableList.getItems().removeAll(tableList.getSelectionModel().getSelectedItem());
-        System.out.println(tableList);
+        
         tableList.refresh();
     }
+    
+   
+
+    @FXML
+    private void bloquer(ActionEvent event) throws IOException {
+         ServiceUtilisateur SV = new ServiceUtilisateur();
+         System.out.println(tableList.getSelectionModel().getSelectedItem().getId());
+       SV.bloquer(tableList.getSelectionModel().getSelectedItem().getId());
+      
+       FXMLLoader  loader = new FXMLLoader(getClass().getResource("AfficherUtilisateur.fxml"));
+            Parent root = loader.load();
+            tableList.getScene().setRoot(root);
+            AfficherUtilisateurController ac = loader.getController();
+    }
+
+    @FXML
+    private void debloquer(ActionEvent event) throws IOException {
+         ServiceUtilisateur SV = new ServiceUtilisateur();
+          System.out.println(tableList.getSelectionModel().getSelectedItem().getId());
+            SV.debloquer(tableList.getSelectionModel().getSelectedItem().getId());
+            
+        FXMLLoader  loader = new FXMLLoader(getClass().getResource("AfficherUtilisateur.fxml"));
+            Parent root = loader.load();
+            tableList.getScene().setRoot(root);
+            AfficherUtilisateurController ac = loader.getController();
+    }
+
+    @FXML
+    private void clickItem(javafx.scene.input.MouseEvent event) {
+         if (event.getClickCount() == 1) {
+            if (tableList.getSelectionModel().getSelectedItem().getEtat()==0) {
+                debloquer.setVisible(true);
+                bloquer.setVisible(false);
+            } else {
+                debloquer.setVisible(false);
+                bloquer.setVisible(true);
+            }
+        }
+    }
+
+    
 }

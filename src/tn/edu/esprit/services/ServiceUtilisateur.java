@@ -170,9 +170,9 @@ ResultSet rs = null;
         }    
     }
     
-    public void bloquer(User u){
+    public void bloquer(int id){
          try {
-            String req = "UPDATE `user` SET `etat` = '"+ 0 + "' WHERE `user`.`id` = " + u.getId();
+            String req = "UPDATE `user` SET `etat` = '"+ 0 + "' WHERE `user`.`id` = " + id;
             Statement st = cnx.createStatement();
             st.executeUpdate(req);
             System.out.println("Utilisateur bloqué !");
@@ -181,9 +181,9 @@ ResultSet rs = null;
         }    
     }
 
-    public void debloquer(User u){
+    public void debloquer(int id){
          try {
-            String req = "UPDATE `user` SET `etat` = '"+ 1 + "' WHERE `user`.`id` = " + u.getId();
+            String req = "UPDATE `user` SET `etat` = '"+ 1 + "' WHERE `user`.`id` = " +id;
             Statement st = cnx.createStatement();
             st.executeUpdate(req);
             System.out.println("Utilisateur débloqué !");
@@ -212,7 +212,7 @@ ResultSet rs = null;
             ResultSet rs = st.executeQuery(req);
             
             while(rs.next()){
-                User u = new Client(rs.getString("nom"), rs.getString("prenom"), rs.getString("username"), rs.getString("email"),rs.getString("file"), rs.getInt("etat"),rs.getDate("created_at"));
+                User u = new Client(rs.getInt("id"),rs.getString("nom"), rs.getString("prenom"), rs.getString("username"), rs.getString("email"),rs.getString("file"), rs.getInt("etat"),rs.getDate("created_at"));
                 list.add(u);
             }
         } catch (SQLException ex) {

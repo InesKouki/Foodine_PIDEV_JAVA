@@ -51,6 +51,15 @@ public class Reclamation {
         this.type = type;
         this.description = description;
     }
+     public Reclamation(int id,String nomu,String prenomu,Date created_at,int etat, String type, String description) {
+         this.id=id;
+      this.nomu=nomu;
+      this.prenomu=prenomu;
+        this.created_at = created_at;
+        this.etat = 0;
+        this.type = type;
+        this.description = description;
+    }
     
     
     public int getId() {
