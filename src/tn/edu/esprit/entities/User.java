@@ -26,11 +26,12 @@ public abstract class User {
     public User() {
     }
 
-    public User(int id, String nom, String prenom, String email) {
+    public User(int id, String nom, String prenom, String email,String file) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
         this.email = email;
+        this.file=file;
     }
 
     public User(int id, String password) {
@@ -71,7 +72,10 @@ public abstract class User {
         this.file = file;
         this.created_at = created_at;
         this.etat = etat;
+       
     }
+    
+   
      public User(String nom, String prenom, String username, String email,String file, int etat,Date created_at) {
         this.nom = nom;
         this.prenom = prenom;

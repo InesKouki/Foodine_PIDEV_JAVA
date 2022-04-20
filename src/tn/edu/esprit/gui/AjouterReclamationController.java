@@ -35,14 +35,6 @@ import tn.edu.esprit.services.ServiceReclamation;
 public class AjouterReclamationController implements Initializable {
 
     @FXML
-    private Button logout;
-    @FXML
-    private Button Home;
-    @FXML
-    private Button afficherProfile;
-    @FXML
-    private Button AjouterReclamation;
-    @FXML
     private TextField tfDescription;
     @FXML
     private ChoiceBox<String> type;
@@ -59,13 +51,7 @@ public class AjouterReclamationController implements Initializable {
 
     }    
 
-    @FXML
-    private void LogOut(ActionEvent event) throws IOException {
-         FXMLLoader  loader = new FXMLLoader(getClass().getResource("Authentification.fxml"));
-            Parent root = loader.load();
-            tfDescription.getScene().setRoot(root);
-            AuthentificationController ac = loader.getController();
-    }
+    
 
     @FXML
     private void AfficherAccueil(ActionEvent event) {
@@ -80,9 +66,6 @@ public class AjouterReclamationController implements Initializable {
 
     }
 
-    @FXML
-    private void AjouterReclamation(ActionEvent event) {
-    }
 
     @FXML
     private void Ajout(ActionEvent event) {
@@ -105,6 +88,22 @@ public class AjouterReclamationController implements Initializable {
                a.showAndWait();
     }
 
+    }
+
+    @FXML
+    private void logout(ActionEvent event) throws IOException {
+         FXMLLoader  loader = new FXMLLoader(getClass().getResource("Authentification.fxml"));
+            Parent root = loader.load();
+            tfDescription.getScene().setRoot(root);
+            AuthentificationController ac = loader.getController();
+    }
+
+    @FXML
+    private void AfficherReclamation(ActionEvent event) throws IOException {
+          FXMLLoader  loader = new FXMLLoader(getClass().getResource("AjouterReclamation.fxml"));
+            Parent root = loader.load();
+            tfDescription.getScene().setRoot(root);
+           AjouterReclamationController ac = loader.getController();
     }
     
 }

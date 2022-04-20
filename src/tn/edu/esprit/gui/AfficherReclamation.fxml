@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -9,14 +10,47 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" prefHeight="579.0" prefWidth="976.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.edu.esprit.gui.AfficherReclamationController">
    <children>
-      <AnchorPane prefHeight="627.0" prefWidth="283.0" style="-fx-background-color: orange;">
+      <AnchorPane prefHeight="627.0" prefWidth="283.0" style="-fx-background-color: #FAD5A5;">
          <children>
-            <Button alignment="BASELINE_LEFT" layoutX="23.0" layoutY="325.0" mnemonicParsing="false" onAction="#AfficherAccueil" prefHeight="67.0" prefWidth="252.0" style="-fx-background-color: Transparent;" text="Accueil">
+            <VBox layoutX="21.0" layoutY="257.0" prefHeight="286.0" prefWidth="173.0">
+               <children>
+                  <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#AfficherAccueil" prefHeight="67.0" prefWidth="200.0" style="-fx-background-color: Transparent;" styleClass="menuButton" stylesheets="@authentification.css" text="Accueil">
+                     <padding>
+                        <Insets left="50.0" />
+                     </padding>
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </Button>
+                  <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#AfficherReclamation" prefHeight="67.0" prefWidth="252.0" style="-fx-background-color: Transparent;" styleClass="menuButton" stylesheets="@authentification.css" text="Reclamation">
+                     <padding>
+                        <Insets left="50.0" />
+                     </padding>
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </Button>
+                  <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#AfficherUtilisateur" prefHeight="67.0" prefWidth="189.0" style="-fx-background-color: Transparent;" styleClass="menuButton" stylesheets="@authentification.css" text="Utilisateurs">
+                     <padding>
+                        <Insets left="50.0" />
+                     </padding>
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </Button>
+               </children>
+            </VBox>
+            <ImageView fitHeight="84.0" fitWidth="252.0" layoutX="16.0" layoutY="117.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/logoo.png" />
+               </image>
+            </ImageView>
+            <Button alignment="BASELINE_LEFT" layoutX="16.0" layoutY="567.0" mnemonicParsing="false" onAction="#logout" prefHeight="67.0" prefWidth="252.0" style="-fx-background-color: Transparent;" styleClass="menuButton" stylesheets="@authentification.css" text="Déconnexion">
                <padding>
                   <Insets left="50.0" />
                </padding>
@@ -24,65 +58,59 @@
                   <Font size="19.0" />
                </font>
             </Button>
-            <Button alignment="BASELINE_LEFT" layoutX="16.0" layoutY="380.0" mnemonicParsing="false" onAction="#AfficherReclamation" prefHeight="67.0" prefWidth="252.0" style="-fx-background-color: Transparent;" text="Reclamation">
-               <padding>
-                  <Insets left="50.0" />
-               </padding>
-               <font>
-                  <Font size="19.0" />
-               </font>
-            </Button>
-            <Button alignment="BASELINE_LEFT" layoutX="16.0" layoutY="436.0" mnemonicParsing="false" onAction="#AfficherUtilisateur" prefHeight="67.0" prefWidth="252.0" style="-fx-background-color: Transparent;" text="Utilisateurs">
-               <padding>
-                  <Insets left="50.0" />
-               </padding>
-               <font>
-                  <Font size="19.0" />
-               </font>
-            </Button>
+            <ImageView fitHeight="29.0" fitWidth="26.0" layoutX="31.0" layoutY="271.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/home.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="29.0" fitWidth="26.0" layoutX="31.0" layoutY="344.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/notes.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="29.0" fitWidth="26.0" layoutX="31.0" layoutY="412.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/group.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="29.0" fitWidth="26.0" layoutX="31.0" layoutY="587.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/logout.png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
-      <Circle fill="WHITE" layoutX="136.0" layoutY="188.0" radius="56.0" stroke="BLACK" strokeType="INSIDE" />
-      <ImageView fitHeight="57.0" fitWidth="252.0" layoutX="34.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@images/logoo.png" />
-         </image>
-      </ImageView>
-      <Separator layoutX="27.0" layoutY="558.0" prefWidth="200.0" />
-      <Button alignment="BASELINE_LEFT" layoutX="10.0" layoutY="560.0" mnemonicParsing="false" onAction="#logout" prefHeight="67.0" prefWidth="252.0" style="-fx-background-color: Transparent;" text="Déconnexion">
-         <padding>
-            <Insets left="50.0" />
-         </padding>
+      <Separator layoutX="-4.0" layoutY="560.0" prefHeight="4.0" prefWidth="283.0" />
+      <Label alignment="BOTTOM_LEFT" layoutX="466.0" layoutY="24.0" prefHeight="65.0" prefWidth="418.0" text="Afficher Reclamation">
          <font>
-            <Font name="System Bold" size="19.0" />
-         </font>
-      </Button>
-      <Label alignment="BOTTOM_LEFT" layoutX="299.0" layoutY="24.0" prefHeight="65.0" prefWidth="418.0" text="Afficher Reclamation">
-         <font>
-            <Font name="System Bold" size="30.0" />
+            <Font name="Arial Bold Italic" size="30.0" />
          </font>
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </padding>
       </Label>
-      <TableView fx:id="listRec" layoutX="299.0" layoutY="88.0" onMouseClicked="#click" prefHeight="327.0" prefWidth="660.0">
+      <TableView fx:id="listRec" layoutX="302.0" layoutY="132.0" onMouseClicked="#click" prefHeight="327.0" prefWidth="660.0">
         <columns>
-          <TableColumn fx:id="colNom" prefWidth="116.0" text="Nom Utilisateur" />
           <TableColumn fx:id="colType" prefWidth="137.0" text="Type de reclamation" />
-            <TableColumn fx:id="colDate" minWidth="0.0" prefWidth="124.0" text="Date d'envoi" />
-            <TableColumn fx:id="colDescr" minWidth="0.0" prefWidth="168.0" text="Description" />
             <TableColumn fx:id="colEtat" minWidth="0.0" prefWidth="114.0" text="Etat" />
+            <TableColumn fx:id="colDescr" minWidth="0.0" prefWidth="168.0" text="Description" />
+            <TableColumn fx:id="colDate" minWidth="0.0" prefWidth="124.0" text="Date d'envoi" />
+          <TableColumn fx:id="colNom" prefWidth="116.0" text="Nom Utilisateur" />
         </columns>
       </TableView>
-      <Button fx:id="supprimer" layoutX="379.0" layoutY="490.0" mnemonicParsing="false" onAction="#supprimer" prefHeight="48.0" prefWidth="173.0" style="-fx-background-color: Orange;" text="Supprimer">
+      <Button fx:id="supprimer" layoutX="529.0" layoutY="490.0" mnemonicParsing="false" onAction="#supprimer" prefHeight="48.0" prefWidth="173.0" styleClass="buttonItem" stylesheets="@authentification.css" text="Supprimer">
          <font>
             <Font size="17.0" />
          </font>
       </Button>
-      <Button fx:id="traiter" layoutX="652.0" layoutY="490.0" mnemonicParsing="false" onAction="#modifier" prefHeight="48.0" prefWidth="173.0" style="-fx-background-color: Orange;" text="Traiter">
+      <Button fx:id="traiter" layoutX="529.0" layoutY="490.0" mnemonicParsing="false" onAction="#modifier" prefHeight="48.0" prefWidth="173.0" stylesheets="@authentification.css" text="Traiter">
          <font>
             <Font size="17.0" />
          </font>
+         <styleClass>
+            <String fx:value="buttonItem" />
+            <String fx:value="buttonItem" />
+         </styleClass>
       </Button>
    </children>
 </AnchorPane>

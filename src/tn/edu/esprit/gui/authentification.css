@@ -5,3 +5,33 @@
 .mainFxmlClass {
 
 }
+
+.buttonItem{
+    -fx-font-weight:bold;
+    -fx-background-color: #FAD5A5;
+    -fx-background-radius: 22;
+    -fx-font-size:16;
+    -fx-text-fill:black;
+}
+.buttonItem:hover{
+    -fx-font-weight:bold;
+    -fx-background-color: white;
+    -fx-background-radius: 22;
+    -fx-font-size:16;
+    -fx-text-fill:orange;
+   
+   
+    
+}
+.menuButton{
+    
+    -fx-background-color: transparent;
+    -fx-font-size:19;
+    -fx-text-fill:black;
+}
+.menuButton:hover{
+    
+    -fx-background-color:white;
+    -fx-font-size:19;
+    -fx-text-fill:black;
+}

@@ -44,7 +44,6 @@ public class ModifierPasswordController implements Initializable {
         // TODO
     }    
 
-    @FXML
     private void LogOut(ActionEvent event) throws IOException {
          FXMLLoader  loader = new FXMLLoader(getClass().getResource("Authentification.fxml"));
             Parent root = loader.load();
@@ -63,7 +62,6 @@ public class ModifierPasswordController implements Initializable {
             tfConfirmPass.getScene().setRoot(root);
             ModifierPasswordController ac = loader.getController();
     }
-    @FXML
     private void AjouterReclamation(ActionEvent event) throws IOException {
           FXMLLoader  loader = new FXMLLoader(getClass().getResource("AjouterReclamation.fxml"));
             Parent root = loader.load();
@@ -113,6 +111,22 @@ StringBuilder finalresult;
         }
            
         }
+    }
+
+    @FXML
+    private void logout(ActionEvent event) throws IOException {
+        FXMLLoader  loader = new FXMLLoader(getClass().getResource("ModifierPassword.fxml"));
+            Parent root = loader.load();
+            tfConfirmPass.getScene().setRoot(root);
+           ModifierPasswordController ac = loader.getController();
+    }
+
+    @FXML
+    private void AfficherReclamation(ActionEvent event) throws IOException {
+         FXMLLoader  loader = new FXMLLoader(getClass().getResource("AjouterReclamation.fxml"));
+            Parent root = loader.load();
+            tfConfirmPass.getScene().setRoot(root);
+           AjouterReclamationController ac = loader.getController();
     }
     
 }

@@ -40,7 +40,7 @@ Connection cnx = DataSource.getInstance().getCnx();
     @FXML
     private TextField tfUsername;
     @FXML
-    private PasswordField tfPassword;
+    private TextField tfPassword;
 
     /**
      * Initializes the controller class.
@@ -90,10 +90,10 @@ Connection cnx = DataSource.getInstance().getCnx();
                    
                   
                if(role.contains("[\"ROLE_ADMIN\"]")){
-                FXMLLoader  loader = new FXMLLoader(getClass().getResource("Dashboard.fxml"));
+                FXMLLoader  loader = new FXMLLoader(getClass().getResource("AfficherReclamation.fxml"));
                 Parent root = loader.load();
                 tfUsername.getScene().setRoot(root);
-                AuthentificationController ac = loader.getController();
+                AfficherReclamationController ac = loader.getController();
                }
                else
                {

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
@@ -8,56 +9,94 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="642.0" prefWidth="1029.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="tn.edu.esprit.gui.AjouterReclamationController">
+<AnchorPane id="AnchorPane" prefHeight="642.0" prefWidth="1029.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.edu.esprit.gui.AjouterReclamationController">
    <children>
-      <AnchorPane prefHeight="642.0" prefWidth="246.0" style="-fx-background-color: orange;" />
-      <ImageView fitHeight="62.0" fitWidth="191.0" layoutX="22.0" layoutY="111.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@images/logoo.png" />
-         </image>
-      </ImageView>
-      <Button fx:id="logout" layoutX="54.0" layoutY="537.0" mnemonicParsing="false" onAction="#LogOut" prefHeight="34.0" prefWidth="149.0" style="-fx-background-color: Transparent;" text="Déconnexion">
+      <AnchorPane prefHeight="642.0" prefWidth="307.0" style="-fx-background-color: #FAD5A5;">
+         <children>
+            <ImageView fitHeight="99.0" fitWidth="301.0" layoutX="16.0" layoutY="107.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/logoo.png" />
+               </image>
+            </ImageView>
+            <Button alignment="BASELINE_LEFT" layoutX="49.0" layoutY="588.0" mnemonicParsing="false" onAction="#logout" prefHeight="67.0" prefWidth="252.0" style="-fx-background-color: Transparent;" styleClass="menuButton" stylesheets="@authentification.css" text="Déconnexion">
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Button>
+            <ImageView fitHeight="29.0" fitWidth="26.0" layoutX="65.0" layoutY="275.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/home.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="29.0" fitWidth="26.0" layoutX="65.0" layoutY="347.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/notes.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="29.0" fitWidth="26.0" layoutX="65.0" layoutY="410.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/user.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="29.0" fitWidth="26.0" layoutX="65.0" layoutY="609.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/logout.png" />
+               </image>
+            </ImageView>
+            <Separator layoutY="582.0" prefHeight="4.0" prefWidth="334.0" />
+            <VBox layoutX="57.0" layoutY="258.0" prefHeight="304.0" prefWidth="241.0">
+               <children>
+                  <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#AfficherAccueil" prefHeight="67.0" prefWidth="200.0" style="-fx-background-color: Transparent;" styleClass="menuButton" stylesheets="@authentification.css" text="Accueil">
+                     <padding>
+                        <Insets left="50.0" />
+                     </padding>
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </Button>
+                  <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#AfficherReclamation" prefHeight="67.0" prefWidth="233.0" style="-fx-background-color: Transparent;" styleClass="menuButton" stylesheets="@authentification.css" text="Ajout reclamation">
+                     <padding>
+                        <Insets left="50.0" />
+                     </padding>
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </Button>
+                  <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#AfficherProfile" prefHeight="67.0" prefWidth="189.0" style="-fx-background-color: Transparent;" styleClass="menuButton" stylesheets="@authentification.css" text="Profile">
+                     <padding>
+                        <Insets left="50.0" />
+                     </padding>
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </Button>
+               </children>
+            </VBox>
+         </children></AnchorPane>
+      <Label layoutX="453.0" layoutY="29.0" prefHeight="68.0" prefWidth="497.0" text="Ajouter Reclamation">
          <font>
-            <Font size="18.0" />
-         </font>
-      </Button>
-      <Button fx:id="Home" layoutX="46.0" layoutY="274.0" mnemonicParsing="false" onAction="#AfficherAccueil" prefHeight="34.0" prefWidth="149.0" style="-fx-background-color: Transparent;" text="Accueil">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Button>
-      <Button fx:id="afficherProfile" layoutX="46.0" layoutY="326.0" mnemonicParsing="false" onAction="#AfficherProfile" prefHeight="34.0" prefWidth="149.0" style="-fx-background-color: Transparent;" text="Profile">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Button>
-      <Button fx:id="AjouterReclamation" layoutX="46.0" layoutY="374.0" mnemonicParsing="false" onAction="#AjouterReclamation" prefHeight="34.0" prefWidth="149.0" style="-fx-background-color: Transparent;" text="Réclamation">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Button>
-      <Separator layoutX="21.0" layoutY="536.0" prefWidth="200.0" />
-      <Label layoutX="397.0" layoutY="31.0" prefHeight="68.0" prefWidth="497.0" text="Ajouter Reclamation">
-         <font>
-            <Font name="System Bold" size="46.0" />
+            <Font name="System Bold Italic" size="46.0" />
          </font>
       </Label>
       <TextField fx:id="tfDescription" layoutX="538.0" layoutY="346.0" prefHeight="27.0" prefWidth="390.0" style="-fx-background-color: Transparent; -fx-border-color: Orange; -fx-border-width: 0px 0px 2px 0px;" />
-      <Label layoutX="317.0" layoutY="339.0" prefHeight="40.0" prefWidth="174.0" text="Description :">
+      <Label layoutX="366.0" layoutY="340.0" prefHeight="40.0" prefWidth="174.0" text="Description :">
          <font>
             <Font size="28.0" />
          </font>
       </Label>
       <ChoiceBox fx:id="type" layoutX="526.0" layoutY="218.0" prefHeight="39.0" prefWidth="408.0" />
-      <Label layoutX="317.0" layoutY="218.0" prefHeight="40.0" prefWidth="174.0" text="Type :">
+      <Label layoutX="366.0" layoutY="218.0" prefHeight="40.0" prefWidth="174.0" text="Type :">
          <font>
             <Font size="28.0" />
          </font>
       </Label>
-      <Button layoutX="432.0" layoutY="463.0" mnemonicParsing="false" onAction="#Ajout" prefHeight="59.0" prefWidth="369.0" style="-fx-background-color: orange;" text="Confirmer">
+      <Button layoutX="493.0" layoutY="457.0" mnemonicParsing="false" onAction="#Ajout" prefHeight="59.0" prefWidth="369.0" styleClass="buttonItem" stylesheets="@authentification.css" text="Confirmer">
          <font>
             <Font size="27.0" />
          </font>

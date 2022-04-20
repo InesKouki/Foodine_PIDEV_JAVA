@@ -62,7 +62,7 @@ ResultSet rs = null;
             ps.setString(4, u.getEmail());
             ps.setString(5,"[]" );
             ps.setString(6, finalresult.toString());
-            ps.setString(7, "unkown.jpg");
+            ps.setString(7, u.getFile());
             ps.setDate(8, date);
             ps.setInt(9,1);
 
@@ -134,6 +134,7 @@ ResultSet rs = null;
         return u ;
     }
 
+      
     @Override
     public void supprimer(int id) {
          try {
@@ -149,7 +150,7 @@ ResultSet rs = null;
     //@Override
     public void modifier(Client u) {
          try {
-            String req = "UPDATE `user` SET `nom` = '" + u.getNom() + "', `prenom` = '" + u.getPrenom() + "', `phone` = '" + u.getPhone() + "', `address` = '" + u.getAddress() + "' WHERE `personne`.`id` = " + u.getId();
+            String req = "UPDATE `user` SET `nom` = '" + u.getNom() + "', `prenom` = '" + u.getPrenom() + "', `phone` = '" + u.getPhone() + "', `address` = '" + u.getAddress() + "', `file` = '" + u.getFile() + "' WHERE `personne`.`id` = " + u.getId();
             Statement st = cnx.createStatement();
             st.executeUpdate(req);
             System.out.println("Utilisateur modifié !");
