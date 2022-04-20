@@ -5,6 +5,7 @@
  */
 package foodine.services;
 
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -12,7 +13,7 @@ import java.util.List;
  * @author abdelazizmezri
  */
 public interface IService <T>{
-    public void ajouter(T p);
+    public void ajouter(T p) throws SQLException;
     public void supprimer(int id);
     public void modifier(T p);
     public List<T> getAll();

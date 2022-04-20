@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="794.0" prefWidth="1533.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="foodine.gui.PromotionsController">
+   <children>
+      <Label alignment="CENTER" layoutX="625.0" layoutY="99.0" text="Pourcentage">
+         <font>
+            <Font name="Century Gothic" size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tfPourcentage" alignment="CENTER" layoutX="802.0" layoutY="94.0" prefHeight="12.0" prefWidth="235.0">
+         <font>
+            <Font name="Century Gothic" size="16.0" />
+         </font>
+      </TextField>
+      <Label alignment="CENTER" layoutX="625.0" layoutY="281.0" text="Evénément">
+         <font>
+            <Font name="Century Gothic" size="18.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="625.0" layoutY="196.0" text="Produit">
+         <font>
+            <Font name="Century Gothic" size="18.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="tfProduit" layoutX="802.0" layoutY="192.0" prefHeight="31.0" prefWidth="235.0" />
+      <ComboBox fx:id="tfEvenement" layoutX="802.0" layoutY="277.0" prefHeight="31.0" prefWidth="235.0" />
+      <Button fx:id="btnaddProm" layoutX="541.0" layoutY="373.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#addEvent" text="Ajouter">
+         <font>
+            <Font name="Century Gothic" size="18.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/add.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="btnupdateProm" disable="true" layoutX="684.0" layoutY="373.0" mnemonicParsing="false" onAction="#updateEvent" text="Modifier">
+         <font>
+            <Font name="Century Gothic" size="18.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/edit.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="btndeleteProm" disable="true" layoutX="832.0" layoutY="373.0" mnemonicParsing="false" onAction="#deleteEvent" text="Supprimer">
+         <font>
+            <Font name="Century Gothic" size="18.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/remove.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="btnReset" layoutX="996.0" layoutY="373.0" mnemonicParsing="false" onAction="#resetFields" text="Réinitialiser">
+         <font>
+            <Font name="Century Gothic" size="18.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/reset.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <TableView fx:id="promotionsTable" layoutX="369.0" layoutY="471.0" onMouseClicked="#rowClicked" prefHeight="413.0" prefWidth="936.0" style="-fx-selection-bar: #9bbed4;">
+         <columns>
+            <TableColumn fx:id="colPourcentage" prefWidth="248.0" style="-fx-alignment: center;" text="Pourcentage" />
+            <TableColumn fx:id="colProduit" prefWidth="342.0" style="-fx-alignment: center;" text="Produit" />
+            <TableColumn fx:id="colEvenement" minWidth="2.999969482421875" prefWidth="345.0" style="-fx-alignment: center;" text="Evénement" />
+         </columns>
+      </TableView>
+      <Label layoutX="1013.0" layoutY="97.0" text="\%">
+         <font>
+            <Font name="Constantia" size="22.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="55.0" fitWidth="200.0" layoutX="14.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/logo.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

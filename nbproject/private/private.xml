@@ -3,10 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/azizm/Desktop/SEM2/PIDEV/Foodine_PIDEV_Desktop/src/foodine/entities/Promotion.java</file>
-            <file>file:/C:/Users/azizm/Desktop/SEM2/PIDEV/Foodine_PIDEV_Desktop/src/foodine/services/ServiceEvenement.java</file>
-            <file>file:/C:/Users/azizm/Desktop/SEM2/PIDEV/Foodine_PIDEV_Desktop/src/foodine/tests/MainClass.java</file>
-            <file>file:/C:/Users/azizm/Desktop/SEM2/PIDEV/Foodine_PIDEV_Desktop/src/foodine/entities/Evenement.java</file>
+            <file>file:/C:/Users/azizm/Desktop/SEM2/PIDEV/Foodine_PIDEV_JAVA/src/foodine/gui/EventsController.java</file>
+            <file>file:/C:/Users/azizm/Desktop/SEM2/PIDEV/Foodine_PIDEV_JAVA/src/foodine/services/ServiceEvenement.java</file>
         </group>
     </open-files>
 </project-private>

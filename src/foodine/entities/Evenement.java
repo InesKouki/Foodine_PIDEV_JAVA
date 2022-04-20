@@ -1,6 +1,7 @@
 package foodine.entities;
 
 import java.sql.Date;
+import javafx.scene.image.ImageView;
 
 public class Evenement {
     private int id;
@@ -9,6 +10,7 @@ public class Evenement {
     private Date date_fin;
     private String description;
     private String image;
+    private ImageView iv;
 
     public Evenement() {
     }
@@ -38,6 +40,30 @@ public class Evenement {
     }
 
     public Evenement(String name) {
+        this.name = name;
+    }
+
+    public Evenement(String name, Date date_deb, Date date_fin, String description, String image, ImageView iv) {
+        this.name = name;
+        this.date_deb = date_deb;
+        this.date_fin = date_fin;
+        this.description = description;
+        this.image = image;
+        this.iv = iv;
+    }
+
+    public Evenement(int id, String name, Date date_deb, Date date_fin, String description, String image, ImageView iv) {
+        this.id = id;
+        this.name = name;
+        this.date_deb = date_deb;
+        this.date_fin = date_fin;
+        this.description = description;
+        this.image = image;
+        this.iv = iv;
+    }
+
+    public Evenement(int id, String name) {
+        this.id = id;
         this.name = name;
     }
     
@@ -89,11 +115,17 @@ public class Evenement {
         this.image = image;
     }
 
-    @Override
-    public String toString() {
-        return "Evenement{" + "name=" + name + ", date_deb=" + date_deb + ", date_fin=" + date_fin + ", description=" + description + ", image=" + image + '}';
+    public ImageView getIv() {
+        return iv;
     }
 
+    public void setIv(ImageView iv) {
+        this.iv = iv;
+    }
     
+    @Override
+    public String toString() {
+        return this.name;
+    }
     
 }

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="426.0" prefWidth="1358.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="foodine.gui.EventsController">
+   <children>
+      <ImageView fitHeight="55.0" fitWidth="200.0" layoutX="14.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/logo.png" />
+         </image>
+      </ImageView>
+      <Label alignment="CENTER" layoutX="350.0" layoutY="91.0" text="Nom">
+         <font>
+            <Font name="Century Gothic" size="18.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="350.0" layoutY="155.0" text="Date début">
+         <font>
+            <Font name="Century Gothic" size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tfNom" alignment="TOP_LEFT" layoutX="527.0" layoutY="86.0" prefHeight="12.0" prefWidth="235.0">
+         <font>
+            <Font name="Century Gothic" size="16.0" />
+         </font>
+      </TextField>
+      <Label alignment="CENTER" layoutX="350.0" layoutY="222.0" text="Date fin">
+         <font>
+            <Font name="Century Gothic" size="18.0" />
+         </font>
+      </Label>
+      <DatePicker fx:id="dateDeb" layoutX="527.0" layoutY="150.0" prefHeight="32.0" prefWidth="235.0" />
+      <DatePicker fx:id="dateFin" layoutX="527.0" layoutY="214.0" prefHeight="32.0" prefWidth="235.0" />
+      <TextArea fx:id="tfDescription" layoutX="1031.0" layoutY="86.0" prefHeight="98.0" prefWidth="382.0">
+         <font>
+            <Font name="Century Gothic" size="16.0" />
+         </font>
+      </TextArea>
+      <Label alignment="CENTER" layoutX="867.0" layoutY="91.0" text="Description">
+         <font>
+            <Font name="Century Gothic" size="18.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="867.0" layoutY="219.0" text="Image">
+         <font>
+            <Font name="Century Gothic" size="18.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnaddEvent" layoutX="590.0" layoutY="324.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#addEvent" text="Ajouter">
+         <font>
+            <Font name="Century Gothic" size="18.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/add.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="btnupdateEvent" disable="true" layoutX="733.0" layoutY="324.0" mnemonicParsing="false" onAction="#updateEvent" text="Modifier">
+         <font>
+            <Font name="Century Gothic" size="18.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/edit.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="btndeleteEvent" disable="true" layoutX="881.0" layoutY="324.0" mnemonicParsing="false" onAction="#deleteEvent" text="Supprimer">
+         <font>
+            <Font name="Century Gothic" size="18.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/remove.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="btnReset" layoutX="1045.0" layoutY="324.0" mnemonicParsing="false" onAction="#resetFields" text="Réinitialiser">
+         <font>
+            <Font name="Century Gothic" size="18.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/reset.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="btnUpload" alignment="CENTER" layoutX="1031.0" layoutY="216.0" mnemonicParsing="false" onAction="#upload" prefHeight="29.0" prefWidth="69.0">
+         <font>
+            <Font name="Century Gothic" size="15.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/upload.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <ImageView fx:id="uploadIV" fitHeight="112.0" fitWidth="200.0" layoutX="1131.0" layoutY="196.0" pickOnBounds="true" preserveRatio="true" />
+      <TableView fx:id="eventsTable" layoutX="117.0" layoutY="429.0" onMouseClicked="#rowClicked" prefHeight="461.0" prefWidth="1500.0" style="-fx-selection-bar: #9bbed4;">
+         <columns>
+            <TableColumn fx:id="colName" prefWidth="268.0" style="-fx-alignment: center;" text="Nom" />
+            <TableColumn fx:id="colDateDeb" minWidth="2.999969482421875" prefWidth="241.0" style="-fx-alignment: center;" text="Date début" />
+            <TableColumn fx:id="colDateFin" prefWidth="259.0" style="-fx-alignment: center;" text="Date fin" />
+            <TableColumn fx:id="colDescription" prefWidth="414.0" style="-fx-alignment: center;" text="Description" />
+            <TableColumn fx:id="colImage" minWidth="0.0" prefWidth="317.0" style="-fx-alignment: CENTER;" text="Image" />
+         </columns>
+      </TableView>
+   </children>
+</AnchorPane>

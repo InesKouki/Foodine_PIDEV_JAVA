@@ -11,21 +11,19 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class ServicePromotion implements IService<Promotion> {
 
     Connection cnx = DataSource.getInstance().getCnx();
 
     @Override
-    public void ajouter(Promotion p) {
-        try {
-            String req = "INSERT INTO `promotion` (`evenement_id`, `produit_id`, `pourcentage`) VALUES ('" + p.getEvenement_id() + "', '" + p.getProduit_id() + "', '" + p.getPourcentage() + "')";
+    public void ajouter(Promotion p) throws SQLException{
+            String req = "INSERT INTO `promotion` (`evenement_id`, `produit_id`, `pourcentage`) VALUES ('" + p.getEvenement_id().getId() + "', '" + p.getProduit_id().getId() + "', '" + p.getPourcentage() + "')";
             Statement st = cnx.createStatement();
             st.executeUpdate(req);
             System.out.println("Promotion created !");
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }
     }
 
     public void ajouter2(Promotion p) {
@@ -57,7 +55,7 @@ public class ServicePromotion implements IService<Promotion> {
     @Override
     public void modifier(Promotion p) {
         try {
-            String req = "UPDATE `promotion` SET `pourcentage` = '" + p.getPourcentage() + "', `evenement_id` = '" + p.getEvenement_id() + "', `produit_id` = '" + p.getProduit_id() + "' WHERE `promotion`.`id` = " + p.getId();
+            String req = "UPDATE `promotion` SET `pourcentage` = '" + p.getPourcentage() + "', `evenement_id` = '" + p.getEvenement_id().getId() + "', `produit_id` = '" + p.getProduit_id().getId() + "' WHERE `promotion`.`id` = " + p.getId();
             Statement st = cnx.createStatement();
             st.executeUpdate(req);
             System.out.println("Promotion updated !");
@@ -67,17 +65,17 @@ public class ServicePromotion implements IService<Promotion> {
     }
 
     @Override
-    public List<Promotion> getAll() {
-        List<Promotion> list = new ArrayList<>();
+    public ObservableList<Promotion> getAll() {
+        ObservableList<Promotion> list = FXCollections.observableArrayList();
         try {
-            String req = "Select * from promotion p, evenement e where e.id = p.evenement_id";
+            String req = "Select * from promotion p, evenement e, product pr where e.id = p.evenement_id and pr.id = p.produit_id";
             Statement st = cnx.createStatement();
             ResultSet rs = st.executeQuery(req);
             while (rs.next()) {
-                Evenement e = new Evenement(rs.getString("e.name"));
-                Produit p = new Produit();
+                Evenement e = new Evenement(rs.getInt("e.id"),rs.getString("e.name"));
+                Produit p = new Produit(rs.getInt("pr.id"),rs.getString("pr.name"));
                 
-                Promotion pr = new Promotion(rs.getDouble("p.pourcentage"), e, p);
+                Promotion pr = new Promotion(rs.getInt("p.id"), (int) Math.round(rs.getDouble("p.pourcentage")*100), e, p);
                 list.add(pr);
             }
         } catch (SQLException ex) {
