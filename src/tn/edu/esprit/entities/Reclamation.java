@@ -56,7 +56,7 @@ public class Reclamation {
       this.nomu=nomu;
       this.prenomu=prenomu;
         this.created_at = created_at;
-        this.etat = 0;
+        this.etat = etat;
         this.type = type;
         this.description = description;
     }

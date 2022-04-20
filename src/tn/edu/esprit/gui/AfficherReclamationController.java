@@ -16,9 +16,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import tn.edu.esprit.entities.Reclamation;
 import tn.edu.esprit.entities.User;
 import tn.edu.esprit.services.ServiceReclamation;
@@ -45,12 +47,18 @@ public class AfficherReclamationController implements Initializable {
 
     ServiceReclamation sv = new ServiceReclamation();
     ObservableList<Reclamation> list ;
+    @FXML
+    private Button supprimer;
+    @FXML
+    private Button traiter;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
       showList();
+      supprimer.setVisible(false);
+        traiter.setVisible(false);
     }    
 
     @FXML
@@ -126,15 +134,38 @@ public class AfficherReclamationController implements Initializable {
     }
    
     @FXML
-    private void supprimer(ActionEvent event) {
+    private void supprimer(ActionEvent event) throws IOException {
          delete();
         listRec.getItems().removeAll(listRec.getSelectionModel().getSelectedItem());
         System.out.println(listRec);
-        listRec.refresh();
+       FXMLLoader  loader = new FXMLLoader(getClass().getResource("AfficherReclamation.fxml"));
+            Parent root = loader.load();
+            listRec.getScene().setRoot(root);
+            AfficherReclamationController ac = loader.getController();
     }
 
     @FXML
-    private void modifier(ActionEvent event) {
+    private void modifier(ActionEvent event) throws IOException {
+        
+         ServiceReclamation SV = new ServiceReclamation();
+       SV.traiter(listRec.getSelectionModel().getSelectedItem().getId());
+        FXMLLoader  loader = new FXMLLoader(getClass().getResource("AfficherReclamation.fxml"));
+            Parent root = loader.load();
+            listRec.getScene().setRoot(root);
+            AfficherReclamationController ac = loader.getController();
+    }
+
+    @FXML
+    private void click(MouseEvent event) {
+        if (event.getClickCount() == 1) {
+            if (listRec.getSelectionModel().getSelectedItem().getEtat()==0) {
+                traiter.setVisible(true);
+                supprimer.setVisible(false);
+            } else {
+                traiter.setVisible(false);
+                supprimer.setVisible(true);
+            }
+        }
     }
     
 }

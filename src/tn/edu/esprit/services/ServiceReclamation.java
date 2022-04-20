@@ -49,8 +49,18 @@ Connection cnx = DataSource.getInstance().getCnx();
         }
     }
 
-    @Override
-    public void modifier(Reclamation r) {
+   
+    public void traiter(int id) {
+         try {
+            
+            String req = "UPDATE `reclamation` SET `etat` = '"+1 + "' WHERE `reclamation`.`id` = " + id;
+            Statement st = cnx.createStatement();
+            st.executeUpdate(req);
+          
+            System.out.println("Reclamation traitée !");
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
         //
     }
     
@@ -85,6 +95,11 @@ Connection cnx = DataSource.getInstance().getCnx();
         }
 
         return list;
+    }
+
+    @Override
+    public void modifier(Reclamation p) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

@@ -34,6 +34,7 @@ import tn.edu.esprit.utils.DataSource;
 public class AuthentificationController implements Initializable {
 public static int idplayer;
 public static String role;
+public static int etat;
 Connection cnx = DataSource.getInstance().getCnx();
     public   User connectedUser;
     @FXML
@@ -71,6 +72,7 @@ Connection cnx = DataSource.getInstance().getCnx();
                 if (rs.next()) {
                     //idplayer = rs.getInt(1);
                     role = rs.getString(6);
+                    etat =rs.getInt(14);
                     connectedUser = su.find(rs.getInt(1));
                 }
                 System.out.println(connectedUser);
@@ -79,9 +81,13 @@ Connection cnx = DataSource.getInstance().getCnx();
             } catch (SQLException ex) {
                 ex.getMessage();
             }
- Alert aa = new Alert(Alert.AlertType.INFORMATION,"Succes !",ButtonType.OK);
+            if(etat==1){
+                  
+                Alert aa = new Alert(Alert.AlertType.INFORMATION,"Succes !",ButtonType.OK);
                     aa.showAndWait();
-                    
+                 
+                   
+                  
                if(role.contains("[\"ROLE_ADMIN\"]")){
                 FXMLLoader  loader = new FXMLLoader(getClass().getResource("Dashboard.fxml"));
                 Parent root = loader.load();
@@ -94,8 +100,14 @@ Connection cnx = DataSource.getInstance().getCnx();
                 Parent root = loader.load();
                 tfUsername.getScene().setRoot(root);
                 ProfileClientController ac = loader.getController();
-               }           
-    }
+               }
+               
+               
+    }else{
+                Alert aa = new Alert(Alert.AlertType.ERROR,"Vous etes bloqué !",ButtonType.OK);
+                    aa.showAndWait();
+            }
+                }
         else{
             Alert a = new Alert(Alert.AlertType.ERROR,"Vérifier vos coodonnées !",ButtonType.OK);
                a.showAndWait();
