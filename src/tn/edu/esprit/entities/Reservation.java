@@ -5,7 +5,7 @@
  */
 package tn.edu.esprit.entities;
 
-import java.util.Date;
+import java.sql.Date;
 
 /**
  *
@@ -27,6 +27,26 @@ public class Reservation {
         this.mobile = mobile;
         this.email = email;
     }
+
+    public Reservation(int id, String nom, Date datereservation, int mobile, String email) {
+        this.id = id;
+        this.nom = nom;
+        this.datereservation = datereservation;
+        this.mobile = mobile;
+        this.email = email;
+    }
+
+    public Reservation(Table tableid) {
+        this.tableid = tableid;
+    }
+    
+    
+
+    public Reservation(String nom, int mobile) {
+        this.nom = nom;
+        this.mobile = mobile;
+    }
+    
 
     public Reservation(Table tableid, String nom, Date datereservation, int mobile, String email) {
         this.tableid = tableid;
@@ -50,6 +70,22 @@ public class Reservation {
         this.nom = nom;
         this.datereservation = datereservation;
     }
+
+    public Reservation(String nom, Date datereservation, int mobile, String email) {
+        this.nom = nom;
+        this.datereservation = datereservation;
+        this.mobile = mobile;
+        this.email = email;
+    }
+
+    public Reservation() {
+    }
+
+    public Reservation(int id, String nom) {
+        this.id = id;
+        this.nom = nom;
+    }
+
     
 
     public int getId() {

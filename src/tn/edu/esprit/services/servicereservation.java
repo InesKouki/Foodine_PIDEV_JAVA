@@ -9,6 +9,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import tn.edu.esprit.entities.Reservation;
 import tn.edu.esprit.entities.Table;
 
@@ -26,7 +28,7 @@ public class servicereservation  implements Iservice<Reservation> {
     @Override
     public void ajouter(Reservation r) {
         try {
-            String req = "INSERT INTO `reservation` ( `tableid_id`,`nom`,`datereservation`,`mobile`,`email`) VALUES ('" + r.getTableid()+ "','" + r.getNom() + "','" + r.getDatereservation() + "','" + r.getMobile()+ "','" + r.getEmail() + "')";
+            String req = "INSERT INTO `reservation` ( `tableid_id`,`nom`,`datereservation`,`mobile`,`email`) VALUES ('" + r.getTableid().getId()+ "','" + r.getNom() + "','" + r.getDatereservation() + "','" + r.getMobile()+ "','" + r.getEmail() + "')";
             Statement st = cnx.createStatement();
             st.executeUpdate(req);
             System.out.println("Reservation created !");
@@ -51,6 +53,16 @@ public class servicereservation  implements Iservice<Reservation> {
     }
 
     @Override
+    public void supprimer(String nom) {
+        try {
+            String req = "DELETE FROM `reservation` WHERE nom = " + nom;
+            Statement st = cnx.createStatement();
+            st.executeUpdate(req);
+            System.out.println("Reservation deleted !");
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
     public void supprimer(int id) {
         try {
             String req = "DELETE FROM `reservation` WHERE id = " + id;
@@ -65,7 +77,7 @@ public class servicereservation  implements Iservice<Reservation> {
     @Override
     public void modifier(Reservation r) {
         try {
-            String req = "UPDATE `reservation` SET `tableid_id` = '" + r.getTableid() + "', `nom` = '" + r.getNom()  + "', `datereservation` = '" + r.getDatereservation() + "', `mobile` = '" + r.getMobile() + "', `email` = '" + r.getEmail()+   "' WHERE `reservation`.`id` = " + r.getId();
+            String req = "UPDATE `reservation` SET  `nom` = '" + r.getNom()+ "', `tableid_id` = '" + r.getTableid().getId()+ "', `datereservation` = '" + r.getDatereservation() + "', `mobile` = '" + r.getMobile() + "', `email` = '" + r.getEmail()+   "' WHERE `reservation`.`id` = " + r.getId();
             Statement st = cnx.createStatement();
             st.executeUpdate(req);
             System.out.println("Reservation updated !");
@@ -75,16 +87,18 @@ public class servicereservation  implements Iservice<Reservation> {
     }
 
     @Override
-    public List<Reservation> getAll() {
-        List<Reservation> list = new ArrayList<>();
+    public ObservableList<Reservation> getAll() {
+        ObservableList<Reservation> list = FXCollections.observableArrayList();
         try {
-            String req = "Select * from `table` t ,reservation r where t.id=r.tableid_id";
+            // String req = "Select * from reservation ";
+            String req = "Select r.id ,t.numerotable,r.nom,r.datereservation,r.mobile,r.email from `table` t ,reservation r where t.id=r.tableid_id";
             Statement st = cnx.createStatement();
-            ResultSet rs = st.executeQuery(req);
+            ResultSet rs = st.executeQuery(req);    
             
             while(rs.next()){
                 Table t1 = new Table(rs.getInt("t.numerotable"));
-                Reservation t = new Reservation(t1, rs.getString(3),rs.getDate(9),rs.getInt(10),rs.getString(11));
+               // Reservation res = new Reservation(t1);
+                Reservation t = new Reservation(rs.getInt(1),t1, rs.getString(3),rs.getDate(4),rs.getInt(5),rs.getString(6));
                 list.add(t);
             }
         } catch (SQLException ex) {

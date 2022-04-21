@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="592.0" prefWidth="780.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.edu.esprit.gui.AjouterreservationController">
+   <children>
+      <Label layoutX="268.0" layoutY="54.0" text="Votre Nom :" />
+      <Label layoutX="246.0" layoutY="105.0" text="Numero Telephone :" />
+      <Label layoutX="286.0" layoutY="156.0" text="Mail :" />
+      <Label layoutX="240.0" layoutY="213.0" text="Date Resevation :" />
+      <Label layoutX="245.0" layoutY="267.0" text="Numero Table :" />
+      <DatePicker fx:id="tfdateRES" layoutX="368.0" layoutY="209.0" prefHeight="25.0" prefWidth="149.0" />
+      <TextField fx:id="tfnomRES" layoutX="368.0" layoutY="50.0" />
+      <TextField fx:id="tfnumtelRES" layoutX="368.0" layoutY="101.0" />
+      <TextField fx:id="tfmailRES" layoutX="368.0" layoutY="152.0" />
+      <TextField fx:id="tfnumtableRES" layoutX="585.0" layoutY="255.0" />
+      <Button layoutX="620.0" layoutY="196.0" mnemonicParsing="false" onAction="#ajouterreservation" prefHeight="25.0" prefWidth="78.0" text="Ajouter">
+         <font>
+            <Font name="System Bold Italic" size="13.0" />
+         </font></Button>
+      <TableView fx:id="reservationaffichage" layoutX="133.0" layoutY="313.0" onMouseClicked="#rowClicked" prefHeight="232.0" prefWidth="626.0">
+        <columns>
+          <TableColumn fx:id="nomreservation" prefWidth="108.0" text="Nom" />
+          <TableColumn fx:id="numtelreservation" prefWidth="131.0" text="Num_Tel" />
+            <TableColumn fx:id="mailreservation" prefWidth="137.0" text="Mail" />
+            <TableColumn fx:id="datereservation" prefWidth="134.0" text="Date_Res" />
+            <TableColumn fx:id="numtabreservation" prefWidth="140.0" text="Num_Tab" />
+            <TableColumn fx:id="idreservation" prefWidth="93.0" text="id_reservation" />
+        </columns>
+      </TableView>
+      <Button layoutX="620.0" layoutY="126.0" mnemonicParsing="false" onAction="#btnsupprimerreseervation" prefHeight="25.0" prefWidth="78.0" text="Supprimer">
+         <font>
+            <Font name="System Bold Italic" size="12.0" />
+         </font></Button>
+      <Button layoutX="620.0" layoutY="50.0" mnemonicParsing="false" onAction="#btnmodifierreservation" prefHeight="25.0" prefWidth="78.0" text="Modifier">
+         <font>
+            <Font name="System Bold Italic" size="12.0" />
+         </font></Button>
+      <ComboBox fx:id="cbnumtab" layoutX="368.0" layoutY="263.0" prefWidth="150.0" />
+      <VBox layoutY="65.0" prefHeight="480.0" prefWidth="130.0" style="-fx-background-color: #FAD5A5;">
+         <children>
+            <Button mnemonicParsing="false" prefHeight="55.0" prefWidth="100.0" style="-fx-background-color: #FAD5A5;" text="reservation">
+               <font>
+                  <Font name="System Bold Italic" size="11.0" />
+               </font></Button>
+            <Button fx:id="closeButton" mnemonicParsing="false" onAction="#passeratable" prefHeight="53.0" prefWidth="100.0" style="-fx-background-color: #FAD5A5;" text="table">
+               <font>
+                  <Font name="System Bold Italic" size="12.0" />
+               </font></Button>
+         </children>
+      </VBox>
+      <Label layoutX="286.0" prefHeight="40.0" prefWidth="285.0" text="Reservation">
+         <font>
+            <Font name="Century Gothic Bold" size="41.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

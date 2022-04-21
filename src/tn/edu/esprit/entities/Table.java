@@ -31,6 +31,15 @@ public class Table {
     public Table(int numerotable) {
         this.numerotable = numerotable;
     }
+
+    public Table(int id, int numerotable) {
+        this.id = id;
+        this.numerotable = numerotable;
+    }
+    
+
+    public Table() {
+    }
     
     
     
@@ -77,7 +86,7 @@ public class Table {
 
     @Override
     public String toString() {
-        return "Table{" + "numerotable=" + numerotable + ", nbplacetable=" + nbplacetable + ", imagetable=" + imagetable + ", etat=" + etat + '}';
+     return String.valueOf(this.numerotable);
     }
 
     

@@ -13,7 +13,13 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import tn.edu.esprit.entities.Table;
+import tn.edu.esprit.gui.AffichertableController;
 import tn.edu.esprit.utils.DataSource;
 
 
@@ -32,8 +38,9 @@ public class servicetable implements Iservice<Table> {
             Statement st = cnx.createStatement();
             st.executeUpdate(req);
             System.out.println("Table created !");
+           
         } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
+           ex.printStackTrace();
         }
     }
     
@@ -47,7 +54,7 @@ public class servicetable implements Iservice<Table> {
             ps.setString(4, t.getImagetable());
             ps.executeUpdate();
         } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
+           ex.printStackTrace();
         }
     }
 
@@ -62,11 +69,21 @@ public class servicetable implements Iservice<Table> {
             System.out.println(ex.getMessage());
         }
     }
+     public void supprimer(String id) {
+        try {
+            String req = "DELETE FROM `table` WHERE id = " + id;
+            Statement st = cnx.createStatement();
+            st.executeUpdate(req);
+            System.out.println("Table deleted !");
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
 
     @Override
     public void modifier(Table t) {
         try {
-            String req = "UPDATE `table` SET `nb_place_table` = '" + t.getNbplacetable() + "', `numero_table` = '" + t.getNumerotable()  + "', `etat_table` = '" + t.getEtat() + "', `image_table` = '" + t.getImagetable()+   "' WHERE `table`.`id` = " + t.getId();
+            String req = "UPDATE `table` SET `nbplacetable` = '" + t.getNbplacetable()+ /*+ "', `numero_table` = '" + t.getNumerotable()  + */"', `etat` = '" + t.getEtat() + "', `imagetable` = '" + t.getImagetable()+   "' WHERE `table`.`numerotable` = " + t.getNumerotable();
             Statement st = cnx.createStatement();
             st.executeUpdate(req);
             System.out.println("Table updated !");
@@ -76,8 +93,8 @@ public class servicetable implements Iservice<Table> {
     }
 
     @Override
-    public List<Table> getAll() {
-        List<Table> list = new ArrayList<>();
+    public ObservableList<Table> getAll() {
+        ObservableList<Table> list = FXCollections.observableArrayList();
         try {
             String req = "SELECT * FROM `table`";
             Statement st = cnx.createStatement();

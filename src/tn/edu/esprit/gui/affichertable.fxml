@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="tn.edu.esprit.gui.AffichertableController">
+   <children>
+      <Label layoutX="112.0" layoutY="98.0" text="numero table :" />
+      <Label layoutX="112.0" layoutY="152.0" text="nombre de place :" />
+      <Label layoutX="112.0" layoutY="208.0" text="image table :" />
+      <Label layoutX="112.0" layoutY="261.0" text="etat :" />
+      <TextField fx:id="tfnumtableafficher" editable="false" layoutX="274.0" layoutY="94.0" />
+      <TextField fx:id="tfnbplaceafficher" editable="false" layoutX="274.0" layoutY="148.0" />
+      <TextField fx:id="tfimageafficher" editable="false" layoutX="274.0" layoutY="204.0" />
+      <TextField fx:id="tfetatafficher" editable="false" layoutX="274.0" layoutY="257.0" />
+   </children>
+</AnchorPane>
