@@ -10,6 +10,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.Date;
+import static java.sql.JDBCType.NULL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -74,7 +75,7 @@ ResultSet rs = null;
     }
     
         public int authentifier(String username, String pwd) throws SQLException {
-           int r=0;
+           
            try {
             MessageDigest msg = MessageDigest.getInstance("SHA-256");
             byte[] hash = msg.digest(pwd.getBytes(StandardCharsets.UTF_8));
@@ -134,7 +135,51 @@ ResultSet rs = null;
         return u ;
     }
 
+      public User findEmail(String email,String code) {
+       
+         String req="SELECT * FROM user where email='"+email+"' Limit 1";
+        Statement st= null;
+        User u =null;
+        try {
+            st = cnx.createStatement();
+            ResultSet rs = st.executeQuery(req);
+                
+            
+           while(rs.next()) {
+              u = new Client(rs.getString("email"));
+             String reqe = "UPDATE `user` SET `reset_token` = '" + code + "' WHERE `user`.`email` = '" + email+"'";
+            
+            st.executeUpdate(reqe);
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            
+        }
+        return u ;
+    }
       
+      public User findCode(String code) {
+       
+         String req="SELECT * FROM user where reset_token='"+code+"' Limit 1";
+        Statement st= null;
+        User u =null;
+        try {
+            st = cnx.createStatement();
+            ResultSet rs = st.executeQuery(req);
+                
+            
+           while(rs.next()) {
+              u = new Client(rs.getString("reset_token"));
+            
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            
+        }
+        return u ;
+    }
     @Override
     public void supprimer(int id) {
          try {
@@ -147,6 +192,10 @@ ResultSet rs = null;
         }
     }
 
+    public void Code(String email,String code){
+        
+        
+    }
     //@Override
     public void modifier(Client u) {
          try {
@@ -225,7 +274,31 @@ ResultSet rs = null;
     
 
 
+public void changerPass(Client u) {
+ try {
+            MessageDigest msg = MessageDigest.getInstance("SHA-256");
+            byte[] hash = msg.digest(u.getPassword().getBytes(StandardCharsets.UTF_8));
+            finalresult = new StringBuilder();
+            for (byte b : hash) {
+                i++;
+                finalresult.append(Integer.toString((b & 0xff) + 0x100, 16).substring(1));
 
+            }
+            System.out.println(finalresult);
+        } catch (NoSuchAlgorithmException ex) {
+            System.out.println(ex.getMessage());
+        }
+   try {
+            String req = "UPDATE `user` SET `password` = '"+ finalresult+ "',reset_token='"+NULL
+                    +
+                     "' WHERE `user`.`reset_token` = '" + u.getReset_token()+"'";
+            Statement st = cnx.createStatement();
+            st.executeUpdate(req);
+            System.out.println("mot de passe modifier modifiée !");
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }    
+    }
     
     public void modifierInfo(Client u) {
 

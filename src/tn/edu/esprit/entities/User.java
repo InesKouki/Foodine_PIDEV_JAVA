@@ -26,6 +26,16 @@ public abstract class User {
     public User() {
     }
 
+    public User(String email) {
+        this.email = email;
+    }
+
+    public User(String password, String reset_token) {
+        this.password = password;
+        this.reset_token = reset_token;
+    }
+
+    
     public User(int id, String nom, String prenom, String email,String file) {
         this.id = id;
         this.nom = nom;

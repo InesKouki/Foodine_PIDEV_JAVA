@@ -117,7 +117,11 @@ Connection cnx = DataSource.getInstance().getCnx();
     }
 
     @FXML
-    private void OubliPass(ActionEvent event) {
+    private void OubliPass(ActionEvent event) throws IOException {
+           FXMLLoader  loader = new FXMLLoader(getClass().getResource("ForgetPassword.fxml"));
+            Parent root = loader.load();
+            tfUsername.getScene().setRoot(root);
+            ForgetPasswordController ac = loader.getController();
     }
 
     @FXML

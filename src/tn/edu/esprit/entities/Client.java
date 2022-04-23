@@ -16,7 +16,13 @@ public class Client extends User{
     private String address;
     private String activation_token ;
 
+    
+    
     public Client() {
+    }
+
+    public Client(String password, String reset_token) {
+        super(password, reset_token);
     }
 
     public Client(int id, String nom, String prenom, String username, String email, String password, String file, Date created_at, int etat) {
@@ -28,6 +34,10 @@ public class Client extends User{
         this.phone=phone;
         this.address=address;
         
+    }
+
+    public Client(String email) {
+        super(email);
     }
 
     public Client(int id, String password) {
