@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.util.Optional;
 import javafx.util.Duration;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -20,7 +21,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -28,10 +31,15 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.InputMethodEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import org.controlsfx.control.Notifications;
 import tn.edu.esprit.entities.Reclamation;
 import tn.edu.esprit.entities.User;
 import tn.edu.esprit.services.ServiceReclamation;
+
+
 
 /**
  * FXML Controller class
@@ -39,7 +47,7 @@ import tn.edu.esprit.services.ServiceReclamation;
  * @author Asus
  */
 public class AfficherReclamationController implements Initializable {
-
+private AnchorPane myAnchorePane;
     @FXML
     private TableView<Reclamation> listRec;
     private TableColumn<Reclamation, String> colNom;
@@ -59,6 +67,8 @@ public class AfficherReclamationController implements Initializable {
     @FXML
     private Button traiter;
     private ChoiceBox<String> choicebox;
+    @FXML
+    private AnchorPane myAnchorPane;
     /**
      * Initializes the controller class.
      */
@@ -147,13 +157,27 @@ public class AfficherReclamationController implements Initializable {
    
     @FXML
     private void supprimer(ActionEvent event) throws IOException {
-         delete();
+        
+        Stage stage =(Stage) myAnchorPane.getScene().getWindow();
+        Alert.AlertType type = Alert.AlertType.CONFIRMATION;
+        Alert alert = new Alert(type,"");
+        alert.initModality(Modality.APPLICATION_MODAL);
+        alert.initOwner(stage);
+        alert.getDialogPane().setContentText("Voulez vous vraiment supprimer cette reclamation?");
+        alert.getDialogPane().setHeaderText("Suppression");
+        Optional<ButtonType> result=alert.showAndWait();
+        if (result.get()==ButtonType.OK)
+        {
+            delete();
         listRec.getItems().removeAll(listRec.getSelectionModel().getSelectedItem());
         System.out.println(listRec);
        FXMLLoader  loader = new FXMLLoader(getClass().getResource("AfficherReclamation.fxml"));
             Parent root = loader.load();
             listRec.getScene().setRoot(root);
             AfficherReclamationController ac = loader.getController();
+            
+            
+            
             
             Notifications notificationBuilder = Notifications.create()
                     .title("Suppression effectuée")
@@ -168,6 +192,13 @@ public class AfficherReclamationController implements Initializable {
                         }
                     });
            notificationBuilder.showConfirm();
+        }else if (result.get()==ButtonType.CANCEL){
+            //nothing
+        }
+        
+        
+
+         
     }
 
     @FXML

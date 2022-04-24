@@ -9,6 +9,7 @@ import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -18,13 +19,18 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.SortEvent;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
 import tn.edu.esprit.entities.Client;
@@ -63,6 +69,8 @@ public class AfficherUtilisateurController implements Initializable {
     private Button debloquer;
     @FXML
     private TextField Recherche;
+    @FXML
+    private AnchorPane myAnchorPane;
     /**
      * Initializes the controller class.
      */
@@ -123,7 +131,16 @@ public class AfficherUtilisateurController implements Initializable {
 
     @FXML
     private void supprimerUtilisateur(ActionEvent event) {
-         delete();
+        Stage stage =(Stage) myAnchorPane.getScene().getWindow();
+        Alert.AlertType type = Alert.AlertType.CONFIRMATION;
+        Alert alert = new Alert(type,"");
+        alert.initModality(Modality.APPLICATION_MODAL);
+        alert.initOwner(stage);
+        alert.getDialogPane().setContentText("Voulez vous vraiment supprimer cette reclamation?");
+        alert.getDialogPane().setHeaderText("Suppression");
+        Optional<ButtonType> result=alert.showAndWait();
+        if (result.get()==ButtonType.OK){
+             delete();
         tableList.getItems().removeAll(tableList.getSelectionModel().getSelectedItem());
         System.out.println(tableList);
         tableList.refresh();
@@ -140,6 +157,8 @@ public class AfficherUtilisateurController implements Initializable {
                         }
                     });
            notificationBuilder.showConfirm();
+        }
+        
     }
     
     
@@ -167,30 +186,9 @@ public class AfficherUtilisateurController implements Initializable {
     {
         ServiceUtilisateur SV = new ServiceUtilisateur();
        SV.supprimer(tableList.getSelectionModel().getSelectedItem().getId());
-       Notifications notificationBuilder = Notifications.create()
-                    .title("Suppression")
-                    .text("Utilisateur supprimé")
-                    .graphic(null)
-                    .hideAfter(Duration.seconds(5))
-                    .position(Pos.TOP_RIGHT)
-                    .onAction(new EventHandler<ActionEvent>(){
-                        @Override 
-                        public void handle(ActionEvent event){
-                            //System.out.println("Supp");
-                        }
-                    });
-           notificationBuilder.showConfirm();
+       
        
             }
-   
-    private void supprimer(ActionEvent event) {
-         delete();
-        tableList.getItems().removeAll(tableList.getSelectionModel().getSelectedItem());
-        
-        tableList.refresh();
-    }
-    
-   
 
     @FXML
     private void bloquer(ActionEvent event) throws IOException {
@@ -217,6 +215,16 @@ public class AfficherUtilisateurController implements Initializable {
            notificationBuilder.showConfirm();
     }
 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     @FXML
     private void debloquer(ActionEvent event) throws IOException {
          ServiceUtilisateur SV = new ServiceUtilisateur();
