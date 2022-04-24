@@ -22,9 +22,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.SortEvent;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
+import tn.edu.esprit.entities.Client;
 import tn.edu.esprit.entities.User;
 import tn.edu.esprit.services.ServiceReclamation;
 import tn.edu.esprit.services.ServiceUtilisateur;
@@ -58,6 +61,8 @@ public class AfficherUtilisateurController implements Initializable {
     private Button bloquer;
     @FXML
     private Button debloquer;
+    @FXML
+    private TextField Recherche;
     /**
      * Initializes the controller class.
      */
@@ -248,6 +253,26 @@ public class AfficherUtilisateurController implements Initializable {
                 bloquer.setVisible(true);
             }
         }
+    }
+
+    @FXML
+    private void Recherche(KeyEvent event) {
+        
+        User b= new Client();
+        ObservableList<User>filter= su.chercherUser(Recherche.getText());
+         populateTable(filter);
+    }
+    private void populateTable(ObservableList<User> branlist){
+       tableList.setItems(branlist);
+   
+       }
+
+    @FXML
+    private void Refresh(javafx.scene.input.MouseEvent event) {
+         debloquer.setVisible(false);
+        bloquer.setVisible(false);
+        showList();
+        Recherche.setText(null);
     }
 
     

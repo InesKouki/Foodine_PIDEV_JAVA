@@ -257,7 +257,7 @@ ResultSet rs = null;
     public ObservableList<User> getAll() {
       ObservableList<User> list = FXCollections.observableArrayList();
         try {
-            String req = "Select * from user where roles likes '%[]%'";
+            String req = "Select * from user where roles like '%[]%'";
             Statement st = cnx.createStatement();
             ResultSet rs = st.executeQuery(req);
             
@@ -361,6 +361,28 @@ public void changerPass(Client u) {
     @Override
     public void modifier(User p) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    
+    
+    public ObservableList<User> chercherUser(String text) {
+        
+          ObservableList<User> list = FXCollections.observableArrayList();
+        try {
+            String req = "Select * from user where nom='"+text+"'or prenom='"+text+"' or username='"+text+"' or email='"+text+"'";
+            Statement st = cnx.createStatement();
+            ResultSet rs = st.executeQuery(req);
+            
+            while(rs.next()){
+                User u = new Client(rs.getInt("id"),rs.getString("nom"), rs.getString("prenom"), rs.getString("username"), rs.getString("email"),rs.getString("file"), rs.getInt("etat"),rs.getDate("created_at"));
+                list.add(u);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return list;
+        
     }
     
     }
