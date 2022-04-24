@@ -257,7 +257,43 @@ ResultSet rs = null;
     public ObservableList<User> getAll() {
       ObservableList<User> list = FXCollections.observableArrayList();
         try {
-            String req = "Select * from user";
+            String req = "Select * from user where roles likes '%[]%'";
+            Statement st = cnx.createStatement();
+            ResultSet rs = st.executeQuery(req);
+            
+            while(rs.next()){
+                User u = new Client(rs.getInt("id"),rs.getString("nom"), rs.getString("prenom"), rs.getString("username"), rs.getString("email"),rs.getString("file"), rs.getInt("etat"),rs.getDate("created_at"));
+                list.add(u);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return list;
+    }
+    
+        public ObservableList<User> getAllTriNom() {
+      ObservableList<User> list = FXCollections.observableArrayList();
+        try {
+            String req = "Select * from user order by nom";
+            Statement st = cnx.createStatement();
+            ResultSet rs = st.executeQuery(req);
+            
+            while(rs.next()){
+                User u = new Client(rs.getInt("id"),rs.getString("nom"), rs.getString("prenom"), rs.getString("username"), rs.getString("email"),rs.getString("file"), rs.getInt("etat"),rs.getDate("created_at"));
+                list.add(u);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return list;
+    }
+        
+           public ObservableList<User> getAllTridate() {
+      ObservableList<User> list = FXCollections.observableArrayList();
+        try {
+            String req = "Select * from user order by created_at ";
             Statement st = cnx.createStatement();
             ResultSet rs = st.executeQuery(req);
             

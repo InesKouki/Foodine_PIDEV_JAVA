@@ -13,9 +13,11 @@ import java.net.URL;
 import java.nio.channels.FileChannel;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -24,7 +26,9 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.util.Duration;
 import javax.swing.JFileChooser;
+import org.controlsfx.control.Notifications;
 import tn.edu.esprit.entities.Client;
 import tn.edu.esprit.entities.User;
 import tn.edu.esprit.services.ServiceUtilisateur;
@@ -65,28 +69,95 @@ String uploads = "C:\\Users\\Asus\\Desktop\\Foodine_PIDEV_JAVA\\src\\images\\";
     @FXML
     private void ajouterUtilisateur(ActionEvent event) throws IOException {
          if(tfNom.getText().isEmpty() || tfPrenom.getText().isEmpty() ||tfUsername.getText().isEmpty() || tfEmail.getText().isEmpty() || tfPassword.getText().isEmpty() || tfConfirmPassword.getText().isEmpty()){
-             Alert a = new Alert(Alert.AlertType.ERROR,"Champs vides !",ButtonType.OK);
-               a.showAndWait();
+            Notifications notificationBuilder = Notifications.create()
+                    .title("Inscription")
+                    .text("Champs vides")
+                    .graphic(null)
+                    .hideAfter(Duration.seconds(5))
+                    .position(Pos.TOP_RIGHT)
+                    .onAction(new EventHandler<ActionEvent>(){
+                        @Override 
+                        public void handle(ActionEvent event){
+                            //System.out.println("Supp");
+                        }
+                    });
+           notificationBuilder.showError();
         }else if (!tfEmail.getText().contains("@") || !tfEmail.getText().contains(".")){
-             Alert a = new Alert(Alert.AlertType.ERROR,"Email invalide !",ButtonType.OK);
-               a.showAndWait();
+             Notifications notificationBuilder = Notifications.create()
+                    .title("Inscription")
+                    .text("Email invalide")
+                    .graphic(null)
+                    .hideAfter(Duration.seconds(5))
+                    .position(Pos.TOP_RIGHT)
+                    .onAction(new EventHandler<ActionEvent>(){
+                        @Override 
+                        public void handle(ActionEvent event){
+                            //System.out.println("Supp");
+                        }
+                    });
+           notificationBuilder.showError();
         }else if (tfPassword.getText().length() <8 ){
-             Alert a = new Alert(Alert.AlertType.ERROR,"Mot de passe doit contenir au moins 8 caractères !",ButtonType.OK);
-               a.showAndWait();
+             Notifications notificationBuilder = Notifications.create()
+                    .title("Inscription")
+                    .text("Mot de passe doit contenir au moins 8 caractères")
+                    .graphic(null)
+                    .hideAfter(Duration.seconds(5))
+                    .position(Pos.TOP_RIGHT)
+                    .onAction(new EventHandler<ActionEvent>(){
+                        @Override 
+                        public void handle(ActionEvent event){
+                            //System.out.println("Supp");
+                        }
+                    });
+           notificationBuilder.showError();
         }
         else if (!tfPassword.getText().equals(tfConfirmPassword.getText())){
-             Alert a = new Alert(Alert.AlertType.ERROR,"Vérifier votre mot de passe !",ButtonType.OK);
-               a.showAndWait();
-        }else if(tfNom.getText().isEmpty() || tfPrenom.getText().isEmpty()){
-            
+             Notifications notificationBuilder = Notifications.create()
+                    .title("Inscription")
+                    .text("Varifier votre mot de passe")
+                    .graphic(null)
+                    .hideAfter(Duration.seconds(5))
+                    .position(Pos.TOP_RIGHT)
+                    .onAction(new EventHandler<ActionEvent>(){
+                        @Override 
+                        public void handle(ActionEvent event){
+                            //System.out.println("Supp");
+                        }
+                    });
+           notificationBuilder.showError();
+        }else if(tfNom.getText().matches("[0-9]+") ||tfPrenom.getText().matches("[0-9]+")){
+             Notifications notificationBuilder = Notifications.create()
+                    .title("Inscription")
+                    .text("Nom et prénom doit contenir que des lettres")
+                    .graphic(null)
+                    .hideAfter(Duration.seconds(5))
+                    .position(Pos.TOP_RIGHT)
+                    .onAction(new EventHandler<ActionEvent>(){
+                        @Override 
+                        public void handle(ActionEvent event){
+                            //System.out.println("Supp");
+                        }
+                    });
+           notificationBuilder.showError();
         }else {
             long millis=System.currentTimeMillis();
             java.sql.Date date= new java.sql.Date(millis);
             ServiceUtilisateur su = new ServiceUtilisateur();
             User u = new Client(tfNom.getText(),tfPrenom.getText(),tfUsername.getText(),tfEmail.getText(),tfPassword.getText(),imgname,date,1);
             su.ajouter(u);
-            Alert a = new Alert(Alert.AlertType.INFORMATION,"Inscription effectuée avec success !",ButtonType.OK);
-            a.showAndWait();
+            Notifications notificationBuilder = Notifications.create()
+                    .title("Inscription")
+                    .text("Inscription faite avec succes")
+                    .graphic(null)
+                    .hideAfter(Duration.seconds(5))
+                    .position(Pos.TOP_RIGHT)
+                    .onAction(new EventHandler<ActionEvent>(){
+                        @Override 
+                        public void handle(ActionEvent event){
+                            //System.out.println("Supp");
+                        }
+                    });
+           notificationBuilder.showInformation();
             
             FXMLLoader  loader = new FXMLLoader(getClass().getResource("Authentification.fxml"));
             Parent root = loader.load();

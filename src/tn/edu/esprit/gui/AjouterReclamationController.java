@@ -13,15 +13,19 @@ import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
 import tn.edu.esprit.entities.Client;
 import tn.edu.esprit.entities.Reclamation;
 import tn.edu.esprit.entities.User;
@@ -70,8 +74,20 @@ public class AjouterReclamationController implements Initializable {
     @FXML
     private void Ajout(ActionEvent event) {
              if(type.getValue().isEmpty() || tfDescription.getText().isEmpty()){
-             Alert a = new Alert(Alert.AlertType.ERROR,"Champs vides !",ButtonType.OK);
-               a.showAndWait();
+            
+              Notifications notificationBuilder = Notifications.create()
+                    .title("Error")
+                    .text("Champs vides")
+                    .graphic(null)
+                    .hideAfter(Duration.seconds(5))
+                    .position(Pos.TOP_RIGHT)
+                    .onAction(new EventHandler<ActionEvent>(){
+                        @Override 
+                        public void handle(ActionEvent event){
+                            //System.out.println("Supp");
+                        }
+                    });
+           notificationBuilder.showError();
    
         }
             else{
@@ -84,8 +100,19 @@ public class AjouterReclamationController implements Initializable {
             System.out.println(type.getSelectionModel().toString());
             Reclamation r = new Reclamation(u,date,0,type.getValue(),tfDescription.getText());
             su.ajouter(r);
-             Alert a = new Alert(Alert.AlertType.INFORMATION,"Succes !",ButtonType.OK);
-               a.showAndWait();
+             Notifications notificationBuilder = Notifications.create()
+                    .title("Ajouter reclamation")
+                    .text("Reclamation ajoutée")
+                    .graphic(null)
+                    .hideAfter(Duration.seconds(5))
+                    .position(Pos.TOP_RIGHT)
+                    .onAction(new EventHandler<ActionEvent>(){
+                        @Override 
+                        public void handle(ActionEvent event){
+                            //System.out.println("Supp");
+                        }
+                    });
+           notificationBuilder.showConfirm();
     }
 
     }

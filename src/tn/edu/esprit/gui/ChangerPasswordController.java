@@ -9,14 +9,18 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
 import tn.edu.esprit.entities.Client;
 import tn.edu.esprit.entities.User;
 import tn.edu.esprit.services.ServiceUtilisateur;
@@ -46,21 +50,65 @@ ServiceUtilisateur su = new ServiceUtilisateur();
     @FXML
     private void ChangerPass(ActionEvent event) throws IOException {
         if(tfPassword.getText().isEmpty() || tfConfirmPassword.getText().isEmpty()|| tfCode.getText().isEmpty()){
-             Alert a = new Alert(Alert.AlertType.ERROR,"Champs vides !",ButtonType.OK);
-               a.showAndWait();
+            Notifications notificationBuilder = Notifications.create()
+                    .title("Changer Mot de passe")
+                    .text("Champs vides")
+                    .graphic(null)
+                    .hideAfter(Duration.seconds(5))
+                    .position(Pos.TOP_RIGHT)
+                    .onAction(new EventHandler<ActionEvent>(){
+                        @Override 
+                        public void handle(ActionEvent event){
+                            //System.out.println("Supp");
+                        }
+                    });
+           notificationBuilder.showError();
    
         }
         else if(!tfConfirmPassword.getText().equals(tfPassword.getText())){
-             Alert a = new Alert(Alert.AlertType.ERROR,"Verifier votre mot de passe!",ButtonType.OK);
-               a.showAndWait();
+             Notifications notificationBuilder = Notifications.create()
+                    .title("Changer Mot de passe")
+                    .text("Verifier votre mot de passe")
+                    .graphic(null)
+                    .hideAfter(Duration.seconds(5))
+                    .position(Pos.TOP_RIGHT)
+                    .onAction(new EventHandler<ActionEvent>(){
+                        @Override 
+                        public void handle(ActionEvent event){
+                            //System.out.println("Supp");
+                        }
+                    });
+           notificationBuilder.showError();
         }else if(su.findCode(tfCode.getText())==null){
-            Alert a = new Alert(Alert.AlertType.ERROR,"Code incorrecte!",ButtonType.OK);
-               a.showAndWait();
+            Notifications notificationBuilder = Notifications.create()
+                    .title("Changer Mot de passe")
+                    .text("Code incorrecte")
+                    .graphic(null)
+                    .hideAfter(Duration.seconds(5))
+                    .position(Pos.TOP_RIGHT)
+                    .onAction(new EventHandler<ActionEvent>(){
+                        @Override 
+                        public void handle(ActionEvent event){
+                            //System.out.println("Supp");
+                        }
+                    });
+           notificationBuilder.showError();
         }else {
             User u = new Client(tfPassword.getText(),tfCode.getText());
             su.changerPass((Client) u);
-             Alert a = new Alert(Alert.AlertType.INFORMATION,"Mot de passe changé avec succes!",ButtonType.OK);
-               a.showAndWait();
+             Notifications notificationBuilder = Notifications.create()
+                    .title("Changer Mot de passe")
+                    .text("Mot de passe modifié avec succes")
+                    .graphic(null)
+                    .hideAfter(Duration.seconds(5))
+                    .position(Pos.TOP_RIGHT)
+                    .onAction(new EventHandler<ActionEvent>(){
+                        @Override 
+                        public void handle(ActionEvent event){
+                            //System.out.println("Supp");
+                        }
+                    });
+           notificationBuilder.showConfirm();
               FXMLLoader  loader = new FXMLLoader(getClass().getResource("Authentification.fxml"));
             Parent root = loader.load();
             tfCode.getScene().setRoot(root);

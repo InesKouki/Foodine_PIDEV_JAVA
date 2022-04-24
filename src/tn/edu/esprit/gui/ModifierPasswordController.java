@@ -13,13 +13,17 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
 import tn.edu.esprit.entities.Client;
 import tn.edu.esprit.entities.User;
 import tn.edu.esprit.services.ServiceUtilisateur;
@@ -72,16 +76,48 @@ public class ModifierPasswordController implements Initializable {
     @FXML
     private void ModifierPass(ActionEvent event) throws IOException {
         if(tfPassword.getText().isEmpty() || tfConfirmPass.getText().isEmpty()){
-            Alert a = new Alert(Alert.AlertType.ERROR,"Champs vides !",ButtonType.OK);
-            
-               a.showAndWait(); 
+             Notifications notificationBuilder = Notifications.create()
+                    .title("Modification mot de passe")
+                    .text("Champs vides")
+                    .graphic(null)
+                    .hideAfter(Duration.seconds(5))
+                    .position(Pos.TOP_RIGHT)
+                    .onAction(new EventHandler<ActionEvent>(){
+                        @Override 
+                        public void handle(ActionEvent event){
+                            //System.out.println("Supp");
+                        }
+                    });
+           notificationBuilder.showError();
         }else if (!tfPassword.getText().equals(tfConfirmPass.getText())){
         
-         Alert a = new Alert(Alert.AlertType.ERROR,"Verifier votre mot de passe !",ButtonType.OK);
-               a.showAndWait(); 
+         Notifications notificationBuilder = Notifications.create()
+                    .title("Modification mot de passe")
+                    .text("Verifier votre mode passe")
+                    .graphic(null)
+                    .hideAfter(Duration.seconds(5))
+                    .position(Pos.TOP_RIGHT)
+                    .onAction(new EventHandler<ActionEvent>(){
+                        @Override 
+                        public void handle(ActionEvent event){
+                            //System.out.println("Supp");
+                        }
+                    });
+           notificationBuilder.showError();
     }else if (tfPassword.getText().length()<8){
-          Alert a = new Alert(Alert.AlertType.ERROR,"Mot de passe doit contenir au moins 8 caracters !",ButtonType.OK);
-               a.showAndWait(); 
+          Notifications notificationBuilder = Notifications.create()
+                    .title("Modification mot de passe")
+                    .text("Mot de passe doit contenir au moins 8 caractères")
+                    .graphic(null)
+                    .hideAfter(Duration.seconds(5))
+                    .position(Pos.TOP_RIGHT)
+                    .onAction(new EventHandler<ActionEvent>(){
+                        @Override 
+                        public void handle(ActionEvent event){
+                            //System.out.println("Supp");
+                        }
+                    });
+           notificationBuilder.showError();
     }
         else {
         
@@ -99,8 +135,19 @@ StringBuilder finalresult;
              ServiceUtilisateur su = new ServiceUtilisateur();
              User u = new Client(parseInt(System.getProperty("id")),finalresult.toString());
             su.modifier_Password((Client) u);
-             Alert a = new Alert(Alert.AlertType.INFORMATION,"Succes !",ButtonType.OK);
-               a.showAndWait();
+             Notifications notificationBuilder = Notifications.create()
+                    .title("Modification mot de passe")
+                    .text("Mot de passe modifié avec succes")
+                    .graphic(null)
+                    .hideAfter(Duration.seconds(5))
+                    .position(Pos.TOP_RIGHT)
+                    .onAction(new EventHandler<ActionEvent>(){
+                        @Override 
+                        public void handle(ActionEvent event){
+                            //System.out.println("Supp");
+                        }
+                    });
+           notificationBuilder.showConfirm();
                
                 FXMLLoader  loader = new FXMLLoader(getClass().getResource("ProfileClient.fxml"));
             Parent root = loader.load();

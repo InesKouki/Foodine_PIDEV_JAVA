@@ -9,18 +9,26 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
 import java.sql.SQLException;
+import javafx.util.Duration;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.ContextMenuEvent;
+import javafx.scene.input.InputMethodEvent;
 import javafx.scene.input.MouseEvent;
+import org.controlsfx.control.Notifications;
 import tn.edu.esprit.entities.Reclamation;
 import tn.edu.esprit.entities.User;
 import tn.edu.esprit.services.ServiceReclamation;
@@ -50,6 +58,7 @@ public class AfficherReclamationController implements Initializable {
     private Button supprimer;
     @FXML
     private Button traiter;
+    private ChoiceBox<String> choicebox;
     /**
      * Initializes the controller class.
      */
@@ -59,6 +68,8 @@ public class AfficherReclamationController implements Initializable {
       supprimer.setVisible(false);
         traiter.setVisible(false);
           System.out.println(System.getProperty("id"));
+          ObservableList<String> list = FXCollections.observableArrayList("Trier par date ","Trier par type");
+//          choicebox.setItems(list);
         
     }    
 
@@ -143,6 +154,20 @@ public class AfficherReclamationController implements Initializable {
             Parent root = loader.load();
             listRec.getScene().setRoot(root);
             AfficherReclamationController ac = loader.getController();
+            
+            Notifications notificationBuilder = Notifications.create()
+                    .title("Suppression effectuée")
+                    .text("Reclamation supprimée")
+                    .graphic(null)
+                    .hideAfter(Duration.seconds(5))
+                    .position(Pos.TOP_RIGHT)
+                    .onAction(new EventHandler<ActionEvent>(){
+                        @Override 
+                        public void handle(ActionEvent event){
+                            //System.out.println("Supp");
+                        }
+                    });
+           notificationBuilder.showConfirm();
     }
 
     @FXML
@@ -154,6 +179,19 @@ public class AfficherReclamationController implements Initializable {
             Parent root = loader.load();
             listRec.getScene().setRoot(root);
             AfficherReclamationController ac = loader.getController();
+            Notifications notificationBuilder = Notifications.create()
+                    .title("Traiter Reclamation")
+                    .text("Reclamation traité avec succes")
+                    .graphic(null)
+                    .hideAfter(Duration.seconds(5))
+                    .position(Pos.TOP_RIGHT)
+                    .onAction(new EventHandler<ActionEvent>(){
+                        @Override 
+                        public void handle(ActionEvent event){
+                            //System.out.println("Supp");
+                        }
+                    });
+           notificationBuilder.showConfirm();
     }
 
     @FXML
@@ -168,5 +206,6 @@ public class AfficherReclamationController implements Initializable {
             }
         }
     }
+
     
 }

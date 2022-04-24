@@ -12,15 +12,19 @@ import java.sql.Date;
 import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.SortEvent;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
 import tn.edu.esprit.entities.User;
 import tn.edu.esprit.services.ServiceReclamation;
 import tn.edu.esprit.services.ServiceUtilisateur;
@@ -118,6 +122,19 @@ public class AfficherUtilisateurController implements Initializable {
         tableList.getItems().removeAll(tableList.getSelectionModel().getSelectedItem());
         System.out.println(tableList);
         tableList.refresh();
+        Notifications notificationBuilder = Notifications.create()
+                    .title("Suppression effectuée")
+                    .text("Utilisateur supprimé supprimée")
+                    .graphic(null)
+                    .hideAfter(Duration.seconds(5))
+                    .position(Pos.TOP_RIGHT)
+                    .onAction(new EventHandler<ActionEvent>(){
+                        @Override 
+                        public void handle(ActionEvent event){
+                            //System.out.println("Supp");
+                        }
+                    });
+           notificationBuilder.showConfirm();
     }
     
     
@@ -145,6 +162,20 @@ public class AfficherUtilisateurController implements Initializable {
     {
         ServiceUtilisateur SV = new ServiceUtilisateur();
        SV.supprimer(tableList.getSelectionModel().getSelectedItem().getId());
+       Notifications notificationBuilder = Notifications.create()
+                    .title("Suppression")
+                    .text("Utilisateur supprimé")
+                    .graphic(null)
+                    .hideAfter(Duration.seconds(5))
+                    .position(Pos.TOP_RIGHT)
+                    .onAction(new EventHandler<ActionEvent>(){
+                        @Override 
+                        public void handle(ActionEvent event){
+                            //System.out.println("Supp");
+                        }
+                    });
+           notificationBuilder.showConfirm();
+       
             }
    
     private void supprimer(ActionEvent event) {
@@ -166,6 +197,19 @@ public class AfficherUtilisateurController implements Initializable {
             Parent root = loader.load();
             tableList.getScene().setRoot(root);
             AfficherUtilisateurController ac = loader.getController();
+            Notifications notificationBuilder = Notifications.create()
+                    .title("Bloquage")
+                    .text("Utilisateur bloqué")
+                    .graphic(null)
+                    .hideAfter(Duration.seconds(5))
+                    .position(Pos.TOP_RIGHT)
+                    .onAction(new EventHandler<ActionEvent>(){
+                        @Override 
+                        public void handle(ActionEvent event){
+                            //System.out.println("Supp");
+                        }
+                    });
+           notificationBuilder.showConfirm();
     }
 
     @FXML
@@ -178,6 +222,19 @@ public class AfficherUtilisateurController implements Initializable {
             Parent root = loader.load();
             tableList.getScene().setRoot(root);
             AfficherUtilisateurController ac = loader.getController();
+            Notifications notificationBuilder = Notifications.create()
+                    .title("Débloquage")
+                    .text("Utilisateur debloqué")
+                    .graphic(null)
+                    .hideAfter(Duration.seconds(5))
+                    .position(Pos.TOP_RIGHT)
+                    .onAction(new EventHandler<ActionEvent>(){
+                        @Override 
+                        public void handle(ActionEvent event){
+                            //System.out.println("Supp");
+                        }
+                    });
+           notificationBuilder.showConfirm();
     }
 
     @FXML

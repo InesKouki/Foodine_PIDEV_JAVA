@@ -14,9 +14,11 @@ import java.net.URL;
 import java.nio.channels.FileChannel;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -24,7 +26,9 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.util.Duration;
 import javax.swing.JFileChooser;
+import org.controlsfx.control.Notifications;
 import tn.edu.esprit.entities.Client;
 import tn.edu.esprit.entities.User;
 import tn.edu.esprit.services.ServiceUtilisateur;
@@ -95,22 +99,66 @@ public class ProfileClientController implements Initializable {
     private void ModifierInformation(ActionEvent event) {
         
         if(!txtEmail.getText().contains("@") || !txtEmail.getText().contains(".")){
-             Alert a = new Alert(Alert.AlertType.ERROR,"Adresse Email non valide !",ButtonType.OK);
-               a.showAndWait();
+              Notifications notificationBuilder = Notifications.create()
+                    .title("Modification informations")
+                    .text("Email invalide")
+                    .graphic(null)
+                    .hideAfter(Duration.seconds(5))
+                    .position(Pos.TOP_RIGHT)
+                    .onAction(new EventHandler<ActionEvent>(){
+                        @Override 
+                        public void handle(ActionEvent event){
+                            //System.out.println("Supp");
+                        }
+                    });
+           notificationBuilder.showError();
         }else if(!txtPhone.getText().matches("[0-9]+") ||txtPhone.getText().length() > 8 ){
-            Alert a = new Alert(Alert.AlertType.ERROR,"Numero téléphone invalide !",ButtonType.OK);
-               a.showAndWait();
+           Notifications notificationBuilder = Notifications.create()
+                    .title("Modification informations")
+                    .text("Numero de téléphone invalide")
+                    .graphic(null)
+                    .hideAfter(Duration.seconds(5))
+                    .position(Pos.TOP_RIGHT)
+                    .onAction(new EventHandler<ActionEvent>(){
+                        @Override 
+                        public void handle(ActionEvent event){
+                            //System.out.println("Supp");
+                        }
+                    });
+           notificationBuilder.showError();
         }else if (txtNom.getText().matches("[0-9]+") ||txtPrenom.getText().matches("[0-9]+")){
-             Alert a = new Alert(Alert.AlertType.ERROR,"Votre nom ou prenom doit contenir des lettre alphabetique !",ButtonType.OK);
-               a.showAndWait();
+           Notifications notificationBuilder = Notifications.create()
+                    .title("Modification informations")
+                    .text("Nom et prénom doivent contenir des lettres alphabetiques")
+                    .graphic(null)
+                    .hideAfter(Duration.seconds(5))
+                    .position(Pos.TOP_RIGHT)
+                    .onAction(new EventHandler<ActionEvent>(){
+                        @Override 
+                        public void handle(ActionEvent event){
+                            //System.out.println("Supp");
+                        }
+                    });
+           notificationBuilder.showError();
         }
         
         else  {
             ServiceUtilisateur su = new ServiceUtilisateur();
             User u = new Client(parseInt(System.getProperty("id")),txtNom.getText(),txtPrenom.getText(),txtEmail.getText(),Integer. parseInt(txtPhone.getText()),txtAdresse.getText(),imgname);
             su.modifierInfo((Client) u);
-             Alert a = new Alert(Alert.AlertType.INFORMATION,"Succes !",ButtonType.OK);
-               a.showAndWait();
+            Notifications notificationBuilder = Notifications.create()
+                    .title("Modification informations")
+                    .text("Profile modifié avec succes")
+                    .graphic(null)
+                    .hideAfter(Duration.seconds(5))
+                    .position(Pos.TOP_RIGHT)
+                    .onAction(new EventHandler<ActionEvent>(){
+                        @Override 
+                        public void handle(ActionEvent event){
+                            //System.out.println("Supp");
+                        }
+                    });
+           notificationBuilder.showConfirm();
             
         }
     }

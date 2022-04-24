@@ -13,14 +13,18 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
 import tn.edu.esprit.entities.Client;
 import tn.edu.esprit.entities.User;
 import tn.edu.esprit.services.ServiceUtilisateur;
@@ -54,8 +58,19 @@ Connection cnx = DataSource.getInstance().getCnx();
     private void Authentification(ActionEvent event) throws SQLException, IOException {
         
     if(tfUsername.getText().isEmpty() || tfPassword.getText().isEmpty()){
-             Alert a = new Alert(Alert.AlertType.ERROR,"Champs vides !",ButtonType.OK);
-               a.showAndWait();
+            Notifications notificationBuilder = Notifications.create()
+                    .title("Authentification")
+                    .text("champs vides")
+                    .graphic(null)
+                    .hideAfter(Duration.seconds(5))
+                    .position(Pos.TOP_RIGHT)
+                    .onAction(new EventHandler<ActionEvent>(){
+                        @Override 
+                        public void handle(ActionEvent event){
+                            //System.out.println("Supp");
+                        }
+                    });
+           notificationBuilder.showError();
    
         }
             else{
@@ -84,8 +99,19 @@ Connection cnx = DataSource.getInstance().getCnx();
             }
             if(etat==1){
                   
-                Alert aa = new Alert(Alert.AlertType.INFORMATION,"Succes !",ButtonType.OK);
-                    aa.showAndWait();
+               Notifications notificationBuilder = Notifications.create()
+                    .title("Authentification")
+                    .text("Bienvenue")
+                    .graphic(null)
+                    .hideAfter(Duration.seconds(5))
+                    .position(Pos.TOP_RIGHT)
+                    .onAction(new EventHandler<ActionEvent>(){
+                        @Override 
+                        public void handle(ActionEvent event){
+                            //System.out.println("Supp");
+                        }
+                    });
+           notificationBuilder.showConfirm();
                  
                    
                   
@@ -105,13 +131,35 @@ Connection cnx = DataSource.getInstance().getCnx();
                
                
     }else{
-                Alert aa = new Alert(Alert.AlertType.ERROR,"Vous etes bloqué !",ButtonType.OK);
-                    aa.showAndWait();
+               Notifications notificationBuilder = Notifications.create()
+                    .title("Authentification")
+                    .text("Vous etes bloqué")
+                    .graphic(null)
+                    .hideAfter(Duration.seconds(5))
+                    .position(Pos.TOP_RIGHT)
+                    .onAction(new EventHandler<ActionEvent>(){
+                        @Override 
+                        public void handle(ActionEvent event){
+                            //System.out.println("Supp");
+                        }
+                    });
+           notificationBuilder.showWarning();
             }
                 }
         else{
-            Alert a = new Alert(Alert.AlertType.ERROR,"Vérifier vos coodonnées !",ButtonType.OK);
-               a.showAndWait();
+            Notifications notificationBuilder = Notifications.create()
+                    .title("Authentification")
+                    .text("Verifier vos coordonées")
+                    .graphic(null)
+                    .hideAfter(Duration.seconds(5))
+                    .position(Pos.TOP_RIGHT)
+                    .onAction(new EventHandler<ActionEvent>(){
+                        @Override 
+                        public void handle(ActionEvent event){
+                            //System.out.println("Supp");
+                        }
+                    });
+           notificationBuilder.showError();
         }
     }
     }

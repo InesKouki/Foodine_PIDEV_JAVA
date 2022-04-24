@@ -101,5 +101,42 @@ Connection cnx = DataSource.getInstance().getCnx();
     public void modifier(Reclamation p) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+     
+    public ObservableList<Reclamation> getAllTriType() {
+      ObservableList<Reclamation> list = FXCollections.observableArrayList();
+        try {
+            String req = "SELECT * FROM `reclamation` r order by `type` ";
+            Statement st = cnx.createStatement();
+            ResultSet rs = st.executeQuery(req);
+            
+            while(rs.next()){
+                
+                Reclamation r = new Reclamation(rs.getInt("id"),rs.getString("u.nom"),rs.getString("u.prenom"),rs.getDate("created_at"), rs.getInt("etat"), rs.getString("type"), rs.getString("description"));
+                list.add(r);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return list;
+    }
     
+     public ObservableList<Reclamation> getAllTriDate() {
+      ObservableList<Reclamation> list = FXCollections.observableArrayList();
+        try {
+            String req = "SELECT * FROM `reclamation` r order by `Date` ";
+            Statement st = cnx.createStatement();
+            ResultSet rs = st.executeQuery(req);
+            
+            while(rs.next()){
+                
+                Reclamation r = new Reclamation(rs.getInt("id"),rs.getString("u.nom"),rs.getString("u.prenom"),rs.getDate("created_at"), rs.getInt("etat"), rs.getString("type"), rs.getString("description"));
+                list.add(r);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return list;
+    }
 }

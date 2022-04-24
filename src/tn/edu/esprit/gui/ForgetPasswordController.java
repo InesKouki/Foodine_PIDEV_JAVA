@@ -10,13 +10,17 @@ import static java.lang.Integer.max;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
 import tn.edu.esprit.services.ServiceUtilisateur;
 import tn.edu.esprit.utils.JavaMail;
 
@@ -54,18 +58,51 @@ int random = (int)Math.floor(Math.random()*(max-min+1)+min);
     private void changerPass(ActionEvent event) throws Exception {
         
         if(tfEmail.getText().isEmpty()){
-             Alert a = new Alert(Alert.AlertType.ERROR,"Champs vides !",ButtonType.OK);
-               a.showAndWait();
+             Notifications notificationBuilder = Notifications.create()
+                    .title("Récuper mot de passe")
+                    .text("Champs vides")
+                    .graphic(null)
+                    .hideAfter(Duration.seconds(5))
+                    .position(Pos.TOP_RIGHT)
+                    .onAction(new EventHandler<ActionEvent>(){
+                        @Override 
+                        public void handle(ActionEvent event){
+                            //System.out.println("Supp");
+                        }
+                    });
+           notificationBuilder.showError();
              
         }else if (su.findEmail(tfEmail.getText(),Integer.toString(random))== null){
-             Alert a = new Alert(Alert.AlertType.ERROR,"Utilisateur non trouvé !",ButtonType.OK);
-               a.showAndWait();
+              Notifications notificationBuilder = Notifications.create()
+                    .title("Récuper mot de passe")
+                    .text("Utilisateur non trouvé")
+                    .graphic(null)
+                    .hideAfter(Duration.seconds(5))
+                    .position(Pos.TOP_RIGHT)
+                    .onAction(new EventHandler<ActionEvent>(){
+                        @Override 
+                        public void handle(ActionEvent event){
+                            //System.out.println("Supp");
+                        }
+                    });
+           notificationBuilder.showError();
         }
             else{
             JavaMail.sendMail(su.findEmail(tfEmail.getText(),Integer.toString(random)).getEmail(), "Changer Mot de passe "+random);
             su.findEmail(tfEmail.getText(),Integer.toString(random)).setReset_token(Integer.toString(random));
-             Alert a = new Alert(Alert.AlertType.INFORMATION,"Un mail vous a été envoyé !",ButtonType.OK);
-            a.showAndWait();
+              Notifications notificationBuilder = Notifications.create()
+                    .title("Récuper mot de passe")
+                    .text("Un mail vous a été envoyé")
+                    .graphic(null)
+                    .hideAfter(Duration.seconds(5))
+                    .position(Pos.TOP_RIGHT)
+                    .onAction(new EventHandler<ActionEvent>(){
+                        @Override 
+                        public void handle(ActionEvent event){
+                            //System.out.println("Supp");
+                        }
+                    });
+           notificationBuilder.showConfirm();
              FXMLLoader  loader = new FXMLLoader(getClass().getResource("ChangerPassword.fxml"));
             Parent root = loader.load();
             tfEmail.getScene().setRoot(root);
