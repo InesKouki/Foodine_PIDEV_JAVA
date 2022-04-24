@@ -3,6 +3,8 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -81,7 +83,7 @@
             <Separator layoutX="-30.0" layoutY="571.0" prefHeight="2.0" prefWidth="316.0" />
          </children>
       </AnchorPane>
-      <Label alignment="BOTTOM_LEFT" layoutX="450.0" layoutY="14.0" prefHeight="65.0" prefWidth="418.0" text="Afficher Utilisateurs">
+      <Label alignment="BOTTOM_LEFT" layoutX="474.0" layoutY="14.0" prefHeight="65.0" prefWidth="418.0" text="Liste des utilisateurs">
          <font>
             <Font name="System Bold Italic" size="30.0" />
          </font>
@@ -109,5 +111,12 @@
             <Image url="@images/refresh.png" />
          </image>
       </ImageView>
+      <MenuButton fx:id="menuButton" layoutX="313.0" layoutY="89.0" mnemonicParsing="false" onAction="#Trier" prefHeight="25.0" prefWidth="145.0" text="Trier">
+        <items>
+          <MenuItem fx:id="trierNom" mnemonicParsing="false" onAction="#trierNom" text="Trier par nom" />
+          <MenuItem fx:id="tierDate" mnemonicParsing="false" onAction="#trierDate" text="Trier par date" />
+            <MenuItem fx:id="trierEmail" mnemonicParsing="false" onAction="#trierEmail" text="Trier par Email" />
+        </items>
+      </MenuButton>
    </children>
 </AnchorPane>

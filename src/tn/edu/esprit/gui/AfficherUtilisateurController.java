@@ -22,6 +22,8 @@ import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.SortEvent;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -71,6 +73,14 @@ public class AfficherUtilisateurController implements Initializable {
     private TextField Recherche;
     @FXML
     private AnchorPane myAnchorPane;
+    @FXML
+    private MenuButton menuButton;
+    @FXML
+    private MenuItem trierNom;
+    @FXML
+    private MenuItem tierDate;
+    @FXML
+    private MenuItem trierEmail;
     /**
      * Initializes the controller class.
      */
@@ -79,6 +89,7 @@ public class AfficherUtilisateurController implements Initializable {
          debloquer.setVisible(false);
         bloquer.setVisible(false);
         showList();
+        
     } 
     
    
@@ -281,6 +292,51 @@ public class AfficherUtilisateurController implements Initializable {
         bloquer.setVisible(false);
         showList();
         Recherche.setText(null);
+    }
+
+    @FXML
+    private void Trier(ActionEvent event) {
+        
+        
+    }
+
+    @FXML
+    private void trierNom(ActionEvent event) {
+        colNom.setCellValueFactory(new PropertyValueFactory<User, String>("nom"));
+            colPrenom.setCellValueFactory(new PropertyValueFactory<User, String>("prenom"));
+            colUsername.setCellValueFactory(new PropertyValueFactory<User, String>("username"));
+            colEmail.setCellValueFactory(new PropertyValueFactory<User, String>("email"));
+           // colRole.setCellValueFactory(new PropertyValueFactory<User, String>("roles"));
+            colEtat.setCellValueFactory(new PropertyValueFactory<User, Integer>("etat"));
+            colDate.setCellValueFactory(new PropertyValueFactory<User, Date>("created_at"));
+             list=su.getAllTriNom();
+             tableList.setItems(list);
+    }
+
+    @FXML
+    private void trierDate(ActionEvent event) {
+        colNom.setCellValueFactory(new PropertyValueFactory<User, String>("nom"));
+            colPrenom.setCellValueFactory(new PropertyValueFactory<User, String>("prenom"));
+            colUsername.setCellValueFactory(new PropertyValueFactory<User, String>("username"));
+            colEmail.setCellValueFactory(new PropertyValueFactory<User, String>("email"));
+           // colRole.setCellValueFactory(new PropertyValueFactory<User, String>("roles"));
+            colEtat.setCellValueFactory(new PropertyValueFactory<User, Integer>("etat"));
+            colDate.setCellValueFactory(new PropertyValueFactory<User, Date>("created_at"));
+             list=su.getAllTridate();
+             tableList.setItems(list);
+    }
+
+    @FXML
+    private void trierEmail(ActionEvent event) {
+        colNom.setCellValueFactory(new PropertyValueFactory<User, String>("nom"));
+            colPrenom.setCellValueFactory(new PropertyValueFactory<User, String>("prenom"));
+            colUsername.setCellValueFactory(new PropertyValueFactory<User, String>("username"));
+            colEmail.setCellValueFactory(new PropertyValueFactory<User, String>("email"));
+           // colRole.setCellValueFactory(new PropertyValueFactory<User, String>("roles"));
+            colEtat.setCellValueFactory(new PropertyValueFactory<User, Integer>("etat"));
+            colDate.setCellValueFactory(new PropertyValueFactory<User, Date>("created_at"));
+             list=su.getAllTriEmail();
+             tableList.setItems(list);
     }
 
     
