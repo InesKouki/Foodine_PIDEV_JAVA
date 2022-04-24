@@ -29,6 +29,7 @@ public class Client extends User{
         super(id, nom, prenom, username, email, password, file, created_at, etat);
     }
     
+    
     public Client(int id, String nom, String prenom, String email,int phone,String address,String file) {
         super(id, nom, prenom, email,file);
         this.phone=phone;
@@ -43,10 +44,18 @@ public class Client extends User{
     public Client(int id, String password) {
         super(id, password);
     }
+    
+   
 
     
     public Client(String nom, String prenom, String username, String email, String password, String file, Date created_at, int etat) {
         super(nom, prenom, username, email, password, file, created_at, etat);
+    }
+    
+    public Client(String nom, String prenom, String username, String email, String password, String file, Date created_at, int etat,String act,int phone) {
+        super(nom, prenom, username, email, password, file, created_at, etat);
+        this.activation_token=act;
+        this.phone=phone;
     }
     
     public Client(String nom, String prenom, String username, String email, String password, Date created_at, int etat) {

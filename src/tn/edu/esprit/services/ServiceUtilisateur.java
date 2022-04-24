@@ -37,10 +37,10 @@ String motdepassecrypte;
 int i = 0;
 StringBuilder finalresult;
 ResultSet rs = null;
-    @Override
+    
   
-        public void ajouter(User u) {
-        String request = "INSERT INTO `user`(`nom`, `prenom`, `username`, `email`, `roles`, `password`, `file`, `created_at`,`etat`) VALUES (?,?,?,?,?,?,?,?,?)";
+        public void ajouterClient(Client u) {
+        String request = "INSERT INTO `user`(`nom`, `prenom`, `username`, `email`, `roles`, `password`, `file`, `created_at`,`activation_token`,`phone`,`etat`) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
        long millis=System.currentTimeMillis();  
         java.sql.Date date=new java.sql.Date(millis); 
         try {
@@ -65,7 +65,9 @@ ResultSet rs = null;
             ps.setString(6, finalresult.toString());
             ps.setString(7, u.getFile());
             ps.setDate(8, date);
-            ps.setInt(9,1);
+            ps.setInt(11,0);
+            ps.setString(9,u.getActivation_token());
+            ps.setInt(10,u.getPhone());
 
             ps.executeUpdate();
         } catch (SQLException ex) {
@@ -171,6 +173,28 @@ ResultSet rs = null;
             
            while(rs.next()) {
               u = new Client(rs.getString("reset_token"));
+            
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            
+        }
+        return u ;
+    }
+      
+        public User findActivationCode(String code) {
+       
+         String req="SELECT * FROM user where activation_token='"+code+"' Limit 1";
+        Statement st= null;
+        User u =null;
+        try {
+            st = cnx.createStatement();
+            ResultSet rs = st.executeQuery(req);
+                
+            
+           while(rs.next()) {
+              u = new Client(rs.getString("nom"),rs.getString("prenom"),rs.getString("username"),rs.getString("email"),rs.getString("password"),rs.getString("file"), rs.getDate("created_at"),rs.getInt("etat"),rs.getString("activation_token"),rs.getInt("phone"));
             
             }
 
@@ -383,6 +407,24 @@ public void changerPass(Client u) {
 
         return list;
         
+    }
+
+    @Override
+    public void ajouter(User p) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void Activer(Client u) {
+        try {
+           String req = "UPDATE `user` SET `activation_token` = '"+NULL+ "',etat='"+1
+                    +
+                     "' WHERE `user`.`activation_token` = '" + u.getActivation_token()+"'";
+            Statement st = cnx.createStatement();
+            st.executeUpdate(req);
+            System.out.println("Profile Activé !");
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }    
     }
     
     }

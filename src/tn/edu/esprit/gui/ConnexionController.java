@@ -5,6 +5,9 @@
  */
 package tn.edu.esprit.gui;
 
+import com.twilio.Twilio;
+import com.twilio.rest.api.v2010.account.Message;
+import com.twilio.type.PhoneNumber;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -32,7 +35,7 @@ import org.controlsfx.control.Notifications;
 import tn.edu.esprit.entities.Client;
 import tn.edu.esprit.entities.User;
 import tn.edu.esprit.services.ServiceUtilisateur;
-
+ 
 /**
  * FXML Controller class
  *
@@ -58,6 +61,15 @@ public class ConnexionController implements Initializable {
     private ImageView uploadIv;
 String uploads = "C:\\Users\\Asus\\Desktop\\Foodine_PIDEV_JAVA\\src\\images\\";
     private String path = "", imgname = "", fn="";
+    
+    public static final String ACCOUNT_SID="AC0c6aefab9c7673bcc184a93c7b3faade";
+    public static final String AUTH_TOKEN="6f4bd195f6994c9feb1aeb3a90c0e4df";
+    int min = 1000;
+int max = 9999;
+int random = (int)Math.floor(Math.random()*(max-min+1)+min);
+    @FXML
+    private TextField tfPhone;
+    
     /**
      * Initializes the controller class.
      */
@@ -68,7 +80,7 @@ String uploads = "C:\\Users\\Asus\\Desktop\\Foodine_PIDEV_JAVA\\src\\images\\";
 
     @FXML
     private void ajouterUtilisateur(ActionEvent event) throws IOException {
-         if(tfNom.getText().isEmpty() || tfPrenom.getText().isEmpty() ||tfUsername.getText().isEmpty() || tfEmail.getText().isEmpty() || tfPassword.getText().isEmpty() || tfConfirmPassword.getText().isEmpty()){
+         if(tfNom.getText().isEmpty() || tfPrenom.getText().isEmpty() ||tfUsername.getText().isEmpty() || tfEmail.getText().isEmpty() || tfPassword.getText().isEmpty() || tfConfirmPassword.getText().isEmpty() || tfPhone.getText().isEmpty()){
             Notifications notificationBuilder = Notifications.create()
                     .title("Inscription")
                     .text("Champs vides")
@@ -139,15 +151,38 @@ String uploads = "C:\\Users\\Asus\\Desktop\\Foodine_PIDEV_JAVA\\src\\images\\";
                         }
                     });
            notificationBuilder.showError();
-        }else {
+        }else if(tfPhone.getText().length() < 8 && !tfPhone.getText().matches("[0-9]+") ) {
+             Notifications notificationBuilder = Notifications.create()
+                    .title("Inscription")
+                    .text("Verifier votre numero de téléphone")
+                    .graphic(null)
+                    .hideAfter(Duration.seconds(5))
+                    .position(Pos.TOP_RIGHT)
+                    .onAction(new EventHandler<ActionEvent>(){
+                        @Override 
+                        public void handle(ActionEvent event){
+                            //System.out.println("Supp");
+                        }
+                    });
+           notificationBuilder.showError();
+        }
+        
+        
+        
+        else {
+            Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
+            
+            Message message = Message.creator(new PhoneNumber("\"+216"+tfPhone.getText()+"\""),
+                    new PhoneNumber("+12395108595")
+                    ,"Utilisez ce code pour activer votre compte :"+random).create();
             long millis=System.currentTimeMillis();
             java.sql.Date date= new java.sql.Date(millis);
             ServiceUtilisateur su = new ServiceUtilisateur();
-            User u = new Client(tfNom.getText(),tfPrenom.getText(),tfUsername.getText(),tfEmail.getText(),tfPassword.getText(),imgname,date,1);
-            su.ajouter(u);
+            User u = new Client(tfNom.getText(),tfPrenom.getText(),tfUsername.getText(),tfEmail.getText(),tfPassword.getText(),imgname,date,1,Integer.toString(random),Integer.parseInt(tfPhone.getText()));
+            su.ajouterClient((Client) u);
             Notifications notificationBuilder = Notifications.create()
                     .title("Inscription")
-                    .text("Inscription faite avec succes")
+                    .text("Un sms vous a été envoyé")
                     .graphic(null)
                     .hideAfter(Duration.seconds(5))
                     .position(Pos.TOP_RIGHT)
@@ -159,10 +194,10 @@ String uploads = "C:\\Users\\Asus\\Desktop\\Foodine_PIDEV_JAVA\\src\\images\\";
                     });
            notificationBuilder.showInformation();
             
-            FXMLLoader  loader = new FXMLLoader(getClass().getResource("Authentification.fxml"));
+            FXMLLoader  loader = new FXMLLoader(getClass().getResource("ActivationCompte.fxml"));
             Parent root = loader.load();
             tfNom.getScene().setRoot(root);
-            ConnexionController ac = loader.getController();
+            ActivationCompteController ac = loader.getController();
     }
     }
 

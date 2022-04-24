@@ -3,17 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Asus/Desktop/Foodine_PIDEV_JAVA/src/tn/edu/esprit/gui/AjouterReclamationController.java</file>
-            <file>file:/C:/Users/Asus/Desktop/Foodine_PIDEV_JAVA/src/tn/edu/esprit/gui/AuthentificationController.java</file>
+            <file>file:/C:/Users/Asus/Desktop/Foodine_PIDEV_JAVA/src/tn/edu/esprit/services/ServiceUtilisateur.java</file>
             <file>file:/C:/Users/Asus/Desktop/Foodine_PIDEV_JAVA/src/tn/edu/esprit/gui/AfficherUtilisateurController.java</file>
             <file>file:/C:/Users/Asus/Desktop/Foodine_PIDEV_JAVA/src/tn/edu/esprit/gui/ForgetPasswordController.java</file>
-            <file>file:/C:/Users/Asus/Desktop/Foodine_PIDEV_JAVA/src/tn/edu/esprit/gui/ChangerPasswordController.java</file>
-            <file>file:/C:/Users/Asus/Desktop/Foodine_PIDEV_JAVA/src/tn/edu/esprit/tests/NewFXMain.java</file>
-            <file>file:/C:/Users/Asus/Desktop/Foodine_PIDEV_JAVA/src/tn/edu/esprit/gui/ProfileClientController.java</file>
-            <file>file:/C:/Users/Asus/Desktop/Foodine_PIDEV_JAVA/src/tn/edu/esprit/services/ServiceReclamation.java</file>
+            <file>file:/C:/Users/Asus/Desktop/Foodine_PIDEV_JAVA/src/tn/edu/esprit/tests/MainClass.java</file>
             <file>file:/C:/Users/Asus/Desktop/Foodine_PIDEV_JAVA/src/tn/edu/esprit/gui/ConnexionController.java</file>
+            <file>file:/C:/Users/Asus/Desktop/Foodine_PIDEV_JAVA/src/tn/edu/esprit/gui/ActivationCompteController.java</file>
             <file>file:/C:/Users/Asus/Desktop/Foodine_PIDEV_JAVA/src/tn/edu/esprit/gui/AfficherReclamationController.java</file>
-            <file>file:/C:/Users/Asus/Desktop/Foodine_PIDEV_JAVA/src/tn/edu/esprit/gui/ModifierPasswordController.java</file>
         </group>
     </open-files>
 </project-private>
