@@ -7,14 +7,19 @@ package tn.edu.esprit.gui;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.layout.AnchorPane;
 
 /**
  * FXML Controller class
  *
  * @author Asus
  */
-public class DashboardAdminController implements Initializable {
+public class HomeController implements Initializable {
+
+    @FXML
+    private AnchorPane anchor;
 
     /**
      * Initializes the controller class.

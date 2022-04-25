@@ -10,8 +10,12 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import static java.lang.Integer.parseInt;
+import java.math.BigInteger;
 import java.net.URL;
 import java.nio.channels.FileChannel;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -26,6 +30,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
 import javafx.util.Duration;
 import javax.swing.JFileChooser;
 import org.controlsfx.control.Notifications;
@@ -50,8 +55,11 @@ public class ProfileClientController implements Initializable {
     private TextField txtPrenom;
     @FXML
     private TextField txtNom;
-    String uploads = "C:\\Users\\Asus\\Desktop\\Foodine_PIDEV_JAVA\\src\\images\\";
-     private String path = "", imgname = "", fn="";
+String fn = null;
+    FileChooser fc = new FileChooser();
+    String filename = null;
+    String filepath = null;
+  String uploads = "C:/Users/Asus/Desktop/Foodine_PIDEV/public/uploads/";
     ServiceUtilisateur u = new ServiceUtilisateur();
      Client us = (Client) u.find(Integer.parseInt(System.getProperty("id")));
     @FXML
@@ -144,7 +152,7 @@ public class ProfileClientController implements Initializable {
         
         else  {
             ServiceUtilisateur su = new ServiceUtilisateur();
-            User u = new Client(parseInt(System.getProperty("id")),txtNom.getText(),txtPrenom.getText(),txtEmail.getText(),Integer. parseInt(txtPhone.getText()),txtAdresse.getText(),imgname);
+            User u = new Client(parseInt(System.getProperty("id")),txtNom.getText(),txtPrenom.getText(),txtEmail.getText(),Integer. parseInt(txtPhone.getText()),txtAdresse.getText(),filename);
             su.modifierInfo((Client) u);
             Notifications notificationBuilder = Notifications.create()
                     .title("Modification informations")
@@ -192,35 +200,45 @@ public class ProfileClientController implements Initializable {
     }
 
    @FXML
-    private void upload(ActionEvent event) throws IOException {
-        JFileChooser chooser = new JFileChooser();
-        chooser.showOpenDialog(null);
-        File f = chooser.getSelectedFile();
-        path= f.getAbsolutePath();
-        imgname = f.getName();
-        fn = imgname;
-        Image getAbsolutePath = null;
+    private void upload(ActionEvent event) throws IOException, NoSuchAlgorithmException {
+     // Set the title of the displayed file dialog 
+        fc.setTitle("Choisir une image");
+        // Gets the extension filters used in the displayed file dialog. 
+        fc.getExtensionFilters().clear();
+        // Removes all of the elements from this list 
+        fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg"));
+        // Set the selected file or null if no file has been selected 
+        File file = fc.showOpenDialog(null);
+        // Shows a new file open dialog.
+        if (file != null) {
+            // URI that represents this abstract pathname 
+            image.setImage(new Image(file.toURI().toString()));
 
-        String dd = uploads + f.getName();
-        File dest = new File(dd);
-        this.copyFile(f, dest);
+            filename = file.getName();
+            filepath = file.getAbsolutePath();
+//            System.out.println("INITAL filename : " + filename);
+//            System.out.println("filepath : " + filepath);
 
-        System.out.println(dd);
+            String extension = Arrays.stream(filename.split("\\.")).reduce((a, b) -> b).orElse(null);
 
-        image.setImage(new Image("file:" + dest.getAbsolutePath()));
+            byte[] bytesOfMessage = filename.getBytes();
+
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            md.update(bytesOfMessage, 0, filename.length());
+
+            filename = new BigInteger(1, md.digest()).toString(16) + "." + extension;
+            fn = filename;
+
+            FileChannel source = new FileInputStream(filepath).getChannel();
+            FileChannel dest = new FileOutputStream(uploads + filename).getChannel();
+            dest.transferFrom(source, 0, source.size());
+//            System.out.println("HASHED filename : " + filename);
+
+        } else {
+            System.out.println("Fichier invalide!");
+        }
        
     }
 
-    public void copyFile(File sourceFile, File destFile) throws IOException {
-        if (!destFile.exists()) {
-            destFile.createNewFile();
-        }
-
-        try (
-                FileChannel in = new FileInputStream(sourceFile).getChannel();
-                FileChannel out = new FileOutputStream(destFile).getChannel();) {
-
-            out.transferFrom(in, 0, in.size());
-        }
-    }
+   
 }

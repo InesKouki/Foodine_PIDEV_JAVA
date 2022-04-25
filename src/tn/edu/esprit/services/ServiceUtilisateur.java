@@ -44,7 +44,7 @@ ResultSet rs = null;
        long millis=System.currentTimeMillis();  
         java.sql.Date date=new java.sql.Date(millis); 
         try {
-            MessageDigest msg = MessageDigest.getInstance("SHA-256");
+            MessageDigest msg = MessageDigest.getInstance("MD5");
             byte[] hash = msg.digest(u.getPassword().getBytes(StandardCharsets.UTF_8));
             finalresult = new StringBuilder();
             for (byte b : hash) {
@@ -79,7 +79,7 @@ ResultSet rs = null;
         public int authentifier(String username, String pwd) throws SQLException {
            
            try {
-            MessageDigest msg = MessageDigest.getInstance("SHA-256");
+            MessageDigest msg = MessageDigest.getInstance("MD5");
             byte[] hash = msg.digest(pwd.getBytes(StandardCharsets.UTF_8));
             finalresult = new StringBuilder();
             for (byte b : hash) {
@@ -336,7 +336,7 @@ ResultSet rs = null;
 
 public void changerPass(Client u) {
  try {
-            MessageDigest msg = MessageDigest.getInstance("SHA-256");
+            MessageDigest msg = MessageDigest.getInstance("MD5");
             byte[] hash = msg.digest(u.getPassword().getBytes(StandardCharsets.UTF_8));
             finalresult = new StringBuilder();
             for (byte b : hash) {

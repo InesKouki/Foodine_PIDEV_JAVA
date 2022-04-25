@@ -12,8 +12,12 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.math.BigInteger;
 import java.net.URL;
 import java.nio.channels.FileChannel;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -29,6 +33,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
 import javafx.util.Duration;
 import javax.swing.JFileChooser;
 import org.controlsfx.control.Notifications;
@@ -59,9 +64,11 @@ public class ConnexionController implements Initializable {
     private Button btnupload;
     @FXML
     private ImageView uploadIv;
-String uploads = "C:\\Users\\Asus\\Desktop\\Foodine_PIDEV_JAVA\\src\\images\\";
-    private String path = "", imgname = "", fn="";
-    
+ String fn = null;
+    FileChooser fc = new FileChooser();
+    String filename = null;
+    String filepath = null;
+  String uploads = "C:/Users/Asus/Desktop/Foodine_PIDEV/public/uploads/";
     public static final String ACCOUNT_SID="AC0c6aefab9c7673bcc184a93c7b3faade";
     public static final String AUTH_TOKEN="6f4bd195f6994c9feb1aeb3a90c0e4df";
     int min = 1000;
@@ -170,15 +177,15 @@ int random = (int)Math.floor(Math.random()*(max-min+1)+min);
         
         
         else {
-            Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
+           /* Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
             
             Message message = Message.creator(new PhoneNumber("\"+216"+tfPhone.getText()+"\""),
                     new PhoneNumber("+12395108595")
-                    ,"Utilisez ce code pour activer votre compte :"+random).create();
+                    ,"Utilisez ce code pour activer votre compte :"+random).create();*/
             long millis=System.currentTimeMillis();
             java.sql.Date date= new java.sql.Date(millis);
             ServiceUtilisateur su = new ServiceUtilisateur();
-            User u = new Client(tfNom.getText(),tfPrenom.getText(),tfUsername.getText(),tfEmail.getText(),tfPassword.getText(),imgname,date,1,Integer.toString(random),Integer.parseInt(tfPhone.getText()));
+            User u = new Client(tfNom.getText(),tfPrenom.getText(),tfUsername.getText(),tfEmail.getText(),tfPassword.getText(),filename,date,1,Integer.toString(random),Integer.parseInt(tfPhone.getText()));
             su.ajouterClient((Client) u);
             Notifications notificationBuilder = Notifications.create()
                     .title("Inscription")
@@ -210,34 +217,44 @@ int random = (int)Math.floor(Math.random()*(max-min+1)+min);
     }
 
     @FXML
-    private void upload(ActionEvent event) throws IOException {
-        JFileChooser chooser = new JFileChooser();
-        chooser.showOpenDialog(null);
-        File f = chooser.getSelectedFile();
-        path= f.getAbsolutePath();
-        imgname = f.getName();
-        fn = imgname;
-        Image getAbsolutePath = null;
+    private void upload(ActionEvent event) throws IOException, NoSuchAlgorithmException {
+       // Set the title of the displayed file dialog 
+        fc.setTitle("Choisir une image");
+        // Gets the extension filters used in the displayed file dialog. 
+        fc.getExtensionFilters().clear();
+        // Removes all of the elements from this list 
+        fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg"));
+        // Set the selected file or null if no file has been selected 
+        File file = fc.showOpenDialog(null);
+        // Shows a new file open dialog.
+        if (file != null) {
+            // URI that represents this abstract pathname 
+            uploadIv.setImage(new Image(file.toURI().toString()));
 
-        String dd = uploads + f.getName();
-        File dest = new File(dd);
-        this.copyFile(f, dest);
+            filename = file.getName();
+            filepath = file.getAbsolutePath();
+//            System.out.println("INITAL filename : " + filename);
+//            System.out.println("filepath : " + filepath);
 
-        System.out.println(dd);
+            String extension = Arrays.stream(filename.split("\\.")).reduce((a, b) -> b).orElse(null);
 
-        uploadIv.setImage(new Image("file:" + dest.getAbsolutePath()));
+            byte[] bytesOfMessage = filename.getBytes();
+
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            md.update(bytesOfMessage, 0, filename.length());
+
+            filename = new BigInteger(1, md.digest()).toString(16) + "." + extension;
+            fn = filename;
+
+            FileChannel source = new FileInputStream(filepath).getChannel();
+            FileChannel dest = new FileOutputStream(uploads + filename).getChannel();
+            dest.transferFrom(source, 0, source.size());
+//            System.out.println("HASHED filename : " + filename);
+
+        } else {
+            System.out.println("Fichier invalide!");
+        }
     }
 
-    public void copyFile(File sourceFile, File destFile) throws IOException {
-        if (!destFile.exists()) {
-            destFile.createNewFile();
-        }
-
-        try (
-                FileChannel in = new FileInputStream(sourceFile).getChannel();
-                FileChannel out = new FileOutputStream(destFile).getChannel();) {
-
-            out.transferFrom(in, 0, in.size());
-        }
-    }
 }
+  

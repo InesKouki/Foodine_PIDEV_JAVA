@@ -86,6 +86,10 @@ public class AfficherUtilisateurController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        
+        
+        
          debloquer.setVisible(false);
         bloquer.setVisible(false);
         showList();
@@ -96,10 +100,6 @@ public class AfficherUtilisateurController implements Initializable {
 
     @FXML
     private void AfficherAccueil(ActionEvent event) throws IOException {
-         FXMLLoader  loader = new FXMLLoader(getClass().getResource("Dashboard.fxml"));
-            Parent root = loader.load();
-            tableList.getScene().setRoot(root);
-           DashboardController ac = loader.getController();
     }
 
     @FXML

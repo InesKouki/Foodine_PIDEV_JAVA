@@ -85,10 +85,7 @@ private AnchorPane myAnchorePane;
 
     @FXML
     private void AfficherAccueil(ActionEvent event) throws IOException {
-         FXMLLoader  loader = new FXMLLoader(getClass().getResource("Dashboard.fxml"));
-            Parent root = loader.load();
-            listRec.getScene().setRoot(root);
-           DashboardController ac = loader.getController();
+       
     }
 
     @FXML

@@ -124,7 +124,7 @@ public class ModifierPasswordController implements Initializable {
         try {
             int i = 0;
 StringBuilder finalresult;
-            MessageDigest msg = MessageDigest.getInstance("SHA-256");
+            MessageDigest msg = MessageDigest.getInstance("MD5");
             byte[] hash = msg.digest(tfPassword.getText().getBytes(StandardCharsets.UTF_8));
             finalresult = new StringBuilder();
             for (byte b : hash) {
