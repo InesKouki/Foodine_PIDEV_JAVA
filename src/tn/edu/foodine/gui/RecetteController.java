@@ -18,6 +18,8 @@ import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -98,6 +100,8 @@ public class RecetteController implements Initializable {
     private Button closeButton;
     @FXML
     private Button reset;
+    @FXML
+    private TextField keywordTextField;
 
     /**
      * Initializes the controller class.
@@ -177,6 +181,7 @@ public class RecetteController implements Initializable {
         }
         ObservableList<Planning> choices = FXCollections.observableArrayList(libelles);
         Planning.setItems(choices);
+        
     }
 
     public void refresh() {
@@ -185,16 +190,39 @@ public class RecetteController implements Initializable {
     }
 
     public void showRecette() {
+        
+        
         Col_id.setCellValueFactory(new PropertyValueFactory<Recette, Integer>("id"));
         Col_Nom.setCellValueFactory(new PropertyValueFactory<Recette, String>("nom"));
         Col_Desc.setCellValueFactory(new PropertyValueFactory<Recette, String>("description"));
         Col_img.setCellValueFactory(new PropertyValueFactory<Recette, String>("image"));
         Col_ing.setCellValueFactory(new PropertyValueFactory<Recette, String>("ingredient"));
         Col_planning.setCellValueFactory(new PropertyValueFactory<Recette, Integer>("planning"));
-        list = sr.getAll();
-        tvRecette.setItems(list);
-        System.out.println(list);
-
+        //list = sr.getAll();
+        temp = sr.getAll();
+        tvRecette.setItems(temp);
+        
+        FilteredList<Recette> filteredData=new FilteredList<>(temp,b->true);
+        keywordTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(Recette->{
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+		}
+                String lowerCaseFilter = newValue.toLowerCase();
+               
+                if(Recette.getNom().toLowerCase().contains(lowerCaseFilter)){
+                    return true;}
+                else if(Recette.getDescription().toLowerCase().contains(lowerCaseFilter)){
+                    return true;}
+                else if(Recette.getIngredient().toLowerCase().contains(lowerCaseFilter)){
+                    return true;}
+                     
+                return false;
+                });
+        });
+            SortedList<Recette> sortedDate =new SortedList<>(filteredData);
+            sortedDate.comparatorProperty().bind(tvRecette.comparatorProperty());
+            tvRecette.setItems(sortedDate);
     }
 
     @FXML
@@ -280,5 +308,6 @@ public class RecetteController implements Initializable {
         clear();
     }
     
-
 }
+
+

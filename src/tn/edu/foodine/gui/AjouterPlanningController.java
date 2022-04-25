@@ -5,10 +5,24 @@
  */
 package tn.edu.foodine.gui;
 
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Paragraph;
+import static com.itextpdf.text.pdf.PdfName.URI;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.awt.Desktop;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.Month;
@@ -34,10 +48,26 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import tn.edu.foodine.entities.Planning;
 import tn.edu.foodine.services.ServicePlanning;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import static java.util.Comparator.reverseOrder;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.stream.Collectors;
+import javafx.collections.transformation.SortedList;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Hyperlink;
+import javafx.scene.control.ListView;
 
 /**
  * FXML Controller class
@@ -47,6 +77,7 @@ import tn.edu.foodine.services.ServicePlanning;
 public class AjouterPlanningController implements Initializable {
 
     int pId = 0;
+    int pid=0;
     @FXML
     private TextField tfNom;
     @FXML
@@ -73,15 +104,56 @@ public class AjouterPlanningController implements Initializable {
     private Button closeButton;
     @FXML
     private Button reset;
-
+    @FXML
+    private Button pdf;
+    @FXML
+    private ListView<Planning> ListView;
+    ObservableList<Planning> listView1;
+    @FXML
+    private ComboBox<String> cbox;
+    @FXML
+    private Button btnlien=new Button("heyy");
+    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         showPlanning();
-    }
+        ObservableList<String> listcb= FXCollections.observableArrayList("Trie par","Par Nom ↑", "Par Nom ↓");
+        cbox.setItems(listcb);  
+        cbox.getSelectionModel().selectFirst();
 
+    }
+    @FXML
+    private void select(ActionEvent event) {
+        String s= cbox.getSelectionModel().getSelectedItem();
+        listView1=sp.getAll();
+        ListView.setItems(listView1);
+        if (s.equals("Par Nom ↑")){
+            SortedList<Planning> sortedList = new SortedList(ListView.getItems().sorted());
+            ListView.setItems(sortedList);
+       }
+          if (s.equals("Par Nom ↓")){
+               SortedList<Planning> sortedList = new SortedList(ListView.getItems().sorted());
+            List<Planning> listpp = new LinkedList<>(Arrays.asList());
+            int i = sortedList.size();
+            while( i > 0 ){
+            listpp.add(sortedList.get(i-1));
+            i-- ;
+            }
+            ListView.setItems(FXCollections.observableList(listpp));
+       }
+    }
+    
+
+        /*hyperlink.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent event) {
+                getHostServices().showDocument("https://eclipse.org");
+            }
+        });*/
     @FXML
     private void ajouterPlanning(ActionEvent event) throws IOException {
         //Instantiating the SimpleDateFormat class
@@ -111,6 +183,18 @@ public class AjouterPlanningController implements Initializable {
     public void refresh() {
         list = sp.getAll();
         tvPlanning.setItems(list);
+        for (int i=0; i<list.size();i++) {
+                String nom=list.get(i).getNom();
+                Date date=list.get(i).getDate();
+                
+                DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");  
+                String strDate = dateFormat.format(date);
+                String list1 = nom + "  \""+strDate +"\"";
+                
+        
+        }
+        listView1=sp.getAll();
+        ListView.setItems(listView1);
     }
 
     public void showPlanning() {
@@ -119,7 +203,10 @@ public class AjouterPlanningController implements Initializable {
         colDate.setCellValueFactory(new PropertyValueFactory<Planning, Date>("date"));
         list = sp.getAll();
         tvPlanning.setItems(list);
-
+        listView1=sp.getAll();
+        ListView.setItems(listView1);
+        
+        
     }
 
     @FXML
@@ -199,4 +286,62 @@ public class AjouterPlanningController implements Initializable {
         btn.setDisable(false);
         clear();
     }
+
+    @FXML
+    private void Pdf(ActionEvent event) {
+        Document doc = new Document();
+        String FILE_NAME = "E:\\java_pdf\\chillyfacts.pdf";
+        try {
+            PdfWriter.getInstance(doc, new FileOutputStream("C:\\Users\\PC\\Desktop\\Mobile\\Foodine_PIDEV_Desktop\\src\\Planning.pdf"));
+            doc.open();
+            Paragraph p = new Paragraph();
+            p.add("Foodine");
+            p.setAlignment(Element.ALIGN_CENTER);
+            
+            
+            doc.add(p);
+            PdfPTable table = new PdfPTable(2); // 2 columns.
+            table.setSpacingBefore(20f);
+
+            PdfPCell cell1 = new PdfPCell(new Paragraph("Nom du Planning"));
+            PdfPCell cell2 = new PdfPCell(new Paragraph("Date Planning"));
+          
+            cell1.setBackgroundColor(BaseColor.RED);
+            cell2.setBackgroundColor(BaseColor.RED);
+            cell1.setPadding(5);
+            table.addCell(cell1);
+            table.addCell(cell2);
+            list = sp.getAll();
+            for (int i=0; i<list.size();i++) {
+                String nom=list.get(i).getNom();
+                Date date=list.get(i).getDate();
+                
+                DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");  
+                String strDate = dateFormat.format(date); 
+                table.addCell(nom);
+                table.addCell(strDate);
+            }
+            doc.add(table);
+            
+            Desktop.getDesktop().open(new File("C:\\Users\\PC\\Desktop\\Mobile\\Foodine_PIDEV_Desktop\\src\\Planning.pdf"));
+            
+            doc.close();
+            
+            
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(AjouterPlanningController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (DocumentException ex) {
+            Logger.getLogger(AjouterPlanningController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(AjouterPlanningController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    
+    @FXML
+    private void openlink1(ActionEvent event)throws URISyntaxException,IOException {
+        Desktop.getDesktop().browse(new URI("https://www.facebook.com/sharer/sharer.php?kid_directed_site=0&sdk=joey&u=http%3A%2F%2F127.0.0.1%3A8000%2Frecette&display=popup&ref=plugin&src=share_button"));
+    }
+
+    
 }
