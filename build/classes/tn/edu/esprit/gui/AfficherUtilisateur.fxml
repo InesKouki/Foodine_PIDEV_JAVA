@@ -5,113 +5,45 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="myAnchorPane" onMouseClicked="#clickItem" prefHeight="647.0" prefWidth="995.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.edu.esprit.gui.AfficherUtilisateurController">
+<AnchorPane id="AnchorPane" fx:id="myAnchorPane" onMouseClicked="#clickItem" prefHeight="690.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.edu.esprit.gui.AfficherUtilisateurController">
    <children>
-      <AnchorPane prefHeight="647.0" prefWidth="284.0" style="-fx-background-color: #FAD5A5;">
-         <children>
-            <VBox layoutX="30.0" layoutY="246.0" prefHeight="304.0" prefWidth="173.0">
-               <children>
-                  <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#AfficherAccueil" prefHeight="67.0" prefWidth="200.0" style="-fx-background-color: Transparent;" styleClass="menuButton" stylesheets="@authentification.css" text="Accueil">
-                     <padding>
-                        <Insets left="50.0" />
-                     </padding>
-                     <font>
-                        <Font size="19.0" />
-                     </font>
-                  </Button>
-                  <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#AfficherReclamation" prefHeight="67.0" prefWidth="252.0" style="-fx-background-color: Transparent;" styleClass="menuButton" stylesheets="@authentification.css" text="Reclamation">
-                     <padding>
-                        <Insets left="50.0" />
-                     </padding>
-                     <font>
-                        <Font size="19.0" />
-                     </font>
-                  </Button>
-                  <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#AfficherUtilisateur" prefHeight="67.0" prefWidth="189.0" style="-fx-background-color: Transparent;" styleClass="menuButton" stylesheets="@authentification.css" text="Utilisateurs">
-                     <padding>
-                        <Insets left="50.0" />
-                     </padding>
-                     <font>
-                        <Font size="19.0" />
-                     </font>
-                  </Button>
-               </children>
-            </VBox>
-            <ImageView fitHeight="84.0" fitWidth="252.0" layoutX="17.0" layoutY="117.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@images/logoo.png" />
-               </image>
-            </ImageView>
-            <Button alignment="BASELINE_LEFT" layoutX="1.0" layoutY="576.0" mnemonicParsing="false" onAction="#logout" prefHeight="67.0" prefWidth="252.0" style="-fx-background-color: Transparent;" styleClass="menuButton" stylesheets="@authentification.css" text="Déconnexion">
-               <padding>
-                  <Insets left="50.0" />
-               </padding>
-               <font>
-                  <Font size="19.0" />
-               </font>
-            </Button>
-            <ImageView fitHeight="29.0" fitWidth="26.0" layoutX="17.0" layoutY="263.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@images/home.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="29.0" fitWidth="26.0" layoutX="17.0" layoutY="335.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@images/notes.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="29.0" fitWidth="26.0" layoutX="17.0" layoutY="398.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@images/group.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="29.0" fitWidth="26.0" layoutX="17.0" layoutY="597.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@images/logout.png" />
-               </image>
-            </ImageView>
-            <Separator layoutX="-30.0" layoutY="571.0" prefHeight="2.0" prefWidth="316.0" />
-         </children>
-      </AnchorPane>
-      <Label alignment="BOTTOM_LEFT" layoutX="474.0" layoutY="14.0" prefHeight="65.0" prefWidth="418.0" text="Liste des utilisateurs">
+      <Label alignment="BOTTOM_LEFT" layoutX="274.0" layoutY="14.0" prefHeight="65.0" prefWidth="418.0" text="Liste des utilisateurs">
          <font>
-            <Font name="System Bold Italic" size="30.0" />
+            <Font name="System Bold Italic" size="37.0" />
          </font>
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </padding>
       </Label>
-      <TableView fx:id="tableList" layoutX="306.0" layoutY="137.0" onMouseClicked="#clickItem" prefHeight="418.0" prefWidth="669.0">
+      <TableView fx:id="tableList" layoutX="20.0" layoutY="160.0" onMouseClicked="#clickItem" prefHeight="400.0" prefWidth="810.0">
         <columns>
-          <TableColumn fx:id="colNom" prefWidth="75.0" text="Nom" />
-          <TableColumn fx:id="colPrenom" prefWidth="95.0" text="Prenom" />
-            <TableColumn fx:id="colUsername" prefWidth="97.0" text="Username" />
-            <TableColumn fx:id="colEmail" prefWidth="153.0" text="Email" />
-            <TableColumn fx:id="colDate" prefWidth="124.0" text="Date d'inscription" />
-            <TableColumn fx:id="colEtat" prefWidth="107.0" text="Etat" />
+          <TableColumn fx:id="colNom" prefWidth="95.0" text="Nom" />
+          <TableColumn fx:id="colPrenom" prefWidth="115.0" text="Prenom" />
+            <TableColumn fx:id="colUsername" prefWidth="133.0" text="Username" />
+            <TableColumn fx:id="colEmail" prefWidth="127.0" text="Email" />
+            <TableColumn fx:id="colDate" prefWidth="210.0" text="Date d'inscription" />
+            <TableColumn fx:id="colEtat" prefWidth="129.0" text="Etat" />
         </columns>
       </TableView>
-      <Button layoutX="422.0" layoutY="571.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="200.0" styleClass="buttonItem" stylesheets="@authentification.css" text="Modifier" />
-      <Button layoutX="714.0" layoutY="571.0" mnemonicParsing="false" onAction="#supprimerUtilisateur" prefHeight="40.0" prefWidth="200.0" styleClass="buttonItem" stylesheets="@authentification.css" text="Supprimer" />
-      <Button fx:id="bloquer" layoutX="422.0" layoutY="571.0" mnemonicParsing="false" onAction="#bloquer" prefHeight="40.0" prefWidth="200.0" styleClass="buttonItem" stylesheets="@authentification.css" text="Bloquer" />
-      <Button fx:id="debloquer" layoutX="422.0" layoutY="571.0" mnemonicParsing="false" onAction="#debloquer" prefHeight="40.0" prefWidth="200.0" styleClass="buttonItem" stylesheets="@authentification.css" text="Debloquer" />
-      <TextField fx:id="Recherche" layoutX="673.0" layoutY="79.0" onKeyReleased="#Recherche" prefHeight="25.0" prefWidth="252.0" promptText="Recherche..." />
-      <ImageView fitHeight="25.0" fitWidth="19.0" layoutX="943.0" layoutY="82.0" onMouseClicked="#Refresh" pickOnBounds="true" preserveRatio="true">
+      <Button layoutX="186.0" layoutY="584.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="200.0" styleClass="buttonItem" stylesheets="@authentification.css" text="Modifier" />
+      <Button layoutX="469.0" layoutY="584.0" mnemonicParsing="false" onAction="#supprimerUtilisateur" prefHeight="40.0" prefWidth="200.0" styleClass="buttonItem" stylesheets="@authentification.css" text="Supprimer" />
+      <Button fx:id="bloquer" layoutX="186.0" layoutY="584.0" mnemonicParsing="false" onAction="#bloquer" prefHeight="40.0" prefWidth="200.0" styleClass="buttonItem" stylesheets="@authentification.css" text="Bloquer" />
+      <Button fx:id="debloquer" layoutX="186.0" layoutY="584.0" mnemonicParsing="false" onAction="#debloquer" prefHeight="40.0" prefWidth="200.0" styleClass="buttonItem" stylesheets="@authentification.css" text="Debloquer" />
+      <TextField fx:id="Recherche" layoutX="535.0" layoutY="99.0" onKeyReleased="#Recherche" prefHeight="25.0" prefWidth="252.0" promptText="Recherche..." />
+      <ImageView fitHeight="25.0" fitWidth="19.0" layoutX="796.0" layoutY="102.0" onMouseClicked="#Refresh" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/refresh.png" />
          </image>
       </ImageView>
-      <MenuButton fx:id="menuButton" layoutX="313.0" layoutY="89.0" mnemonicParsing="false" onAction="#Trier" prefHeight="25.0" prefWidth="145.0" text="Trier">
+      <MenuButton fx:id="menuButton" layoutX="40.0" layoutY="79.0" mnemonicParsing="false" onAction="#Trier" prefHeight="25.0" prefWidth="145.0" text="Trier">
         <items>
           <MenuItem fx:id="trierNom" mnemonicParsing="false" onAction="#trierNom" text="Trier par nom" />
           <MenuItem fx:id="tierDate" mnemonicParsing="false" onAction="#trierDate" text="Trier par date" />

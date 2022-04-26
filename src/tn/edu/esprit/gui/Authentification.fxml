@@ -10,58 +10,58 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="542.0" prefWidth="879.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.edu.esprit.gui.AuthentificationController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1005.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.edu.esprit.gui.AuthentificationController">
    <children>
-      <AnchorPane prefHeight="542.0" prefWidth="406.0" style="-fx-background-color: #FAD5A5;">
+      <AnchorPane prefHeight="750.0" prefWidth="386.0" style="-fx-background-color: #FAD5A5;">
          <children>
-            <ImageView fitHeight="230.0" fitWidth="330.0" layoutX="31.0" layoutY="212.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="135.0" fitWidth="351.0" layoutX="25.0" layoutY="311.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/logoo.png" />
                </image>
             </ImageView>
-            <Label layoutX="76.0" layoutY="313.0" prefHeight="17.0" prefWidth="287.0" text="La meilleure solution pour votre restaurant">
+            <Label layoutX="77.0" layoutY="427.0" prefHeight="17.0" prefWidth="287.0" text="La meilleure solution pour votre restaurant">
                <font>
                   <Font name="System Bold Italic" size="12.0" />
                </font>
             </Label>
-            <ImageView fitHeight="70.0" fitWidth="59.0" layoutX="160.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="70.0" fitWidth="59.0" layoutX="161.0" layoutY="127.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/restaurant.png" />
                </image>
             </ImageView>
          </children>
       </AnchorPane>
-      <Label layoutX="472.0" layoutY="32.0" prefHeight="70.0" prefWidth="361.0" text="Authentification">
+      <Label layoutX="513.0" layoutY="77.0" prefHeight="70.0" prefWidth="361.0" text="Authentification">
          <font>
             <Font name="Arial" size="46.0" />
          </font>
       </Label>
-      <TextField fx:id="tfUsername" layoutX="509.0" layoutY="169.0" prefHeight="37.0" prefWidth="268.0" promptText="Username" style="-fx-background-color: transparent; -fx-border-color: orange; -fx-border-width: 0px 0px 2px 0px;" />
-      <Button layoutX="505.0" layoutY="363.0" mnemonicParsing="false" onAction="#Authentification" prefHeight="37.0" prefWidth="276.0" styleClass="buttonItem" stylesheets="@authentification.css" text="Connexion">
+      <TextField fx:id="tfUsername" layoutX="559.0" layoutY="267.0" prefHeight="37.0" prefWidth="268.0" promptText="Username" style="-fx-background-color: transparent; -fx-border-color: orange; -fx-border-width: 0px 0px 2px 0px;" />
+      <Button layoutX="548.0" layoutY="460.0" mnemonicParsing="false" onAction="#Authentification" prefHeight="37.0" prefWidth="276.0" styleClass="buttonItem" stylesheets="@authentification.css" text="Connexion">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
-      <Hyperlink layoutX="582.0" layoutY="417.0" onAction="#OubliPass" text="Mot de passe oublié?" />
-      <Button layoutX="643.0" layoutY="484.0" mnemonicParsing="false" onAction="#AfficherInscription" styleClass="buttonItem" stylesheets="@authentification.css" text="Créer un nouveau compte">
+      <Hyperlink layoutX="625.0" layoutY="513.0" onAction="#OubliPass" text="Mot de passe oublié?" />
+      <Button layoutX="723.0" layoutY="620.0" mnemonicParsing="false" onAction="#AfficherInscription" prefHeight="27.0" prefWidth="217.0" styleClass="buttonItem" stylesheets="@authentification.css" text="Créer un nouveau compte">
          <font>
             <Font size="15.0" />
          </font>
       </Button>
-      <ImageView fitHeight="44.0" fitWidth="37.0" layoutX="468.0" layoutY="169.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="44.0" fitWidth="37.0" layoutX="518.0" layoutY="267.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/user.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="37.0" fitWidth="42.0" layoutX="468.0" layoutY="253.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="37.0" fitWidth="42.0" layoutX="518.0" layoutY="351.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/lock.png" />
          </image>
       </ImageView>
-      <Label layoutX="430.0" layoutY="494.0" prefHeight="20.0" prefWidth="217.0" text="Vous n'etes pas encore inscrit?">
+      <Label layoutX="455.0" layoutY="629.0" prefHeight="20.0" prefWidth="217.0" text="Vous n'etes pas encore inscrit?">
          <font>
             <Font size="14.0" />
          </font></Label>
-      <PasswordField fx:id="tfPassword" layoutX="509.0" layoutY="263.0" prefHeight="25.0" prefWidth="268.0" promptText="Mot de passe" style="-fx-background-color: transparent; -fx-border-color: orange; -fx-border-width: 0px 0px 2px 0px;" />
+      <PasswordField fx:id="tfPassword" layoutX="559.0" layoutY="361.0" prefHeight="25.0" prefWidth="268.0" promptText="Mot de passe" style="-fx-background-color: transparent; -fx-border-color: orange; -fx-border-width: 0px 0px 2px 0px;" />
    </children>
 </AnchorPane>

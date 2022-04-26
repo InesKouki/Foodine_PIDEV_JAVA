@@ -55,21 +55,7 @@ public class AjouterReclamationController implements Initializable {
 
     }    
 
-    
-
-    @FXML
-    private void AfficherAccueil(ActionEvent event) {
-    }
-
-    @FXML
-    private void AfficherProfile(ActionEvent event) throws IOException {
-          FXMLLoader  loader = new FXMLLoader(getClass().getResource("ProfileClient.fxml"));
-            Parent root = loader.load();
-            tfDescription.getScene().setRoot(root);
-            ProfileClientController ac = loader.getController();
-
-    }
-
+  
 
     @FXML
     private void Ajout(ActionEvent event) {
@@ -117,20 +103,4 @@ public class AjouterReclamationController implements Initializable {
 
     }
 
-    @FXML
-    private void logout(ActionEvent event) throws IOException {
-         FXMLLoader  loader = new FXMLLoader(getClass().getResource("Authentification.fxml"));
-            Parent root = loader.load();
-            tfDescription.getScene().setRoot(root);
-            AuthentificationController ac = loader.getController();
-    }
-
-    @FXML
-    private void AfficherReclamation(ActionEvent event) throws IOException {
-          FXMLLoader  loader = new FXMLLoader(getClass().getResource("AjouterReclamation.fxml"));
-            Parent root = loader.load();
-            tfDescription.getScene().setRoot(root);
-           AjouterReclamationController ac = loader.getController();
-    }
-    
 }

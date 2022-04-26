@@ -87,38 +87,12 @@ public class AfficherUtilisateurController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
-        
-        
-        
-         debloquer.setVisible(false);
+        debloquer.setVisible(false);
         bloquer.setVisible(false);
         showList();
         
     } 
-    
-   
 
-    @FXML
-    private void AfficherAccueil(ActionEvent event) throws IOException {
-    }
-
-    @FXML
-    private void AfficherReclamation(ActionEvent event) throws IOException {
-         FXMLLoader  loader = new FXMLLoader(getClass().getResource("AfficherReclamation.fxml"));
-            Parent root = loader.load();
-            tableList.getScene().setRoot(root);
-           AfficherReclamationController ac = loader.getController();
-    }
-
-    @FXML
-    private void AfficherUtilisateur(ActionEvent event) throws IOException {
-        FXMLLoader  loader = new FXMLLoader(getClass().getResource("AfficherUtilisateur.fxml"));
-            Parent root = loader.load();
-            tableList.getScene().setRoot(root);
-            AfficherUtilisateurController ac = loader.getController();
-        
-        
-    }
        public void showList(){
             colNom.setCellValueFactory(new PropertyValueFactory<User, String>("nom"));
             colPrenom.setCellValueFactory(new PropertyValueFactory<User, String>("prenom"));
@@ -132,13 +106,7 @@ public class AfficherUtilisateurController implements Initializable {
             
     }
 
-    @FXML
-    private void logout(ActionEvent event) throws IOException {
-        FXMLLoader  loader = new FXMLLoader(getClass().getResource("Authentification.fxml"));
-            Parent root = loader.load();
-            tableList.getScene().setRoot(root);
-            AuthentificationController ac = loader.getController();
-    }
+   
 
     @FXML
     private void supprimerUtilisateur(ActionEvent event) {
@@ -147,7 +115,7 @@ public class AfficherUtilisateurController implements Initializable {
         Alert alert = new Alert(type,"");
         alert.initModality(Modality.APPLICATION_MODAL);
         alert.initOwner(stage);
-        alert.getDialogPane().setContentText("Voulez vous vraiment supprimer cette reclamation?");
+        alert.getDialogPane().setContentText("Voulez vous vraiment supprimer cet utilisateur?");
         alert.getDialogPane().setHeaderText("Suppression");
         Optional<ButtonType> result=alert.showAndWait();
         if (result.get()==ButtonType.OK){
@@ -175,9 +143,8 @@ public class AfficherUtilisateurController implements Initializable {
     
       private void refresh() {
            list.clear();
-            
-           showList();
-              debloquer.setVisible(false);
+            showList();
+            debloquer.setVisible(false);
             bloquer.setVisible(false);
         
     }
@@ -197,8 +164,6 @@ public class AfficherUtilisateurController implements Initializable {
     {
         ServiceUtilisateur SV = new ServiceUtilisateur();
        SV.supprimer(tableList.getSelectionModel().getSelectedItem().getId());
-       
-       
             }
 
     @FXML
@@ -206,11 +171,8 @@ public class AfficherUtilisateurController implements Initializable {
          ServiceUtilisateur SV = new ServiceUtilisateur();
          System.out.println(tableList.getSelectionModel().getSelectedItem().getId());
        SV.bloquer(tableList.getSelectionModel().getSelectedItem().getId());
+            refresh();
       
-       FXMLLoader  loader = new FXMLLoader(getClass().getResource("AfficherUtilisateur.fxml"));
-            Parent root = loader.load();
-            tableList.getScene().setRoot(root);
-            AfficherUtilisateurController ac = loader.getController();
             Notifications notificationBuilder = Notifications.create()
                     .title("Bloquage")
                     .text("Utilisateur bloqué")
@@ -227,25 +189,13 @@ public class AfficherUtilisateurController implements Initializable {
     }
 
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
     @FXML
     private void debloquer(ActionEvent event) throws IOException {
          ServiceUtilisateur SV = new ServiceUtilisateur();
           System.out.println(tableList.getSelectionModel().getSelectedItem().getId());
             SV.debloquer(tableList.getSelectionModel().getSelectedItem().getId());
             
-        FXMLLoader  loader = new FXMLLoader(getClass().getResource("AfficherUtilisateur.fxml"));
-            Parent root = loader.load();
-            tableList.getScene().setRoot(root);
-            AfficherUtilisateurController ac = loader.getController();
+       refresh();
             Notifications notificationBuilder = Notifications.create()
                     .title("Débloquage")
                     .text("Utilisateur debloqué")

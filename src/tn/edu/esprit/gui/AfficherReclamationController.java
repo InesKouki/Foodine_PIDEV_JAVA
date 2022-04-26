@@ -83,37 +83,6 @@ private AnchorPane myAnchorePane;
         
     }    
 
-    @FXML
-    private void AfficherAccueil(ActionEvent event) throws IOException {
-       
-    }
-
-    @FXML
-    private void AfficherReclamation(ActionEvent event) throws IOException {
-         FXMLLoader  loader = new FXMLLoader(getClass().getResource("AfficherReclamation.fxml"));
-            Parent root = loader.load();
-            listRec.getScene().setRoot(root);
-            AfficherReclamationController ac = loader.getController();
-        
-    }
-
-    @FXML
-    private void AfficherUtilisateur(ActionEvent event) throws IOException {
-         FXMLLoader  loader = new FXMLLoader(getClass().getResource("AfficherUtilisateur.fxml"));
-            Parent root = loader.load();
-            listRec.getScene().setRoot(root);
-            AfficherUtilisateurController ac = loader.getController();
-    }
-
-    @FXML
-    private void logout(ActionEvent event) throws IOException {
-         FXMLLoader  loader = new FXMLLoader(getClass().getResource("Authentification.fxml"));
-            Parent root = loader.load();
-            listRec.getScene().setRoot(root);
-            AuthentificationController ac = loader.getController();
-    }
-
-    
       public void showList(){
            // colNom.setCellValueFactory(new PropertyValueFactory<Reclamation, String>("u.nom"));
             colType.setCellValueFactory(new PropertyValueFactory<Reclamation, String>("type"));
@@ -129,7 +98,6 @@ private AnchorPane myAnchorePane;
     
       private void refresh() {
            list.clear();
-            
            list=sv.getAll();
              System.out.println(list);
              listRec.setItems(list);
@@ -168,14 +136,8 @@ private AnchorPane myAnchorePane;
             delete();
         listRec.getItems().removeAll(listRec.getSelectionModel().getSelectedItem());
         System.out.println(listRec);
-       FXMLLoader  loader = new FXMLLoader(getClass().getResource("AfficherReclamation.fxml"));
-            Parent root = loader.load();
-            listRec.getScene().setRoot(root);
-            AfficherReclamationController ac = loader.getController();
-            
-            
-            
-            
+       refresh();
+     
             Notifications notificationBuilder = Notifications.create()
                     .title("Suppression effectuée")
                     .text("Reclamation supprimée")
@@ -203,10 +165,8 @@ private AnchorPane myAnchorePane;
         
          ServiceReclamation SV = new ServiceReclamation();
        SV.traiter(listRec.getSelectionModel().getSelectedItem().getId());
-        FXMLLoader  loader = new FXMLLoader(getClass().getResource("AfficherReclamation.fxml"));
-            Parent root = loader.load();
-            listRec.getScene().setRoot(root);
-            AfficherReclamationController ac = loader.getController();
+       refresh();
+           
             Notifications notificationBuilder = Notifications.create()
                     .title("Traiter Reclamation")
                     .text("Reclamation traité avec succes")

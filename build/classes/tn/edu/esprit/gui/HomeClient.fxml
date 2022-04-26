@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="1005.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="tn.edu.esprit.gui.HomeClientController">
+   <children>
+      <ImageView fitHeight="27.0" fitWidth="28.0" layoutX="1147.0" layoutY="22.0" onMouseClicked="#logout" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/delete.png" />
+         </image>
+      </ImageView>
+      <AnchorPane fx:id="anchor" prefHeight="803.0" prefWidth="347.0" style="-fx-background-color: #FAD5A5;">
+         <children>
+            <VBox layoutX="46.0" layoutY="232.0" prefHeight="512.0" prefWidth="216.0" spacing="10.0">
+               <children>
+                  <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#Home" prefHeight="25.0" prefWidth="199.0" style="-fx-background-color: transparent;" text="Accueil">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Button>
+                  <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#AfficherReclamation" prefHeight="25.0" prefWidth="199.0" style="-fx-background-color: transparent;" text="Reclamations">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#Profile" prefHeight="25.0" prefWidth="199.0" style="-fx-background-color: transparent;" text="Profile">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#AfficherProduit" prefHeight="25.0" prefWidth="199.0" style="-fx-background-color: transparent;" text="Produits">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#AfficherCatégories" prefHeight="25.0" prefWidth="199.0" style="-fx-background-color: transparent;" text="Catégories">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#AfficherEvenement" prefHeight="25.0" prefWidth="199.0" style="-fx-background-color: transparent;" text="Evénements">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#AfficherPromotion" prefHeight="25.0" prefWidth="199.0" style="-fx-background-color: transparent;" text="Promotions">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#AfficherRecette" prefHeight="25.0" prefWidth="199.0" style="-fx-background-color: transparent;" text="Recettes">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#AfficherPlanning" prefHeight="25.0" prefWidth="199.0" style="-fx-background-color: transparent;" text="Planning">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#AfficherReservation" prefHeight="25.0" prefWidth="199.0" style="-fx-background-color: transparent;" text="Réservations">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+               </children>
+               <padding>
+                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+               </padding>
+            </VBox>
+            <ImageView fitHeight="123.0" fitWidth="310.0" layoutX="19.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/logoo.png" />
+               </image>
+            </ImageView>
+            <VBox layoutY="245.0" prefHeight="490.0" prefWidth="58.0" spacing="25.0">
+               <children>
+                  <ImageView fitHeight="24.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/home.png" />
+                     </image>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </ImageView>
+                  <ImageView fitHeight="24.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/notes.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="24.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/group.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="24.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/prod.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="24.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/category.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="24.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/booking.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="24.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/coupon.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="24.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/receipt.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="24.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/task.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="24.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/reserve.png" />
+                     </image>
+                  </ImageView>
+               </children>
+               <padding>
+                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+               </padding>
+            </VBox>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="anchorPane" layoutX="347.0" layoutY="113.0" prefHeight="690.0" prefWidth="850.0" />
+   </children>
+</AnchorPane>

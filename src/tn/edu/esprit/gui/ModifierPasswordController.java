@@ -22,6 +22,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
 import tn.edu.esprit.entities.Client;
@@ -55,11 +56,7 @@ public class ModifierPasswordController implements Initializable {
             AuthentificationController ac = loader.getController();
     }
 
-    @FXML
-    private void AfficherAccueil(ActionEvent event) {
-    }
 
-    @FXML
    private void AfficherProfile(ActionEvent event) throws IOException {
         FXMLLoader  loader = new FXMLLoader(getClass().getResource("ProfileClient.fxml"));
             Parent root = loader.load();
@@ -160,7 +157,6 @@ StringBuilder finalresult;
         }
     }
 
-    @FXML
     private void logout(ActionEvent event) throws IOException {
         FXMLLoader  loader = new FXMLLoader(getClass().getResource("ModifierPassword.fxml"));
             Parent root = loader.load();
@@ -168,12 +164,15 @@ StringBuilder finalresult;
            ModifierPasswordController ac = loader.getController();
     }
 
-    @FXML
     private void AfficherReclamation(ActionEvent event) throws IOException {
          FXMLLoader  loader = new FXMLLoader(getClass().getResource("AjouterReclamation.fxml"));
             Parent root = loader.load();
             tfConfirmPass.getScene().setRoot(root);
            AjouterReclamationController ac = loader.getController();
+    }
+
+    @FXML
+    private void Home(MouseEvent event) {
     }
     
 }
