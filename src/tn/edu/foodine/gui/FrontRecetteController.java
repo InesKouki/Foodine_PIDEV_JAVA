@@ -32,8 +32,6 @@ import tn.edu.foodine.services.ServiceRecette;
  */
 public class FrontRecetteController implements Initializable {
     String up = "C:\\Users\\PC\\Desktop\\Mobile\\Foodine_PIDEV_Desktop\\src\\img\\";
-    @FXML
-    private TilePane tilePane;
     
     @FXML
     private GridPane RecetteContainer;
@@ -54,13 +52,13 @@ public class FrontRecetteController implements Initializable {
                 EventItemController itemController = fxmlLoader.getController();
                 itemController.setData(event);
 
-                if (col == 4) {
+                if (col == 3) {
                     col = 0;
                     row++;
                 }
 
            RecetteContainer.add(itemBox,col++,row);
-            GridPane.setMargin(itemBox, new Insets(30));
+           GridPane.setMargin(itemBox, new Insets(30));
                 
             }
         } catch (IOException ex) {
