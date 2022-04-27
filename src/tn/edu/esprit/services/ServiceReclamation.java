@@ -67,10 +67,10 @@ Connection cnx = DataSource.getInstance().getCnx();
     public void repondre(Reponse r){
         try {
             String req = "INSERT INTO `reponse` (`recla_id`, `message`) VALUES ('" + r.getId_rec()+ "', '" + r.getMessage()+"')";
-            String req1 = "UPDATE `reclamation` SET `etat` = '"+1 + "' WHERE `reclamation`.`id` = " + r.getId_rec();
+            //String req1 = "UPDATE `reclamation` SET `etat` = '"+1 + "' WHERE `reclamation`.`id` = " + r.getId_rec();
             Statement st = cnx.createStatement();
+            //st.executeUpdate(req1);
             st.executeUpdate(req);
-            st.executeUpdate(req1);
             System.out.println("Reponse ajoutée !");
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());

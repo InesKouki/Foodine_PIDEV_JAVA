@@ -27,6 +27,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.InputMethodEvent;
@@ -36,6 +37,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.controlsfx.control.Notifications;
 import tn.edu.esprit.entities.Reclamation;
+import tn.edu.esprit.entities.Reponse;
 import tn.edu.esprit.entities.User;
 import tn.edu.esprit.services.ServiceReclamation;
 
@@ -69,6 +71,8 @@ private AnchorPane myAnchorePane;
     private ChoiceBox<String> choicebox;
     @FXML
     private AnchorPane myAnchorPane;
+    @FXML
+    private TextArea tfText;
     /**
      * Initializes the controller class.
      */
@@ -77,6 +81,7 @@ private AnchorPane myAnchorePane;
       showList();
       supprimer.setVisible(false);
         traiter.setVisible(false);
+        tfText.setVisible(false);
           System.out.println(System.getProperty("id"));
           ObservableList<String> list = FXCollections.observableArrayList("Trier par date ","Trier par type");
 //          choicebox.setItems(list);
@@ -166,7 +171,9 @@ private AnchorPane myAnchorePane;
          ServiceReclamation SV = new ServiceReclamation();
        SV.traiter(listRec.getSelectionModel().getSelectedItem().getId());
        refresh();
-           
+          /* Reponse r = new Reponse(listRec.getSelectionModel().getSelectedItem().getId(),tfText.getText());
+           SV.repondre(r);
+           System.out.println(r);*/
             Notifications notificationBuilder = Notifications.create()
                     .title("Traiter Reclamation")
                     .text("Reclamation traité avec succes")
@@ -187,8 +194,10 @@ private AnchorPane myAnchorePane;
         if (event.getClickCount() == 1) {
             if (listRec.getSelectionModel().getSelectedItem().getEtat()==0) {
                 traiter.setVisible(true);
+                tfText.setVisible(true);
                 supprimer.setVisible(false);
             } else {
+                tfText.setVisible(false);
                 traiter.setVisible(false);
                 supprimer.setVisible(true);
             }

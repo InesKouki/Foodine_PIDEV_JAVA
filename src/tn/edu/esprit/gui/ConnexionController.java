@@ -177,11 +177,11 @@ int random = (int)Math.floor(Math.random()*(max-min+1)+min);
         
         
         else {
-           /* Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
+            Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
             
             Message message = Message.creator(new PhoneNumber("\"+216"+tfPhone.getText()+"\""),
                     new PhoneNumber("+12395108595")
-                    ,"Utilisez ce code pour activer votre compte :"+random).create();*/
+                    ,"Utilisez ce code pour activer votre compte :"+random).create();
             long millis=System.currentTimeMillis();
             java.sql.Date date= new java.sql.Date(millis);
             ServiceUtilisateur su = new ServiceUtilisateur();

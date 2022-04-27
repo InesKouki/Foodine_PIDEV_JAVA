@@ -24,10 +24,11 @@ public class NewFXMain extends Application {
     
     @Override
     public void start(Stage primaryStage) throws IOException {
-       FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/Home.fxml"));
+       FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/home.fxml"));
        Parent root = loader.load();
        Scene scene = new Scene(root);
        primaryStage.setScene(scene);
+      // primaryStage.setMaximized(true);
        primaryStage.setTitle("Foodine-Gestion de Restaurant");
        primaryStage.show();
        
