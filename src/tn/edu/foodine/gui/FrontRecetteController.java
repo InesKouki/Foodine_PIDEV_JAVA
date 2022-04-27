@@ -9,10 +9,14 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -20,6 +24,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import tn.edu.foodine.entities.Planning;
 import tn.edu.foodine.entities.Recette;
 import tn.edu.foodine.services.ServicePlanning;
@@ -35,6 +40,8 @@ public class FrontRecetteController implements Initializable {
     
     @FXML
     private GridPane RecetteContainer;
+    @FXML
+    private Button retour;
     
     /**
      * Initializes the controller class.
@@ -63,6 +70,20 @@ public class FrontRecetteController implements Initializable {
             }
         } catch (IOException ex) {
         }}
+    Stage front = new Stage();
+    private Parent root;
+    @FXML
+    private void retour(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/AjouterPlanning.fxml"));
+        root = loader.load();
+        Scene scene = new Scene(root);
+        
+        front.setScene(scene);
+        front.setMaximized(true);
+        front.show();
+        Stage stage = (Stage) retour.getScene().getWindow();
+        stage.close();
+    }
       
     
 }
