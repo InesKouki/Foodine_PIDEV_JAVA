@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -29,11 +30,11 @@ public class MainClass {
         java.sql.Date d = new java.sql.Date(date.getTime());
         //Planning p =new Planning(31,"Plaaaan 88",d);
         ServicePlanning s=new ServicePlanning();
-        
+        s.getAll();
+        System.out.println(s);
       //  Recette r = new Recette("Rec1","Abdelaziz", "M","frfr",p);
      
         
-        ServiceRecette sp = new ServiceRecette();
         
         //sp.ajouter2(r);
         //sp.supprimer(88);
@@ -54,13 +55,9 @@ public class MainClass {
 
         java.sql.Date d = new java.sql.Date(date.getTime());
         Planning p =new Planning("noef",d);*/
-        /*ServiceRecette s=new ServiceRecette();
-*/
-    List<Recette> a =    sp.getAll();
-        System.out.println(a.size());
-        
-        for (Recette recette : a) {
-            System.out.println(recette.getNom());
-        }
+        ServiceRecette sr=new ServiceRecette();
+        sr.getAll();
+        System.out.println(sr);
+    
     
     }}

@@ -5,6 +5,8 @@
  */
 package tn.edu.foodine.gui;
 
+import com.barcodelib.barcode.a.g.m.s;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -14,6 +16,7 @@ import java.nio.channels.FileChannel;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 import javafx.collections.FXCollections;
@@ -44,6 +47,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import net.glxn.qrgen.QRCode;
+import net.glxn.qrgen.image.ImageType;
+import org.controlsfx.control.Rating;
 import tn.edu.foodine.entities.Planning;
 import tn.edu.foodine.entities.Recette;
 import tn.edu.foodine.services.ServicePlanning;
@@ -71,7 +77,7 @@ public class RecetteController implements Initializable {
     private String path = "", imgname = "", fn="";
 
     @FXML
-    private ComboBox<Planning> Planning;
+    private ComboBox<String> Planning;
     ObservableList<Recette> list;
     ObservableList<Recette> temp = FXCollections.observableArrayList();
     
@@ -89,7 +95,7 @@ public class RecetteController implements Initializable {
     @FXML
     private TableColumn<Recette, String> Col_img;
     @FXML
-    private TableColumn<Recette, Integer> Col_planning;
+    private TableColumn<Recette, Planning> Col_planning;
     @FXML
     private Button ModifierRecette;
     @FXML
@@ -102,7 +108,7 @@ public class RecetteController implements Initializable {
     private Button reset;
     @FXML
     private TextField keywordTextField;
-
+    ServicePlanning sp =new ServicePlanning();
     /**
      * Initializes the controller class.
      */
@@ -133,7 +139,7 @@ public class RecetteController implements Initializable {
         File dest = new File(dd);
         this.copyFile(f, dest);
 
-        System.out.println(dd);
+        //System.out.println(dd);
 
         image.setImage(new Image("file:" + dest.getAbsolutePath()));
 
@@ -158,28 +164,47 @@ public class RecetteController implements Initializable {
             Alert a = new Alert(Alert.AlertType.ERROR, "champs vide", ButtonType.OK);
             a.showAndWait();
         } else {
-            Planning p = Planning.getSelectionModel().getSelectedItem();
+           // Planning p = Planning.getSelectionModel().getSelectedItem();
             //pps.ajouter(new Produit(Nom_ProduitPlat.getText(),Prix.getText(), Desc_ProduitPlat.getText(),qte.getText()));
-            sr.ajouter(new Recette(Nom_Recette.getText(), Desc_Recette.getText(), imgname, ing_Recette.getText(), p));
+            sr.ajouter(new Recette(Nom_Recette.getText(), Desc_Recette.getText(), imgname, ing_Recette.getText(),sp.getNomPlanning(Planning.getValue())));
+            SendMail s=new SendMail();
+        s.mail();
             // pps.add(new Produit(Nom_ProduitPlat.getText(),Double.parseDouble(Prix.getText()),Integer.parseInt(qte.getText()),Desc_ProduitPlat.getText(),id));
             JOptionPane.showMessageDialog(null, "produit ajouté avec succés");
             refresh();
         }
+        
+        try {
 
+            ByteArrayOutputStream out = QRCode.from(Nom_Recette.getText())
+                    .to(ImageType.PNG).stream();
+
+            String f_name = Nom_Recette.getText();
+            String Path_name = "E:\\";
+
+            FileOutputStream fout = new FileOutputStream(new File(Path_name + (f_name + ".PNG")));
+            fout.write(out.toByteArray());
+            fout.flush();
+            Alert a = new Alert(Alert.AlertType.INFORMATION, "un QR-CODE a ete enregistrer dans votre PC sous votre nom contient tous les infomartions", ButtonType.OK);
+            a.showAndWait();
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 
     private void showPlanning() {
-        List<Planning> listC = new ServicePlanning().getAll();
-
-        ArrayList<Planning> libelles = new ArrayList<>();
-        for (Planning cat : listC) {
-            Planning Ocat = new Planning();
-            Ocat.setId(cat.getId());
-            Ocat.setId(cat.getId());
-            Ocat.setNom(cat.getNom());
-            libelles.add(Ocat);
-        }
-        ObservableList<Planning> choices = FXCollections.observableArrayList(libelles);
+        List<String> listC = new ServicePlanning().getAll1();
+        //System.out.println(listC);
+        ArrayList<String> libelles = new ArrayList<>();
+        /*for (String cat : listC) {
+            /*Planning Ocat = new Planning();
+            
+            Ocat.setNom(cat.getNom());*/
+        
+                //libelles.add(listC);
+             //   System.out.println(Planning.getValue());
+        ObservableList<String> choices = FXCollections.observableArrayList(listC);
         Planning.setItems(choices);
         
     }
@@ -188,20 +213,8 @@ public class RecetteController implements Initializable {
         list = sr.getAll();
         tvRecette.setItems(list);
     }
-
-    public void showRecette() {
-        
-        
-        Col_id.setCellValueFactory(new PropertyValueFactory<Recette, Integer>("id"));
-        Col_Nom.setCellValueFactory(new PropertyValueFactory<Recette, String>("nom"));
-        Col_Desc.setCellValueFactory(new PropertyValueFactory<Recette, String>("description"));
-        Col_img.setCellValueFactory(new PropertyValueFactory<Recette, String>("image"));
-        Col_ing.setCellValueFactory(new PropertyValueFactory<Recette, String>("ingredient"));
-        Col_planning.setCellValueFactory(new PropertyValueFactory<Recette, Integer>("planning"));
-        //list = sr.getAll();
-        temp = sr.getAll();
-        tvRecette.setItems(temp);
-        
+    @FXML
+    public void recherche(){
         FilteredList<Recette> filteredData=new FilteredList<>(temp,b->true);
         keywordTextField.textProperty().addListener((observable, oldValue, newValue) -> {
             filteredData.setPredicate(Recette->{
@@ -224,12 +237,28 @@ public class RecetteController implements Initializable {
             sortedDate.comparatorProperty().bind(tvRecette.comparatorProperty());
             tvRecette.setItems(sortedDate);
     }
+    public void showRecette() {
+        Col_id.setCellValueFactory(new PropertyValueFactory<Recette, Integer>("id"));
+        Col_Nom.setCellValueFactory(new PropertyValueFactory<Recette, String>("nom"));
+        Col_Desc.setCellValueFactory(new PropertyValueFactory<Recette, String>("description"));
+        Col_img.setCellValueFactory(new PropertyValueFactory<Recette, String>("image"));
+        Col_ing.setCellValueFactory(new PropertyValueFactory<Recette, String>("ingredient"));
+        Col_planning.setCellValueFactory(new PropertyValueFactory<Recette, Planning>("planning"));
+        temp = sr.getAll2();
+        System.out.println(temp);
+        tvRecette.setItems(temp);
+    }
 
     @FXML
     private void SupprimerRecette(ActionEvent event) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "");
+        alert.getDialogPane().setContentText("Voulez vous vraiment supprimer cette événement?");
+        alert.getDialogPane().setHeaderText("Suppression");
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK) { 
         Recette p = tvRecette.getSelectionModel().getSelectedItem();
         sr.supprimer(p.getId());
-        refresh();
+        refresh();}
     }
 
     @FXML
@@ -243,14 +272,14 @@ public class RecetteController implements Initializable {
         Nom_Recette.setText(r.getNom());
         Desc_Recette.setText(r.getDescription());
         ing_Recette.setText(r.getIngredient());
-        Planning.setValue(r.getPlanning());
+        Planning.setValue(r.getPlanning().getNom());
         Image im = new Image("file:///"+up +r.getImage());
         image.setImage(im);
         
     }
     private void refreshData() {
         temp.clear();
-        list = sr.getAll();
+        list = sr.getAll2();
         /*for (Recette e : list) {
             Image im = new Image("file:///"+ up  + e.getImage());
             ImageView iv = new ImageView(im);
@@ -276,7 +305,8 @@ public class RecetteController implements Initializable {
             Alert a = new Alert(Alert.AlertType.ERROR, "champs vide", ButtonType.OK);
             a.showAndWait();
         } else {
-            Recette p = new Recette(rId, Nom_Recette.getText(), Desc_Recette.getText(), fn, ing_Recette.getText(), Planning.getValue());
+            
+            Recette p = new Recette(rId, Nom_Recette.getText(), Desc_Recette.getText(), fn, ing_Recette.getText(), sp.getNomPlanning(Planning.getValue()));
             sr.modifier(p);
             refresh();
         }
@@ -307,6 +337,7 @@ public class RecetteController implements Initializable {
         AjouterRecette.setDisable(false);
         clear();
     }
+
     
 }
 

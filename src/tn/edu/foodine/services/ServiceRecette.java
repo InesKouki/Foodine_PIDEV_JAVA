@@ -96,4 +96,26 @@ public class ServiceRecette implements IService<Recette> {
         }
         return list;
     }
+    
+    
+    public ObservableList<Recette> getAll2() {
+        ObservableList<Recette> list = FXCollections.observableArrayList();
+        try {
+            String req = "Select r.*, p.nom,p.id from recette r, planning p where p.id = r.planningid_id";
+            Statement st = cnx.createStatement();
+            ResultSet rs = st.executeQuery(req);
+            while(rs.next()){
+                Planning p = new Planning(rs.getInt("p.id"), rs.getString("p.nom"));
+                Recette r = new Recette(rs.getInt("r.id"),rs.getString("r.nom"),rs.getString("r.description"),rs.getString("r.imagerecette"),rs.getString("r.ingredient"),p);
+                list.add(r);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return list;
+    }
+    /*public void rating(float rating,Recette r) throws SQLException{
+        String req = "UPDATE `recette` SET `nomUser` = '" + (r.getNbUser()+1) + "' `Rating` = '" + ((r.getRating()+rating)/r.getNbUser())+ "' WHERE `recette`.`id` = " + r.getId();
+        
+    }*/
 }

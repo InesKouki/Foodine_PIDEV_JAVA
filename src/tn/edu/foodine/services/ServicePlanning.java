@@ -93,4 +93,35 @@ public class ServicePlanning implements IService<Planning> {
 
         return list;
     }
+    public ObservableList<String> getAll1() {
+        ObservableList<String> list = FXCollections.observableArrayList();
+        try {
+            String req = "Select nom from planning";
+            Statement st = cnx.createStatement();
+            ResultSet rs = st.executeQuery(req);
+            while(rs.next()){
+                list.add(rs.getString("nom"));
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return list;
+    }
+    public Planning getNomPlanning(String nom) {
+       // List<Planning> list = new ArrayList();
+       Planning p=null;
+        try {
+            String req = "Select * from planning where nom='"+nom+"'";
+            Statement st = cnx.createStatement();
+            ResultSet rs = st.executeQuery(req);
+            while(rs.next()){
+                 p = new Planning(rs.getInt(1), rs.getDate(3), rs.getString(2));
+                //list.add(p);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return p;
+    }
 }

@@ -20,6 +20,8 @@ public class Recette {
     private String ingredient;
     private Planning planning;
     private ImageView iv;
+
+    
     
     public Recette(int id, String nom, String description, String image, String ingredient,Planning planning,ImageView iv) {
         this.id = id;
@@ -38,6 +40,16 @@ public class Recette {
         this.image = image;
         this.ingredient = ingredient;
         this.planning = planning;
+    }
+    
+    public Recette(int id, String nom, String description, String image, String ingredient,String nomp) {
+        this.id = id;
+        this.nom = nom;
+        this.description = description;
+        this.image = image;
+        this.ingredient = ingredient;
+        this.planning = planning;
+        this.nomp= nomp;
     }
 
     public Recette(String nom, String description, String image, String ingredient, Planning planning) {
@@ -115,8 +127,10 @@ public class Recette {
 
     @Override
     public String toString() {
-        return "Recette{" +  " nom=" + nom + ", description=" + description + ", image=" + image + ", ingredient=" + ingredient + ", planning=" + planning + '}';
+        return "Recette{" + "nom=" + nom + ", description=" + description + ", image=" + image + ", nomp=" + nomp + ", ingredient=" + ingredient + '}';
     }
+
+
     
 
     

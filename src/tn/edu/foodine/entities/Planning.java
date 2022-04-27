@@ -16,6 +16,10 @@ public class Planning {
     private Date date;
     private String nom;
 
+    public Planning(String nom) {
+        this.nom = nom;
+    }
+
     
 
     public Planning(int id, Date date, String nom) {
@@ -63,7 +67,7 @@ public class Planning {
 
     @Override
     public String toString() {
-        return  nom + "                "+ date ;
+        return String.valueOf(this.nom);
     }
 
     public int compareToIgnoreCase(Planning o2) {

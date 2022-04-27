@@ -115,6 +115,6 @@
          </font>
       </Label>
       <Label layoutX="672.0" layoutY="365.0" text="Recherche" />
-      <TextField fx:id="keywordTextField" layoutX="742.0" layoutY="361.0" />
+      <TextField fx:id="keywordTextField" layoutX="742.0" layoutY="361.0" onKeyTyped="#recherche" />
    </children>
 </AnchorPane>

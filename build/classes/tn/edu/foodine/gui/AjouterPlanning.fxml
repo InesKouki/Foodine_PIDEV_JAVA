@@ -5,8 +5,6 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
@@ -18,36 +16,29 @@
 
 <AnchorPane id="AnchorPane" prefHeight="794.0" prefWidth="1533.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.edu.foodine.gui.AjouterPlanningController">
    <children>
-      <Label layoutX="343.0" layoutY="118.0" text="Nom :">
+      <Label layoutX="343.0" layoutY="128.0" text="Nom :">
          <font>
             <Font name="System Bold" size="20.0" />
          </font></Label>
-      <Label layoutX="341.0" layoutY="171.0" prefHeight="30.0" prefWidth="148.0" text="Date Planning :">
+      <Label layoutX="341.0" layoutY="181.0" prefHeight="30.0" prefWidth="148.0" text="Date Planning :">
          <font>
             <Font name="Century Gothic Bold" size="20.0" />
          </font></Label>
-      <TextField fx:id="tfNom" layoutX="557.0" layoutY="121.0" prefHeight="12.0" prefWidth="235.0" />
-      <Button fx:id="btn" layoutX="419.0" layoutY="238.0" mnemonicParsing="false" onAction="#ajouterPlanning" prefHeight="35.0" prefWidth="107.0" style="-fx-background-color: #FAD5A5;" text="Ajouter">
+      <TextField fx:id="tfNom" layoutX="604.0" layoutY="131.0" prefHeight="12.0" prefWidth="235.0" />
+      <Button fx:id="btn" layoutX="480.0" layoutY="268.0" mnemonicParsing="false" onAction="#ajouterPlanning" prefHeight="35.0" prefWidth="107.0" style="-fx-background-color: #FAD5A5;" text="Ajouter">
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Button>
-      <DatePicker fx:id="dtDate" layoutX="557.0" layoutY="174.0" prefHeight="12.0" prefWidth="235.0" />
-      <TableView fx:id="tvPlanning" editable="true" layoutX="226.0" layoutY="286.0" onMouseClicked="#rowClicked" prefHeight="291.0" prefWidth="481.0">
-        <columns>
-            <TableColumn fx:id="colId" prefWidth="75.0" text="id" visible="false" />
-          <TableColumn fx:id="colNom" prefWidth="240.0" text="Nom" />
-          <TableColumn fx:id="colDate" prefWidth="240.0" text="Date" />
-        </columns>
-      </TableView>
-      <Button fx:id="btn2" disable="true" layoutX="567.0" layoutY="238.0" mnemonicParsing="false" onAction="#updatePlanning" prefHeight="35.0" prefWidth="107.0" style="-fx-background-color: #FAD5A5;" text="Modifier">
+      <DatePicker fx:id="dtDate" layoutX="604.0" layoutY="184.0" prefHeight="12.0" prefWidth="235.0" />
+      <Button fx:id="btn2" disable="true" layoutX="608.0" layoutY="268.0" mnemonicParsing="false" onAction="#updatePlanning" prefHeight="35.0" prefWidth="107.0" style="-fx-background-color: #FAD5A5;" text="Modifier">
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Button>
-      <Button fx:id="btn3" disable="true" layoutX="707.0" layoutY="238.0" mnemonicParsing="false" onAction="#supprimerPlanning" prefHeight="35.0" prefWidth="107.0" style="-fx-background-color: #FAD5A5;" text="Supprimer">
+      <Button fx:id="btn3" disable="true" layoutX="733.0" layoutY="268.0" mnemonicParsing="false" onAction="#supprimerPlanning" prefHeight="35.0" prefWidth="107.0" style="-fx-background-color: #FAD5A5;" text="Supprimer">
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Button>
-      <Button fx:id="reset" layoutX="831.0" layoutY="238.0" mnemonicParsing="false" onAction="#reset" prefHeight="35.0" prefWidth="107.0" style="-fx-background-color: #FAD5A5;" text="Réinitialiser">
+      <Button fx:id="reset" layoutX="856.0" layoutY="268.0" mnemonicParsing="false" onAction="#reset" prefHeight="35.0" prefWidth="107.0" style="-fx-background-color: #FAD5A5;" text="Réinitialiser">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
@@ -94,17 +85,23 @@
             <Font name="Century Gothic Bold" size="30.0" />
          </font>
       </Label>
-      <Button fx:id="pdf" layoutX="288.0" layoutY="238.0" mnemonicParsing="false" onAction="#Pdf" prefHeight="35.0" prefWidth="107.0" style="-fx-background-color: #FAD5A5;" text="PDF">
+      <Button fx:id="pdf" layoutX="733.0" layoutY="367.0" mnemonicParsing="false" onAction="#Pdf" prefHeight="35.0" prefWidth="67.0" style="-fx-background-color: transparent;">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
+         <graphic>
+            <ImageView fitHeight="26.0" fitWidth="26.0" onMouseClicked="#Pdf">
+               <image>
+                  <Image url="@image/pdf%20(2).png" />
+               </image>
+            </ImageView>
+         </graphic>
       </Button>
-      <ListView fx:id="ListView" layoutX="950.0" layoutY="273.0" prefHeight="383.0" prefWidth="340.0">
+      <ListView fx:id="ListView" layoutX="552.0" layoutY="407.0" onMouseClicked="#rowClicked1" prefHeight="287.0" prefWidth="340.0">
          <effect>
             <DropShadow />
          </effect>
       </ListView>
-      <ComboBox fx:id="cbox" layoutX="1082.0" layoutY="60.0" onAction="#select" prefWidth="150.0" />
-      <Button fx:id="btnlien" layoutX="859.0" layoutY="565.0" mnemonicParsing="false" onAction="#openlink1" text="Button" />
+      <ComboBox fx:id="cbox" layoutX="797.0" layoutY="372.0" onAction="#select" prefHeight="25.0" prefWidth="95.0" />
    </children>
 </AnchorPane>

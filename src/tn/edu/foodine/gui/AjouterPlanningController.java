@@ -5,6 +5,10 @@
  */
 package tn.edu.foodine.gui;
 
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.WriterException;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.oned.EAN13Writer;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
@@ -63,6 +67,7 @@ import java.util.Comparator;
 import static java.util.Comparator.reverseOrder;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import javafx.collections.transformation.SortedList;
 import javafx.scene.control.ComboBox;
@@ -88,14 +93,6 @@ public class AjouterPlanningController implements Initializable {
     private Button btn2;
     @FXML
     private Button btn3;
-    @FXML
-    private TableColumn<Planning, String> colNom;
-    @FXML
-    private TableColumn<Planning, Date> colDate;
-    @FXML
-    private TableView<Planning> tvPlanning;
-    @FXML
-    private TableColumn<Planning, Integer> colId;
     ObservableList<Planning> list;
     ServicePlanning sp = new ServicePlanning();
     @FXML
@@ -181,8 +178,8 @@ public class AjouterPlanningController implements Initializable {
     }
 
     public void refresh() {
-        list = sp.getAll();
-        tvPlanning.setItems(list);
+        /*list = sp.getAll();
+        // tvPlanning.setItems(list);
         for (int i=0; i<list.size();i++) {
                 String nom=list.get(i).getNom();
                 Date date=list.get(i).getDate();
@@ -192,17 +189,17 @@ public class AjouterPlanningController implements Initializable {
                 String list1 = nom + "  \""+strDate +"\"";
                 
         
-        }
+        }*/
         listView1=sp.getAll();
         ListView.setItems(listView1);
     }
 
     public void showPlanning() {
-        colId.setCellValueFactory(new PropertyValueFactory<Planning, Integer>("id"));
+        /*colId.setCellValueFactory(new PropertyValueFactory<Planning, Integer>("id"));
         colNom.setCellValueFactory(new PropertyValueFactory<Planning, String>("nom"));
         colDate.setCellValueFactory(new PropertyValueFactory<Planning, Date>("date"));
         list = sp.getAll();
-        tvPlanning.setItems(list);
+        tvPlanning.setItems(list);*/
         listView1=sp.getAll();
         ListView.setItems(listView1);
         
@@ -223,7 +220,7 @@ public class AjouterPlanningController implements Initializable {
             refresh();
         }
     }
-
+/*
     @FXML
     private void rowClicked(javafx.scene.input.MouseEvent event) {
         Planning p = tvPlanning.getSelectionModel().getSelectedItem();
@@ -234,12 +231,20 @@ public class AjouterPlanningController implements Initializable {
         btn3.setDisable(false);
         btn.setDisable(true);
     }
-
+*/
     @FXML
     private void supprimerPlanning(ActionEvent event) {
-        Planning p = tvPlanning.getSelectionModel().getSelectedItem();
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "");
+        alert.getDialogPane().setContentText("Voulez vous vraiment supprimer cette événement?");
+        alert.getDialogPane().setHeaderText("Suppression");
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK) { 
+        /*Planning p = tvPlanning.getSelectionModel().getSelectedItem();
         sp.supprimer(p.getId());
-        refresh();
+        refresh();*/
+        Planning p2 = ListView.getSelectionModel().getSelectedItem();
+        sp.supprimer(p2.getId());
+        refresh();}
     }
 
     /*
@@ -337,10 +342,23 @@ public class AjouterPlanningController implements Initializable {
         }
     }
 
-    
+
     @FXML
-    private void openlink1(ActionEvent event)throws URISyntaxException,IOException {
-        Desktop.getDesktop().browse(new URI("https://www.facebook.com/sharer/sharer.php?kid_directed_site=0&sdk=joey&u=http%3A%2F%2F127.0.0.1%3A8000%2Frecette&display=popup&ref=plugin&src=share_button"));
+    private void rowClicked1(javafx.scene.input.MouseEvent event) {
+        Planning p2 = ListView.getSelectionModel().getSelectedItem();
+        System.out.println(p2);
+        pId = p2.getId();
+        tfNom.setText(p2.getNom());
+        dtDate.setValue(p2.getDate().toLocalDate());
+        btn2.setDisable(false);
+        btn3.setDisable(false);
+        btn.setDisable(true);
+    }
+
+    
+
+    @FXML
+    private void Pdf(javafx.scene.input.MouseEvent event) {
     }
 
     
