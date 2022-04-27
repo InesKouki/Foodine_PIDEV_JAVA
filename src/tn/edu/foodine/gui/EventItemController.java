@@ -57,7 +57,6 @@ int c;
         
         
         lbrat.setText(Integer.toString(sr.rechrat(c)));
-            System.out.println(Integer.toString(sr.rechrat(c)));
         labelName.setText(rec.getNom());
         labelDate.setText(rec.getDescription());
         
@@ -74,11 +73,11 @@ int c;
     }
 
     int i=1,idr=0;
+    ServiceRating sr =new ServiceRating();
     @FXML
     private void calcul(ActionEvent event) throws SQLException {
-         ServiceRating sr =new ServiceRating();
+         
          int c=sr.rech(rec.getId());
-         System.out.println(sr.rech(rec.getId()));
          i=i+1;
          if (!sr.verif(rec.getId())){
             sr.ajouter(new rating((float) Rating.getRating(),i,this.rec));
@@ -86,6 +85,9 @@ int c;
          else{
              sr.update(new rating((((float) Rating.getRating()+sr.rechrat(c))/i),i,this.rec),c);
          }
+         Rating.setRating(0);
          
     }
+    /*private void refreshData() throws SQLException {
+        lbrat.setText(Integer.toString((sr.rechrat(rec.getId()))));}*/
 }

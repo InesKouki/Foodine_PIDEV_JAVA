@@ -171,7 +171,7 @@ public class SendMail {
 "                                    <table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\n" +
 "\n" +
 "                                        <tr>\n" +
-"                                            <td class=\"h2-center\"style=\"color:#000000; font-family:'Playfair Display', Times, 'Times New Roman', serif; font-size:32px; line-height:36px; text-align:center; padding-bottom:20px;\">bonjaeazeazeazeaeaezezaea</td>\n" +
+"                                            <td class=\"h2-center\"style=\"color:#000000; font-family:'Playfair Display', Times, 'Times New Roman', serif; font-size:32px; line-height:36px; text-align:center; padding-bottom:20px;\">Le chef a ajouté une nouvelle Recette</td>\n" +
 "                                        </tr>\n" +
 "                                    </table>\n" +
 "                                 </td>\n" +

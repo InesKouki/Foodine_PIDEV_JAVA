@@ -23,7 +23,7 @@ import javafx.stage.Stage;
 public class NewFXMain extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/FrontRecette.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/AjouterPlanning.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root);
         

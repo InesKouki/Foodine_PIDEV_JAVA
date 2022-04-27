@@ -102,6 +102,18 @@
                   <Font name="System Bold" size="20.0" />
                </font>
             </Button>
+            <Button fx:id="closeButton2" mnemonicParsing="false" onAction="#front1" prefHeight="95.0" prefWidth="219.0" style="-fx-background-color: #FAD5A5;" text="Front">
+               <graphic>
+                  <ImageView fitHeight="40.0" fitWidth="40.0">
+                     <image>
+                        <Image url="@image/icons8-porridge-50.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Button>
          </children>
       </VBox>
       <Button fx:id="reset" layoutX="846.0" layoutY="267.0" mnemonicParsing="false" onAction="#reset" prefHeight="35.0" prefWidth="107.0" style="-fx-background-color: #FAD5A5;" text="Réinitialiser">

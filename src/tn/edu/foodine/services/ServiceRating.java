@@ -63,6 +63,7 @@ public int rechrat(int idrt) throws SQLException{
     } 
     return a;
 }
+
 }
     
 

@@ -109,7 +109,7 @@ public class AjouterPlanningController implements Initializable {
     @FXML
     private ComboBox<String> cbox;
     @FXML
-    private Button btnlien=new Button("heyy");
+    private Button closeButton1;
     
     /**
      * Initializes the controller class.
@@ -215,7 +215,7 @@ public class AjouterPlanningController implements Initializable {
             Alert a = new Alert(Alert.AlertType.ERROR, "Date Invalid", ButtonType.OK);
             a.showAndWait();
         } else {
-            Planning p = new Planning(pId, Date.valueOf(dtDate.getValue()), tfNom.getText());
+            Planning p = new Planning(pId, tfNom.getText());
             sp.modifier(p);
             refresh();
         }
@@ -311,8 +311,8 @@ public class AjouterPlanningController implements Initializable {
             PdfPCell cell1 = new PdfPCell(new Paragraph("Nom du Planning"));
             PdfPCell cell2 = new PdfPCell(new Paragraph("Date Planning"));
           
-            cell1.setBackgroundColor(BaseColor.RED);
-            cell2.setBackgroundColor(BaseColor.RED);
+            cell1.setBackgroundColor(BaseColor.GRAY);
+            cell2.setBackgroundColor(BaseColor.GRAY);
             cell1.setPadding(5);
             table.addCell(cell1);
             table.addCell(cell2);
@@ -359,6 +359,19 @@ public class AjouterPlanningController implements Initializable {
 
     @FXML
     private void Pdf(javafx.scene.input.MouseEvent event) {
+    }
+    Stage front = new Stage();
+    @FXML
+    private void front(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/FrontRecette.fxml"));
+        root = loader.load();
+        Scene scene = new Scene(root);
+        
+        front.setScene(scene);
+        front.setMaximized(true);
+        front.show();
+        Stage stage = (Stage) closeButton1.getScene().getWindow();
+        stage.close();
     }
 
     

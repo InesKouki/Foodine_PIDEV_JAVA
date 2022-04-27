@@ -109,6 +109,8 @@ public class RecetteController implements Initializable {
     @FXML
     private TextField keywordTextField;
     ServicePlanning sp =new ServicePlanning();
+    @FXML
+    private Button closeButton2;
     /**
      * Initializes the controller class.
      */
@@ -244,7 +246,7 @@ public class RecetteController implements Initializable {
         Col_img.setCellValueFactory(new PropertyValueFactory<Recette, String>("image"));
         Col_ing.setCellValueFactory(new PropertyValueFactory<Recette, String>("ingredient"));
         Col_planning.setCellValueFactory(new PropertyValueFactory<Recette, Planning>("planning"));
-        temp = sr.getAll2();
+        temp = sr.getAll();
         System.out.println(temp);
         tvRecette.setItems(temp);
     }
@@ -336,6 +338,20 @@ public class RecetteController implements Initializable {
         SupprimerRecette.setDisable(true);
         AjouterRecette.setDisable(false);
         clear();
+    }
+    
+    Stage front = new Stage();
+    @FXML
+    private void front1(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/FrontRecette.fxml"));
+        root = loader.load();
+        Scene scene = new Scene(root);
+        
+        front.setScene(scene);
+        front.setMaximized(true);
+        front.show();
+        Stage stage = (Stage) closeButton2.getScene().getWindow();
+        stage.close();
     }
 
     
