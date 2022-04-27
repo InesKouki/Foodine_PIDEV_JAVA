@@ -41,8 +41,8 @@ ServiceUtilisateur su = new ServiceUtilisateur();
 
     @FXML
     private void Activer(ActionEvent event) throws IOException {
-        System.out.println(tfCode.getText());
-        System.out.println(su.findActivationCode(tfCode.getText()).toString());
+       // System.out.println(tfCode.getText());
+//        System.out.println(su.findActivationCode(tfCode.getText()).toString());
           if(tfCode.getText().isEmpty()){
             Notifications notificationBuilder = Notifications.create()
                     .title("Activation de compte")

@@ -182,6 +182,48 @@ ResultSet rs = null;
         }
         return u ;
     }
+       public User findEmail(String email) {
+       
+         String req="SELECT * FROM user where email='"+email+"' Limit 1";
+        Statement st= null;
+        User u =null;
+        try {
+            st = cnx.createStatement();
+            ResultSet rs = st.executeQuery(req);
+                
+            
+           while(rs.next()) {
+              u = new Client(rs.getString("email"));
+            
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            
+        }
+        return u ;
+    }
+       public User findUsername(String username) {
+       
+         String req="SELECT * FROM user where username='"+username+"' Limit 1";
+        Statement st= null;
+        User u =null;
+        try {
+            st = cnx.createStatement();
+            ResultSet rs = st.executeQuery(req);
+                
+            
+           while(rs.next()) {
+              u = new Client(rs.getString("username"));
+            
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            
+        }
+        return u ;
+    }
       
         public User findActivationCode(String code) {
        

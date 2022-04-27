@@ -68,9 +68,11 @@ public class ConnexionController implements Initializable {
     FileChooser fc = new FileChooser();
     String filename = null;
     String filepath = null;
-  String uploads = "C:/Users/Asus/Desktop/Foodine_PIDEV/public/uploads/";
-    public static final String ACCOUNT_SID="AC0c6aefab9c7673bcc184a93c7b3faade";
-    public static final String AUTH_TOKEN="6f4bd195f6994c9feb1aeb3a90c0e4df";
+  
+  String uploads = "C:\\Users\\ASUS\\Desktop\\Foodine_PIDEV\\public\\uploads\\";
+    public static final String ACCOUNT_SID="AC44458b2e54dfa590060fff32d22e20e3";
+    public static final String AUTH_TOKEN="4f4a79fd743f967be1efb82b7227dfae";
+    ServiceUtilisateur su = new ServiceUtilisateur();
     int min = 1000;
 int max = 9999;
 int random = (int)Math.floor(Math.random()*(max-min+1)+min);
@@ -115,6 +117,36 @@ int random = (int)Math.floor(Math.random()*(max-min+1)+min);
                         }
                     });
            notificationBuilder.showError();
+        }else if(su.findEmail(tfEmail.getText())!=null){
+             Notifications notificationBuilder = Notifications.create()
+                    .title("Inscription")
+                    .text("Email deja utilisé")
+                    .graphic(null)
+                    .hideAfter(Duration.seconds(5))
+                    .position(Pos.TOP_RIGHT)
+                    .onAction(new EventHandler<ActionEvent>(){
+                        @Override 
+                        public void handle(ActionEvent event){
+                            //System.out.println("Supp");
+                        }
+                    });
+           notificationBuilder.showError();
+        }
+         else if(su.findUsername(tfUsername.getText())!=null){
+             Notifications notificationBuilder = Notifications.create()
+                    .title("Inscription")
+                    .text("Username deja utilisé")
+                    .graphic(null)
+                    .hideAfter(Duration.seconds(5))
+                    .position(Pos.TOP_RIGHT)
+                    .onAction(new EventHandler<ActionEvent>(){
+                        @Override 
+                        public void handle(ActionEvent event){
+                            //System.out.println("Supp");
+                        }
+                    });
+           notificationBuilder.showError();
+        
         }else if (tfPassword.getText().length() <8 ){
              Notifications notificationBuilder = Notifications.create()
                     .title("Inscription")
@@ -180,11 +212,11 @@ int random = (int)Math.floor(Math.random()*(max-min+1)+min);
             Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
             
             Message message = Message.creator(new PhoneNumber("\"+216"+tfPhone.getText()+"\""),
-                    new PhoneNumber("+12395108595")
+                    new PhoneNumber("+19378264363")
                     ,"Utilisez ce code pour activer votre compte :"+random).create();
             long millis=System.currentTimeMillis();
             java.sql.Date date= new java.sql.Date(millis);
-            ServiceUtilisateur su = new ServiceUtilisateur();
+            
             User u = new Client(tfNom.getText(),tfPrenom.getText(),tfUsername.getText(),tfEmail.getText(),tfPassword.getText(),filename,date,1,Integer.toString(random),Integer.parseInt(tfPhone.getText()));
             su.ajouterClient((Client) u);
             Notifications notificationBuilder = Notifications.create()

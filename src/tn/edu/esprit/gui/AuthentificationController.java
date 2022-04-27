@@ -116,17 +116,17 @@ Connection cnx = DataSource.getInstance().getCnx();
                    
                   
                if(role.contains("[\"ROLE_ADMIN\"]")){
-                FXMLLoader  loader = new FXMLLoader(getClass().getResource("AfficherReclamation.fxml"));
+                FXMLLoader  loader = new FXMLLoader(getClass().getResource("Home.fxml"));
                 Parent root = loader.load();
                 tfUsername.getScene().setRoot(root);
-                AfficherReclamationController ac = loader.getController();
+               HomeController ac = loader.getController();
                }
                else
                {
-                    FXMLLoader  loader = new FXMLLoader(getClass().getResource("ProfileClient.fxml"));
+                    FXMLLoader  loader = new FXMLLoader(getClass().getResource("HomeClient.fxml"));
                 Parent root = loader.load();
                 tfUsername.getScene().setRoot(root);
-                ProfileClientController ac = loader.getController();
+                HomeClientController ac = loader.getController();
                }
                
                

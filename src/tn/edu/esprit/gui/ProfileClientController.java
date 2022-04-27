@@ -59,7 +59,7 @@ String fn = null;
     FileChooser fc = new FileChooser();
     String filename = null;
     String filepath = null;
-  String uploads = "C:/Users/Asus/Desktop/Foodine_PIDEV/public/uploads/";
+  String uploads = "C:\\Users\\ASUS\\Desktop\\Foodine_PIDEV\\public\\uploads\\";
     ServiceUtilisateur u = new ServiceUtilisateur();
      Client us = (Client) u.find(Integer.parseInt(System.getProperty("id")));
     @FXML
