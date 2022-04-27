@@ -82,5 +82,76 @@ public class ServiceEvenement implements IService<Evenement> {
 
         return list;
     }
+    
+     public ObservableList<Evenement> sortNameAsc() {
+        ObservableList<Evenement> list = FXCollections.observableArrayList();
+        try {
+            String req = "Select * from evenement order by name asc";
+            Statement st = cnx.createStatement();
+            ResultSet rs = st.executeQuery(req);
+            while (rs.next()) {
+                Evenement p = new Evenement(rs.getInt(1), rs.getString(2), rs.getDate(3), rs.getDate(4), rs.getString(5), rs.getString(6));
+                list.add(p);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return list;
+    }
+     
+     public ObservableList<Evenement> sortNameDesc() {
+        ObservableList<Evenement> list = FXCollections.observableArrayList();
+        try {
+            String req = "Select * from evenement order by name desc";
+            Statement st = cnx.createStatement();
+            ResultSet rs = st.executeQuery(req);
+            while (rs.next()) {
+                Evenement p = new Evenement(rs.getInt(1), rs.getString(2), rs.getDate(3), rs.getDate(4), rs.getString(5), rs.getString(6));
+                list.add(p);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return list;
+    }
+     
+     public ObservableList<Evenement> sortDateAsc() {
+        ObservableList<Evenement> list = FXCollections.observableArrayList();
+        try {
+            String req = "Select * from evenement order by date_deb asc";
+            Statement st = cnx.createStatement();
+            ResultSet rs = st.executeQuery(req);
+            while (rs.next()) {
+                Evenement p = new Evenement(rs.getInt(1), rs.getString(2), rs.getDate(3), rs.getDate(4), rs.getString(5), rs.getString(6));
+                list.add(p);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return list;
+    }
+     
+     public ObservableList<Evenement> sortDateDesc() {
+        ObservableList<Evenement> list = FXCollections.observableArrayList();
+        try {
+            String req = "Select * from evenement order by date_deb desc";
+            Statement st = cnx.createStatement();
+            ResultSet rs = st.executeQuery(req);
+            while (rs.next()) {
+                Evenement p = new Evenement(rs.getInt(1), rs.getString(2), rs.getDate(3), rs.getDate(4), rs.getString(5), rs.getString(6));
+                list.add(p);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return list;
+    }
+    
+    
+    
 
 }

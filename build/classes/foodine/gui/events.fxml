@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
@@ -117,7 +118,7 @@
          </graphic>
       </Button>
       <ImageView fx:id="uploadIV" fitHeight="112.0" fitWidth="200.0" layoutX="1131.0" layoutY="196.0" pickOnBounds="true" preserveRatio="true" />
-      <TableView fx:id="eventsTable" layoutX="117.0" layoutY="429.0" onMouseClicked="#rowClicked" prefHeight="461.0" prefWidth="1500.0" style="-fx-selection-bar: #9bbed4;">
+      <TableView fx:id="eventsTable" layoutX="117.0" layoutY="489.0" onMouseClicked="#rowClicked" prefHeight="461.0" prefWidth="1500.0" style="-fx-selection-bar: C0DAEA;">
          <columns>
             <TableColumn fx:id="colName" prefWidth="268.0" style="-fx-alignment: center;" text="Nom" />
             <TableColumn fx:id="colDateDeb" minWidth="2.999969482421875" prefWidth="241.0" style="-fx-alignment: center;" text="Date début" />
@@ -126,5 +127,15 @@
             <TableColumn fx:id="colImage" minWidth="0.0" prefWidth="317.0" style="-fx-alignment: CENTER;" text="Image" />
          </columns>
       </TableView>
+      <JFXTextField fx:id="searchBar" focusColor="#70a2bf" layoutX="697.0" layoutY="427.0" onKeyTyped="#searching" prefHeight="31.0" prefWidth="335.0" promptText="Rechercher...">
+         <font>
+            <Font name="Century Gothic" size="16.0" />
+         </font>
+      </JFXTextField>
+      <ImageView fitHeight="32.0" fitWidth="16.0" layoutX="1015.0" layoutY="437.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/search.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

@@ -16,6 +16,7 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
@@ -29,6 +30,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
+//import javafx.scene.control.ComboBox;
 import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
@@ -133,14 +135,20 @@ public class PromotionsController implements Initializable {
     @FXML
     private void deleteEvent(ActionEvent event) {
         Promotion ev = promotionsTable.getSelectionModel().getSelectedItem();
-        sp.supprimer(ev.getId());
-        Alert a = new Alert(Alert.AlertType.INFORMATION, "Promotion supprimée", ButtonType.OK);
-        a.showAndWait();
-        refreshData();
-        clear();
-        btnupdateProm.setDisable(true);
-        btndeleteProm.setDisable(true);
-        btnaddProm.setDisable(false);
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "");
+        alert.getDialogPane().setContentText("Voulez vous vraiment supprimer cette événement?");
+        alert.getDialogPane().setHeaderText("Suppression");
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK) {
+            sp.supprimer(ev.getId());
+            Alert a = new Alert(Alert.AlertType.INFORMATION, "Promotion supprimée", ButtonType.OK);
+            a.showAndWait();
+            refreshData();
+            clear();
+            btnupdateProm.setDisable(true);
+            btndeleteProm.setDisable(true);
+            btnaddProm.setDisable(false);
+        }
     }
 
     @FXML
@@ -166,7 +174,6 @@ public class PromotionsController implements Initializable {
 
     private void showEvents() {
         List<Evenement> listEv = new ServiceEvenement().getAll();
-
         ArrayList<Evenement> events = new ArrayList<>();
         for (Evenement ev : listEv) {
             Evenement e = new Evenement();

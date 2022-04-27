@@ -21,32 +21,29 @@ import javafx.scene.text.TextAlignment;
 import java.io.IOException;
 import java.net.URL;
 
-public class mainController {
+public class backMainController {
 
     @FXML
     private JFXTabPane tabContainer;
-
     @FXML
     private Tab eventsTab;
-
     @FXML
     private AnchorPane eventsContainer;
-
     @FXML
     private Tab promotionsTab;
-
     @FXML
     private AnchorPane promotionsContainer;
-
     private double tabWidth = 140.0;
     public static int lastSelectedTabIndex = 0;
+    @FXML
+    private Tab homeTab;
+    @FXML
+    private AnchorPane homeContainer;
 
-    /// Life cycle
     public void initialize() {
         configureView();
     }
 
-    /// Private
     private void configureView() {
         tabContainer.setTabMinWidth(tabWidth);
         tabContainer.setTabMaxWidth(tabWidth);
@@ -64,12 +61,14 @@ public class mainController {
                 currentTab.setStyle("-fx-background-color: -fx-accent;");
             }
         };
-
+        
+        configureTab(homeTab, "Home", "images/calendar.png", homeContainer, getClass().getResource("home.fxml"), replaceBackgroundColorHandler);
         configureTab(eventsTab, "Evénements", "images/calendar.png", eventsContainer, getClass().getResource("events.fxml"), replaceBackgroundColorHandler);
         configureTab(promotionsTab, "Promotions", "images/discounts.png", promotionsContainer, getClass().getResource("promotions.fxml"), replaceBackgroundColorHandler);
 
-        eventsTab.setStyle("-fx-background-color: -fx-focus-color;");
+        homeTab.setStyle("-fx-background-color: -fx-focus-color;");
     }
+    Parent contentView;
 
     private void configureTab(Tab tab, String title, String iconPath, AnchorPane containerPane, URL resourceURL, EventHandler<Event> onSelectionChangedEvent) {
         double imageWidth = 30.0;

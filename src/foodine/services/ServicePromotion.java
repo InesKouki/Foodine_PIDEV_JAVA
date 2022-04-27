@@ -19,11 +19,11 @@ public class ServicePromotion implements IService<Promotion> {
     Connection cnx = DataSource.getInstance().getCnx();
 
     @Override
-    public void ajouter(Promotion p) throws SQLException{
-            String req = "INSERT INTO `promotion` (`evenement_id`, `produit_id`, `pourcentage`) VALUES ('" + p.getEvenement_id().getId() + "', '" + p.getProduit_id().getId() + "', '" + p.getPourcentage() + "')";
-            Statement st = cnx.createStatement();
-            st.executeUpdate(req);
-            System.out.println("Promotion created !");
+    public void ajouter(Promotion p) throws SQLException {
+        String req = "INSERT INTO `promotion` (`evenement_id`, `produit_id`, `pourcentage`) VALUES ('" + p.getEvenement_id().getId() + "', '" + p.getProduit_id().getId() + "', '" + p.getPourcentage() + "')";
+        Statement st = cnx.createStatement();
+        st.executeUpdate(req);
+        System.out.println("Promotion created !");
     }
 
     public void ajouter2(Promotion p) {
@@ -72,10 +72,10 @@ public class ServicePromotion implements IService<Promotion> {
             Statement st = cnx.createStatement();
             ResultSet rs = st.executeQuery(req);
             while (rs.next()) {
-                Evenement e = new Evenement(rs.getInt("e.id"),rs.getString("e.name"));
-                Produit p = new Produit(rs.getInt("pr.id"),rs.getString("pr.name"));
-                
-                Promotion pr = new Promotion(rs.getInt("p.id"), (int) Math.round(rs.getDouble("p.pourcentage")*100), e, p);
+                Evenement e = new Evenement(rs.getInt("e.id"), rs.getString("e.name"));
+                Produit p = new Produit(rs.getInt("pr.id"), rs.getString("pr.name"));
+
+                Promotion pr = new Promotion(rs.getInt("p.id"), (int) Math.round(rs.getDouble("p.pourcentage") * 100), e, p);
                 list.add(pr);
             }
         } catch (SQLException ex) {
@@ -83,6 +83,21 @@ public class ServicePromotion implements IService<Promotion> {
         }
 
         return list;
+    }
+
+    public int countPromotions(int id) {
+        int count = 0;
+        try {
+            String req = "select count(*) as total from promotion where evenement_id = " + id;
+            Statement st = cnx.createStatement();
+            ResultSet rs = st.executeQuery(req);
+            while (rs.next()) {
+                count = rs.getInt("total");
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return count;
     }
 
 }

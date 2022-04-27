@@ -5,8 +5,11 @@
  */
 package foodine.gui;
 
+import com.jfoenix.controls.JFXTextField;
 import foodine.entities.Evenement;
+import foodine.entities.User;
 import foodine.services.ServiceEvenement;
+import foodine.services.ServiceUtilisateur;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -22,12 +25,19 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalAccessor;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -35,7 +45,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
@@ -45,7 +54,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
-import javax.imageio.ImageIO;
+import javafx.scene.input.KeyEvent;
 
 /**
  * FXML Controller class
@@ -70,12 +79,18 @@ public class EventsController implements Initializable {
     ObservableList<Evenement> eventsList;
     ObservableList<Evenement> temp = FXCollections.observableArrayList();
     ServiceEvenement se = new ServiceEvenement();
+    Mail mailClass = new Mail();
+    SMS smsClass = new SMS();
+
     int evID = 0;
     String fn = null;
     FileChooser fc = new FileChooser();
     String filename = null;
     String filepath = null;
     String uploads = "C:/Users/azizm/Desktop/SEM2/PIDEV/Foodine_PIDEV/public/uploads/";
+//    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMMM");
+    String evName, evDesc = null;
+    Date evdateDeb, evdateFin = null;
 
     @FXML
     private Button btnaddEvent;
@@ -97,6 +112,8 @@ public class EventsController implements Initializable {
     private Button btnUpload;
     @FXML
     private ImageView uploadIV;
+    @FXML
+    private JFXTextField searchBar;
 
     /**
      * Initializes the controller class.
@@ -127,14 +144,22 @@ public class EventsController implements Initializable {
         } else {
             try {
                 Evenement ev = new Evenement(tfNom.getText(), Date.valueOf(dateDeb.getValue()), Date.valueOf(dateFin.getValue()), tfDescription.getText(), filename);
+                evName = tfNom.getText();
+                evDesc = tfDescription.getText();
+                evdateDeb = Date.valueOf(dateDeb.getValue());
+                evdateFin = Date.valueOf(dateFin.getValue());
                 se.ajouter(ev);
                 Alert a = new Alert(Alert.AlertType.INFORMATION, "Evénement ajouté");
                 a.showAndWait();
                 refreshData();
                 clear();
+
             } catch (SQLException ex) {
                 System.out.println(ex.getMessage());
             }
+            mailClass.sendMail(evName, evDesc, evdateDeb, evdateFin);
+            smsClass.sendSMS(evName, evdateDeb, evdateFin);
+
         }
     }
 
@@ -162,18 +187,25 @@ public class EventsController implements Initializable {
     @FXML
     private void deleteEvent(ActionEvent event) {
         Evenement ev = eventsTable.getSelectionModel().getSelectedItem();
-        se.supprimer(ev.getId());
-        Alert a = new Alert(Alert.AlertType.INFORMATION, "Evénement supprimé", ButtonType.OK);
-        a.showAndWait();
-        refreshData();
-        clear();
-        btnupdateEvent.setDisable(true);
-        btndeleteEvent.setDisable(true);
-        btnaddEvent.setDisable(false);
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "");
+        alert.getDialogPane().setContentText("Voulez vous vraiment supprimer cette promotion?");
+        alert.getDialogPane().setHeaderText("Suppression");
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK) {
+            se.supprimer(ev.getId());
+            Alert a = new Alert(Alert.AlertType.INFORMATION, "Promotion supprimée", ButtonType.OK);
+            a.showAndWait();
+            refreshData();
+            clear();
+            btnupdateEvent.setDisable(true);
+            btndeleteEvent.setDisable(true);
+            btnaddEvent.setDisable(false);
+        }
     }
 
     @FXML
-    private void rowClicked(MouseEvent event) {
+    private void rowClicked(MouseEvent event
+    ) {
         btnaddEvent.setDisable(true);
         btnupdateEvent.setDisable(false);
         btndeleteEvent.setDisable(false);
@@ -186,7 +218,7 @@ public class EventsController implements Initializable {
         dateFin.setValue(ev.getDate_fin().toLocalDate());
         tfDescription.setText(ev.getDescription());
 
-        Image im = new Image("file:///" + uploads + ev.getImage());
+        Image im = new Image("file:" + uploads + ev.getImage());
         uploadIV.setImage(im);
     }
 
@@ -194,7 +226,7 @@ public class EventsController implements Initializable {
         temp.clear();
         eventsList = se.getAll();
         for (Evenement e : eventsList) {
-            Image im = new Image("file:///" + uploads + e.getImage());
+            Image im = new Image("file:" + uploads + e.getImage());
             ImageView iv = new ImageView(im);
             iv.setFitHeight(112);
             iv.setFitWidth(200);
@@ -204,12 +236,35 @@ public class EventsController implements Initializable {
         eventsTable.setItems(temp);
     }
 
+    private void searchFilter() {
+        FilteredList<Evenement> filteredData = new FilteredList<>(temp, b -> true);
+        searchBar.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(event -> {
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+                String lowerCaseFilter = newValue.toLowerCase();
+                if (event.getName().toLowerCase().contains(lowerCaseFilter)) {
+                    return true; // Filter matches name.
+                } else if (event.getDescription().toLowerCase().contains(lowerCaseFilter)) {
+                    return true; // Filter matches description.
+                } else {
+                    return false; // Does not match.
+                }
+            });
+        });
+        SortedList<Evenement> sortedData = new SortedList<>(filteredData);
+        sortedData.comparatorProperty().bind(eventsTable.comparatorProperty());
+        eventsTable.setItems(sortedData);
+    }
+
     private void clear() {
         tfNom.clear();
         tfDescription.clear();
         dateDeb.setValue(null);
         dateFin.setValue(null);
         uploadIV.setImage(null);
+        searchBar.clear();
     }
 
     @FXML
@@ -258,6 +313,11 @@ public class EventsController implements Initializable {
         } else {
             System.out.println("Fichier invalide!");
         }
+    }
+
+    @FXML
+    private void searching(KeyEvent event) {
+        searchFilter();
     }
 
 }
