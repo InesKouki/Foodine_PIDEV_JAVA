@@ -29,7 +29,7 @@ public class FXMain extends Application {
         Parent root = loader.load();
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
-        primaryStage.setTitle("Gestion des personnes");
+        primaryStage.setTitle("Gestion des livraisons");
         primaryStage.show();
     }
     

@@ -14,8 +14,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  *
@@ -65,9 +68,9 @@ public class ServiceLivraison implements IService<Livraison> {
     }
 
     @Override
-    public void modifier(Livraison l) {
+    public void modifier(Livraison p) {
         try {
-            String req = "UPDATE livraison SET addresse = '" + l.getAddresse() + "', codepostal = '" + l.getCodepostal()+ "', email = '" + l.getEmail() + "', phone = '" + l.getPhone()+ "', details = '" + l.getDetails()+ "' WHERE livraison.`id` = " + l.getId();
+            String req = "UPDATE `livraison` SET `addresse` = '" + p.getAddresse() + "', `codepostal` = '" + p.getCodepostal()+ "', `email` = '" + p.getEmail()+ "', `phone` = '" + p.getPhone()+ "', `details` = '" + p.getDetails()+ "' WHERE id = " + p.getId();            
             Statement st = cnx.createStatement();
             st.executeUpdate(req);
             System.out.println("Livraison updated !");
@@ -77,20 +80,21 @@ public class ServiceLivraison implements IService<Livraison> {
     }
 
     @Override
-    public List<Livraison> getAll() {
-        List<Livraison> list = new ArrayList<>();
+    public ObservableList<Livraison> getAll() {
+        ObservableList<Livraison> list = FXCollections.observableArrayList();
         try {
             String req = "Select * from livraison";
             Statement st = cnx.createStatement();
             ResultSet rs = st.executeQuery(req);
             while(rs.next()){
-                Livraison l = new Livraison(rs.getString(1), rs.getString(2), rs.getString(3),rs.getString(4), rs.getString(5));
+                Livraison l = new Livraison(rs.getInt("id"), rs.getString("addresse"), rs.getString("codepostal"),rs.getString("email"), rs.getString("phone"),rs.getString("details"));
                 list.add(l);
+                
             }
+            System.out.println(list);
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
-
         return list;
     }
 

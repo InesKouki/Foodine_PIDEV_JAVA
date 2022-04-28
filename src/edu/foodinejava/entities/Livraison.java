@@ -16,38 +16,22 @@ public class Livraison {
     int id ;
     String addresse , details , email,codepostal,phone ;
 
-    public Livraison(int id, String codepostal, String phone, String addresse, String details, String email) {
+    public Livraison(int id, String addresse,String codepostal, String email,String phone, String details) {
         this.id = id;
-        this.codepostal = codepostal;
-        this.phone = phone;
         this.addresse = addresse;
-        this.details = details;
-        this.email = email;
-    }
-
-    public Livraison(String codepostal, String phone, String addresse, String details, String email) {
         this.codepostal = codepostal;
-        this.phone = phone;
-        this.addresse = addresse;
-        this.details = details;
         this.email = email;
+        this.phone = phone;
+        this.details = details;
     }
 
-    public Livraison() {
+    public Livraison(String addresse,String codepostal, String email,String phone, String details) {
+        this.addresse = addresse;
+        this.codepostal = codepostal;
+        this.email = email;
+        this.phone = phone;
+        this.details = details;
     }
-
-    public Livraison(String text, String text0) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public Livraison(String text) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    
-
-    
-
     public int getId() {
         return id;
     }

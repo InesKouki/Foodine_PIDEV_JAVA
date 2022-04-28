@@ -14,26 +14,27 @@
    <children>
       <Label layoutX="327.0" layoutY="106.0" text="addresse :" textFill="WHITE" />
       <Label layoutX="326.0" layoutY="155.0" text="code postal :" textFill="WHITE" />
-      <TextField fx:id="tfCodepostal" layoutX="460.0" layoutY="101.0" prefHeight="31.0" prefWidth="138.0" style="-fx-border-color: #9643A9; -fx-background-insets: 0; -fx-border-radius: 20; -fx-background-color: #2A0033;" stylesheets="@../../../../../../../Downloads/Dealseek/Dealseek/src/css/fullpackstyling.css" />
-      <TextField fx:id="tfPhone" layoutX="460.0" layoutY="150.0" prefHeight="31.0" prefWidth="138.0" style="-fx-border-color: #9643A9; -fx-background-color: #2A0033; -fx-background-insets: 0; -fx-border-radius: 20;" />
+      <TextField fx:id="tfCodepostal" layoutX="460.0" layoutY="149.0" prefHeight="31.0" prefWidth="138.0" style="-fx-border-color: #9643A9; -fx-background-insets: 0; -fx-border-radius: 20; -fx-background-color: #2A0033;" stylesheets="@../../../../../../../Downloads/Dealseek/Dealseek/src/css/fullpackstyling.css" />
+      <TextField fx:id="tfPhone" layoutX="460.0" layoutY="246.0" prefHeight="31.0" prefWidth="138.0" style="-fx-border-color: #9643A9; -fx-background-color: #2A0033; -fx-background-insets: 0; -fx-border-radius: 20;" />
       <Button fx:id="btnAjouter" layoutX="719.0" layoutY="377.0" mnemonicParsing="false" onAction="#ajouterlivraison" style="-fx-background-color: #9070c2;" stylesheets="@../../../../../../../Downloads/Dealseek/Dealseek/src/css/fullpackstyling_1.css" text="ajouter" textFill="WHITE" />
       <Label layoutX="324.0" layoutY="252.0" text=" phone :" textFill="WHITE" />
       <Label layoutX="324.0" layoutY="202.0" text="email :" textFill="WHITE" />
       <Label layoutX="327.0" layoutY="303.0" text="detail : " textFill="WHITE" />
-      <TextField fx:id="tfAddresse" layoutX="460.0" layoutY="197.0" prefHeight="31.0" prefWidth="138.0" style="-fx-border-color: #9643A9; -fx-background-color: #2A0033; -fx-background-insets: 0; -fx-border-radius: 20;" />
-      <TextField fx:id="tfDetails" layoutX="460.0" layoutY="247.0" prefHeight="31.0" prefWidth="138.0" style="-fx-border-color: #9643A9; -fx-background-color: #2A0033; -fx-background-insets: 0; -fx-border-radius: 20;" />
-      <TextField fx:id="tfEmail" layoutX="460.0" layoutY="298.0" prefHeight="31.0" prefWidth="138.0" style="-fx-border-color: #9643A9; -fx-background-color: #2A0033; -fx-background-insets: 0; -fx-border-radius: 20;" />
+      <TextField fx:id="tfAddresse" layoutX="460.0" layoutY="100.0" prefHeight="31.0" prefWidth="138.0" style="-fx-border-color: #9643A9; -fx-background-color: #2A0033; -fx-background-insets: 0; -fx-border-radius: 20;" />
+      <TextField fx:id="tfDetails" layoutX="460.0" layoutY="297.0" prefHeight="31.0" prefWidth="138.0" style="-fx-border-color: #9643A9; -fx-background-color: #2A0033; -fx-background-insets: 0; -fx-border-radius: 20;" />
+      <TextField fx:id="tfEmail" layoutX="460.0" layoutY="197.0" prefHeight="31.0" prefWidth="138.0" style="-fx-border-color: #9643A9; -fx-background-color: #2A0033; -fx-background-insets: 0; -fx-border-radius: 20;" />
       <TableView fx:id="tvLivraison" layoutX="608.0" layoutY="100.0" onMouseClicked="#rowclicked" prefHeight="227.0" prefWidth="378.0" style="-fx-background-color: #9070c2;">
         <columns>
-          <TableColumn fx:id="colAddresse" prefWidth="75.0" text="addresse" />
-          <TableColumn fx:id="colCodepostal" prefWidth="75.0" text="code postal" />
+            <TableColumn fx:id="col_id" prefWidth="75.0" text="Column X" visible="false" />
+          <TableColumn fx:id="colAddresse" prefWidth="75.0" text="Adresse" />
+          <TableColumn fx:id="colCodepostal" prefWidth="75.0" text="codepostal" />
             <TableColumn fx:id="colEmail" prefWidth="75.0" text="email" />
             <TableColumn fx:id="colPhone" prefWidth="75.0" text="phone" />
             <TableColumn fx:id="colDetails" prefWidth="75.0" text="details" />
         </columns>
       </TableView>
       <Button layoutX="898.0" layoutY="377.0" mnemonicParsing="false" onAction="#supprimer" style="-fx-background-color: #9070c2;" text="Supprimer" textFill="WHITE" />
-      <Button layoutX="806.0" layoutY="377.0" mnemonicParsing="false" onAction="#modifier" style="-fx-background-color: #9070c2;" text="modifier" textFill="WHITE" />
+      <Button fx:id="btnModifier" layoutX="806.0" layoutY="377.0" mnemonicParsing="false" onAction="#modifierliv" style="-fx-background-color: #9070c2;" text="modifier" textFill="WHITE" />
       <AnchorPane layoutX="-8.0" prefHeight="804.0" prefWidth="312.0" style="-fx-background-color: #3F2B63;">
          <children>
             <Button layoutX="4.0" layoutY="132.0" mnemonicParsing="false" prefHeight="73.0" prefWidth="312.0" style="-fx-background-color: #3F2B63;" text="Evenement" textFill="WHITE" />
@@ -56,5 +57,8 @@
       </AnchorPane>
       <Label layoutX="988.0" text="X" textFill="WHITE" />
       <Separator layoutX="327.0" layoutY="360.0" opacity="0.15" prefHeight="0.0" prefWidth="665.0" style="-fx-background-color: #9070c2;" />
+      <Button layoutX="786.0" layoutY="440.0" mnemonicParsing="false" onAction="#techarger_pdf" style="-fx-background-color: #9070c2;" stylesheets="@../../../../../../../Downloads/Dealseek/Dealseek/src/css/fullpackstyling_1.css" text="Télecharger_PDF" textFill="WHITE" />
+      <TextField fx:id="tfsearch" layoutX="626.0" layoutY="42.0" onKeyPressed="#search" />
+      <Button fx:id="excel" layoutX="698.0" layoutY="440.0" mnemonicParsing="false" onAction="#exportExcel" style="-fx-background-color: #9070c2;" stylesheets="@../../../../../../../Downloads/Dealseek/Dealseek/src/css/fullpackstyling_1.css" text="excel" textFill="WHITE" />
    </children>
 </AnchorPane>

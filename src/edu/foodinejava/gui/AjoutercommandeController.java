@@ -125,18 +125,21 @@ public class AjoutercommandeController implements Initializable {
         Commande commande = new Commande(tfNom.getText(), tfTotal.getText(), Date.valueOf(tfDate.getValue()), tfModepaiement.getText());
         com.ajouter(commande);
         refresh();
+        
     }
 
     @FXML
     private void modifier(ActionEvent event) {
         Commande commande = new Commande(id, tfNom.getText(), tfTotal.getText(), tfModepaiement.getText());
         com.modifier(commande);
+        refresh();
     }
 
     @FXML
     private void supprimer(ActionEvent event) {
         Commande commande = tvCommande.getSelectionModel().getSelectedItem();
         com.supprimer(commande.getId());
+        refresh();
     }
     private Parent root;
     Stage livra = new Stage();
