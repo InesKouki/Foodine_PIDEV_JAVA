@@ -157,8 +157,8 @@ public class EventsController implements Initializable {
             } catch (SQLException ex) {
                 System.out.println(ex.getMessage());
             }
-            mailClass.sendMail(evName, evDesc, evdateDeb, evdateFin);
-            smsClass.sendSMS(evName, evdateDeb, evdateFin);
+//            mailClass.sendMail(evName, evDesc, evdateDeb, evdateFin);
+//            smsClass.sendSMS(evName, evdateDeb, evdateFin);
 
         }
     }

@@ -20,7 +20,7 @@ public class SMS {
     String message = null;
 
     public static final String ACCOUNT_SID = "ACab7ec54e44e881456dd4b2a026236083";
-    public static final String AUTH_TOKEN = "a237778eba2048aadca57a0f910adc17";
+    public static final String AUTH_TOKEN = "f8c792cae89a2074e522bb52314e6a85";
 
     public void sendSMS(String name, Date date_deb, Date date_fin){
 //        String username = "azizmdk";

@@ -36,6 +36,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -211,6 +212,28 @@ public class PromotionsController implements Initializable {
                 tfPourcentage.setText(newValue.replaceAll("[^\\d]", ""));
             }
         });
+         tfPourcentage.setTextFormatter(new TextFormatter<Integer>(change -> {
+            // Deletion should always be possible.
+            if (change.isDeleted()) {
+                return change;
+            }
+
+            // How would the text look like after the change?
+            String txt = change.getControlNewText();
+
+            // There shouldn't be leading zeros.
+            if (txt.matches("0\\d+")) {
+                return null;
+            }
+
+            // Try parsing and check if the result is in [0, 64].
+            try {
+                int n = Integer.parseInt(txt);
+                return 1 <= n && n <= 100 ? change : null;
+            } catch (NumberFormatException e) {
+                return null;
+            }
+        }));
     }
 
 }

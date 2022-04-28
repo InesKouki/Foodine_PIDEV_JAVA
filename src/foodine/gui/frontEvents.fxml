@@ -16,9 +16,9 @@
             <ComboBox fx:id="sortComboBox" onAction="#selectSort" prefHeight="31.0" prefWidth="180.0" />
          </children>
       </HBox>
-      <HBox layoutX="-1.0" layoutY="136.0" prefHeight="838.0" prefWidth="1920.0">
+      <HBox layoutX="-1.0" layoutY="136.0" prefHeight="729.0" prefWidth="1920.0">
          <children>
-            <ScrollPane prefWidth="1644.0" style="-fx-border-color: #FFFFFF; -fx-fit-to-width: true; -fx-background-color: #FFFFFF;" vbarPolicy="ALWAYS">
+            <ScrollPane prefHeight="706.0" prefWidth="1644.0" style="-fx-border-color: #FFFFFF; -fx-fit-to-width: true; -fx-background-color: #FFFFFF;" vbarPolicy="ALWAYS">
                <content>
                   <GridPane fx:id="eventsContainer" alignment="CENTER" prefHeight="0.0" prefWidth="0.0">
                     <rowConstraints>
