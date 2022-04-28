@@ -26,8 +26,8 @@ import javax.mail.internet.MimeMessage;
 public class JavaMail {
     public static void sendMail(String recepient,String msg) throws Exception{
         System.out.println("in progress");
-        
-    Properties properties = new Properties();
+    //etapes : proprieties-> session->auth->send    
+    Properties properties = new Properties();// key + value  stored
     properties.put("mail.smtp.ssl.trust", "smtp.gmail.com");
     properties.put("mail.smtp.auth", "true");
     properties.put("mail.smtp.starttls.enable","true");
@@ -53,7 +53,7 @@ public class JavaMail {
     private static Message prepareMessage(Session session,String myAccount,String recepient,String msg )
     {
         try {
-            Message message= new MimeMessage(session);
+            Message message= new MimeMessage(session);// internet standard that extends the format of email
             message.setFrom(new InternetAddress(myAccount));
             message.setRecipient(Message.RecipientType.TO, new InternetAddress(recepient));
             message.setSubject("Récuperation mot de passe");

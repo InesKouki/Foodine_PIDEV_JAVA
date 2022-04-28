@@ -125,7 +125,7 @@ public class AfficherUtilisateurController implements Initializable {
         tableList.refresh();
         Notifications notificationBuilder = Notifications.create()
                     .title("Suppression effectuée")
-                    .text("Utilisateur supprimé supprimée")
+                    .text("Utilisateur supprimé ")
                     .graphic(null)
                     .hideAfter(Duration.seconds(5))
                     .position(Pos.TOP_RIGHT)

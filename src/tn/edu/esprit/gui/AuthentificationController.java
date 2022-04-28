@@ -23,6 +23,9 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseDragEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
 import tn.edu.esprit.entities.Client;
@@ -45,17 +48,25 @@ Connection cnx = DataSource.getInstance().getCnx();
     private TextField tfUsername;
     @FXML
     private TextField tfPassword;
+    @FXML
+    private TextField tfPas;
+    @FXML
+    private ImageView imgShow;
+    @FXML
+    private ImageView imgHide;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        tfPas.setVisible(false);
+        imgHide.setVisible(false);
     }    
 
     @FXML
     private void Authentification(ActionEvent event) throws SQLException, IOException {
+        
         
     if(tfUsername.getText().isEmpty() || tfPassword.getText().isEmpty()){
             Notifications notificationBuilder = Notifications.create()
@@ -178,6 +189,25 @@ Connection cnx = DataSource.getInstance().getCnx();
             Parent root = loader.load();
             tfUsername.getScene().setRoot(root);
             ConnexionController ac = loader.getController();
+    }
+
+    
+    @FXML
+    private void ShowPass(MouseEvent event) {
+         String s=  tfPassword.getText();
+      tfPas.setVisible(true);
+      tfPassword.setVisible(false);
+      imgHide.setVisible(true);
+        imgShow.setVisible(false);
+        tfPas.setText(s);
+    }
+
+    @FXML
+    private void hidePass(MouseEvent event) {
+        tfPas.setVisible(false);
+        imgShow.setVisible(true);
+        imgHide.setVisible(false);
+      tfPassword.setVisible(true);
     }
     
 }

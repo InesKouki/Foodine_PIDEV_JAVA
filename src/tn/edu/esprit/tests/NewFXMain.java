@@ -28,7 +28,7 @@ public class NewFXMain extends Application {
        Parent root = loader.load();
        Scene scene = new Scene(root);
        primaryStage.setScene(scene);
-      // primaryStage.setMaximized(true);
+       primaryStage.setMaximized(true);
        primaryStage.setTitle("Foodine-Gestion de Restaurant");
        primaryStage.show();
        
