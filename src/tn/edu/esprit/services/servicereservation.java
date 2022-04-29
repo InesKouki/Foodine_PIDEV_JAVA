@@ -28,7 +28,7 @@ public class servicereservation  implements Iservice<Reservation> {
     @Override
     public void ajouter(Reservation r) {
         try {
-            String req = "INSERT INTO `reservation` ( `tableid_id`,`nom`,`datereservation`,`mobile`,`email`) VALUES ('" + r.getTableid().getId()+ "','" + r.getNom() + "','" + r.getDatereservation() + "','" + r.getMobile()+ "','" + r.getEmail() + "')";
+            String req = "INSERT INTO `reservation`( `tableid_id`,`nom`,`datereservation`,`mobile`,`email`) VALUES ('" + r.getTableid().getId()+ "','" + r.getNom() + "','" + r.getDatereservation() + "','" + r.getMobile()+ "','" + r.getEmail() + "')";
             Statement st = cnx.createStatement();
             st.executeUpdate(req);
             System.out.println("Reservation created !");
@@ -91,7 +91,7 @@ public class servicereservation  implements Iservice<Reservation> {
         ObservableList<Reservation> list = FXCollections.observableArrayList();
         try {
             // String req = "Select * from reservation ";
-            String req = "Select r.id ,t.numerotable,r.nom,r.datereservation,r.mobile,r.email from `table` t ,reservation r where t.id=r.tableid_id";
+            String req = "Select r.id ,t.numerotable,r.nom,r.datereservation,r.mobile,r.email from `table` t ,reservation r where t.id=r.tableid_id ";
             Statement st = cnx.createStatement();
             ResultSet rs = st.executeQuery(req);    
             

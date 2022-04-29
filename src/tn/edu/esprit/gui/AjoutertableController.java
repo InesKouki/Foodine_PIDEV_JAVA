@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.channels.FileChannel;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -24,6 +25,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -43,8 +46,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javax.swing.JFileChooser;
+import javax.swing.table.DefaultTableModel;
 import tn.edu.esprit.entities.Reservation;
 import tn.edu.esprit.entities.Table;
+import tn.edu.esprit.services.servicereservation;
 import tn.edu.esprit.services.servicetable;
 import tn.edu.esprit.utils.DataSource;
 import static tn.edu.esprit.utils.DataSource.getInstance;
@@ -62,7 +67,7 @@ public class AjoutertableController implements Initializable {
     private TextField tfnumtable;
     @FXML
     private TextField tfnbplace;
-   
+
     @FXML
     private TableView<Table> tableauaffichage;
     @FXML
@@ -88,11 +93,16 @@ public class AjoutertableController implements Initializable {
      */
     String uploads = "C:\\Users\\ASUS\\Documents\\GitHub\\Foodine_PIDEV_JAVA\\src\\img\\";
     String path, fn, imgname;
+    servicetable sr = new servicetable();
+    @FXML
+    private TextField tfrecherche;
+    Connection cnx = DataSource.getInstance().getCnx();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         showtable();
+        
         comboboxetat.setValue("disponible");
         comboboxetat.setItems(mm);
 
@@ -115,10 +125,10 @@ public class AjoutertableController implements Initializable {
     private void ajoutertable(ActionEvent event) throws IOException {
         int numtable = Integer.parseInt(tfnumtable.getText());
         int nbplace = Integer.parseInt(tfnbplace.getText());
-       
+
         String etat = comboboxetat.getValue().toString();
 
-        if (this.tfnbplace.toString().isEmpty()  || comboboxetat.getItems().isEmpty()|| imgname.isEmpty()) {
+        if (this.tfnbplace.toString().isEmpty() || comboboxetat.getItems().isEmpty() || imgname.isEmpty()) {
             Alert a = new Alert(Alert.AlertType.ERROR, "Remplir les Champs", ButtonType.OK);
             a.showAndWait();
         } else if (nbplace == 0 || numtable == 0) {
@@ -244,7 +254,7 @@ public class AjoutertableController implements Initializable {
         Scene scene = new Scene(root);
 
         recette.setScene(scene);
-        recette.setMaximized(true);
+        recette.setMaximized(false);
         recette.show();
 
     }
@@ -259,6 +269,104 @@ public class AjoutertableController implements Initializable {
         comboboxetat.setValue(ev.getEtat());
         Image im = new Image("file:" + uploads + ev.getImagetable());
         uploadimagev.setImage(im);
+    }
+
+    private void refresh() {
+        ObservableList<Table> list = sr.getAll();
+        tableauaffichage.setItems(list);
+        showtable();
+    }
+
+    /*public void recherche() {
+        ObservableList<Table> list = FXCollections.observableArrayList();
+        FilteredList<Table> filteredData = new FilteredList<>(list, b -> true);
+
+        // 2. Set the filter Predicate whenever the filter changes.
+        tfrecherche.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(Table -> {
+                // If filter text is empty, display all persons.
+
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+
+                // Compare first name and last name of every person with filter text.
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                if (Table.getImagetable().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+                    return true; // Filter matches first name.
+                } else if (String.valueOf(Table.getNbplacetable()).indexOf(lowerCaseFilter) != -1) {
+                    return true; // Filter matches last name.
+                } else if (String.valueOf(Table.getNumerotable()).indexOf(lowerCaseFilter) != -1) {
+                    return true;
+                } else if (Table.getEtat().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+                    return true;
+                } else {
+                    return false; // Does not match.
+                }
+                
+            });
+        });
+
+        // 3. Wrap the FilteredList in a SortedList. 
+        SortedList<Table> sortedData = new SortedList<>(filteredData);
+
+        // 4. Bind the SortedList comparator to the TableView comparator.
+        // 	  Otherwise, sorting the TableView would have no effect.
+        sortedData.comparatorProperty().bind(tableauaffichage.comparatorProperty());
+
+        // 5. Add sorted (and filtered) data to the table.
+        tableauaffichage.setItems(sortedData);
+
+    }*/
+     servicetable sv= new servicetable();
+    private ObservableList<Table> getTableList() {
+       
+        ObservableList<Table> List = sv.getAll();
+        return List ;
+        
+    }
+FilteredList<Table> filter = new FilteredList<>(getTableList(), e -> true);
+    SortedList<Table> sort = new SortedList<>(filter);
+    
+    
+    
+
+    @FXML
+    private void search(javafx.scene.input.KeyEvent event) {
+         tfrecherche.setOnKeyReleased(e -> {
+                  
+
+            tfrecherche.textProperty().addListener((observable, oldValue, newValue) -> {
+               filter.setPredicate(t -> {
+                   if (newValue == null || newValue.isEmpty()) {
+                       return true;
+                   }
+                    String lowerCaseFilter = newValue.toLowerCase();
+                    if (String.valueOf(t.getNumerotable()).toLowerCase().contains(lowerCaseFilter) ) {
+                        return true;
+                    } else {
+                        return false;
+                   }
+                });
+            });
+               
+            sort.comparatorProperty().bind(tableauaffichage.comparatorProperty());
+          tableauaffichage.setItems(sort);
+      });  
+        
+    }
+
+    @FXML
+    private void btntriertable(ActionEvent event) {
+        
+          servicetable st = new servicetable();
+        ObservableList<Table> list = st.getAlltrier();
+        num.setCellValueFactory(new PropertyValueFactory<Table, Integer>("numerotable"));
+        nb.setCellValueFactory(new PropertyValueFactory<Table, Integer>("nbplacetable"));
+        img.setCellValueFactory(new PropertyValueFactory<Table, String>("imagetable"));
+        etat.setCellValueFactory(new PropertyValueFactory<Table, String>("etat"));
+        tableauaffichage.setItems(list);
     }
 
 }

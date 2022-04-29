@@ -5,6 +5,7 @@
  */
 package tn.edu.esprit.gui;
 
+import com.itextpdf.text.pdf.PdfWriter;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -36,14 +37,22 @@ public class NewFXMainReservation extends Application {
             primaryStage.show();
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
-        }
+     
+       }
+        
+         
+
+        
+        
     }
+    
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         launch(args);
+     
     }
     
 }

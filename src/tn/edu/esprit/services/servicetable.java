@@ -111,4 +111,27 @@ public class servicetable implements Iservice<Table> {
         return list;
     }
 
+    
+    public ObservableList<Table> getAlltrier() {
+        ObservableList<Table> list = FXCollections.observableArrayList();
+        try {
+            String req = "SELECT * FROM `table` order by numerotable ";
+            Statement st = cnx.createStatement();
+            ResultSet rs = st.executeQuery(req);
+
+            while(rs.next()){
+                Table t = new Table(rs.getInt(1),rs.getInt(2),rs.getString(3), rs.getInt(4),rs.getString(5));
+                list.add(t);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return list;
+    }
+    
+    
+    
+    
+    
 }
