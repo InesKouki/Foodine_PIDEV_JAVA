@@ -70,8 +70,8 @@ public class ConnexionController implements Initializable {
     String filepath = null;
   
   String uploads = "C:\\Users\\ASUS\\Desktop\\Foodine_PIDEV\\public\\uploads\\";
-    public static final String ACCOUNT_SID="AC44458b2e54dfa590060fff32d22e20e3";
-    public static final String AUTH_TOKEN="4f4a79fd743f967be1efb82b7227dfae";
+    public static final String ACCOUNT_SID="AC670a83f316f3e82572fc8eee12571d6a";
+    public static final String AUTH_TOKEN="2ff680b0f32090a7b9e23d8175fbcf03";
     ServiceUtilisateur su = new ServiceUtilisateur();
     int min = 1000;
 int max = 9999;
@@ -212,7 +212,7 @@ int random = (int)Math.floor(Math.random()*(max-min+1)+min);
             Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
             
             Message message = Message.creator(new PhoneNumber("\"+216"+tfPhone.getText()+"\""),
-                    new PhoneNumber("+19378264363")
+                    new PhoneNumber("+19379278619")
                     ,"Utilisez ce code pour activer votre compte :"+random).create();
             long millis=System.currentTimeMillis();
             java.sql.Date date= new java.sql.Date(millis);

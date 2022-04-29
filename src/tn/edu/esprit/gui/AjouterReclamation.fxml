@@ -7,26 +7,26 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="690.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.edu.esprit.gui.AjouterReclamationController">
+<AnchorPane id="AnchorPane" prefHeight="794.0" prefWidth="1533.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.edu.esprit.gui.AjouterReclamationController">
    <children>
-      <Label layoutX="197.0" layoutY="40.0" prefHeight="68.0" prefWidth="497.0" text="Ajouter Reclamation">
+      <Label layoutX="520.0" layoutY="48.0" prefHeight="119.0" prefWidth="427.0" text="Ajouter Reclamation">
          <font>
-            <Font name="System Bold Italic" size="46.0" />
+            <Font name="System Bold Italic" size="39.0" />
          </font>
       </Label>
-      <TextField fx:id="tfDescription" layoutX="307.0" layoutY="332.0" prefHeight="27.0" prefWidth="390.0" style="-fx-background-color: Transparent; -fx-border-color: Orange; -fx-border-width: 0px 0px 2px 0px;" />
-      <Label layoutX="103.0" layoutY="325.0" prefHeight="40.0" prefWidth="174.0" text="Description :">
-         <font>
-            <Font size="28.0" />
-         </font>
-      </Label>
-      <ChoiceBox fx:id="type" layoutX="298.0" layoutY="219.0" prefHeight="39.0" prefWidth="408.0" />
-      <Label layoutX="110.0" layoutY="218.0" prefHeight="40.0" prefWidth="174.0" text="Type :">
+      <TextField fx:id="tfDescription" layoutX="648.0" layoutY="377.0" prefHeight="69.0" prefWidth="299.0" style="-fx-background-color: Transparent; -fx-border-color: Orange; -fx-border-width: 0px 0px 2px 0px;" />
+      <Label layoutX="427.0" layoutY="412.0" prefHeight="40.0" prefWidth="174.0" text="Description :">
          <font>
             <Font size="28.0" />
          </font>
       </Label>
-      <Button layoutX="241.0" layoutY="452.0" mnemonicParsing="false" onAction="#Ajout" prefHeight="59.0" prefWidth="369.0" styleClass="buttonItem" stylesheets="@authentification.css" text="Confirmer">
+      <ChoiceBox fx:id="type" layoutX="641.0" layoutY="263.0" prefHeight="50.0" prefWidth="325.0" />
+      <Label layoutX="427.0" layoutY="263.0" prefHeight="40.0" prefWidth="174.0" text="Type :">
+         <font>
+            <Font size="28.0" />
+         </font>
+      </Label>
+      <Button layoutX="564.0" layoutY="542.0" mnemonicParsing="false" onAction="#Ajout" prefHeight="40.0" prefWidth="278.0" styleClass="buttonItem" stylesheets="@authentification.css" text="Confirmer">
          <font>
             <Font size="27.0" />
          </font>

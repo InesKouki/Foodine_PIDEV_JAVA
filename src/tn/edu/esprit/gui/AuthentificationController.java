@@ -97,8 +97,8 @@ Connection cnx = DataSource.getInstance().getCnx();
 
                 if (rs.next()) {
                     System.setProperty("id",Integer.toString(rs.getInt(1)));
-                    role = rs.getString(6);
-                    etat =rs.getInt(14);
+                    role = rs.getString("roles");
+                    etat =rs.getInt("etat");
                     connectedUser = su.find(rs.getInt(1));
                 }
                 System.out.println(System.setProperty("id",Integer.toString(rs.getInt(1))));
