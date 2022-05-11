@@ -3,6 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< Updated upstream
             <file>file:/C:/Users/Ahmed/Documents/NetBeansProjects/foodinejava/src/edu/foodinejava/utils/DataSource.java</file>
             <file>file:/C:/Users/Ahmed/Documents/NetBeansProjects/foodinejava/src/edu/foodinejava/services/ServiceCommande.java</file>
             <file>file:/C:/Users/Ahmed/Documents/NetBeansProjects/foodinejava/src/edu/foodinejava/services/ServiceLivraison.java</file>
@@ -12,6 +13,9 @@
             <file>file:/C:/Users/Ahmed/Documents/NetBeansProjects/foodinejava/src/edu/foodinejava/entities/Livraison.java</file>
             <file>file:/C:/Users/Ahmed/Documents/NetBeansProjects/foodinejava/src/edu/foodinejava/gui/AfficherlivraisonController.java</file>
             <file>file:/C:/Users/Ahmed/Documents/NetBeansProjects/foodinejava/src/edu/foodinejava/gui/ajouterlivraison.fxml</file>
+=======
+            <file>file:/C:/Users/azizm/Desktop/SEM2/PIDEV/Foodine_PIDEV_JAVA/src/tn/edu/foodine/gui/FrontMainController.java</file>
+>>>>>>> Stashed changes
         </group>
     </open-files>
 </project-private>
